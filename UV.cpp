@@ -35,7 +35,6 @@ void UV::ajouterCategorie(Categorie c, int n){
     if (Nb_Categorie==0){
         Tab_Categorie=new Categorie[1];
         Tab_Categorie[0]=c;
-        cout<<"Ajout cat : "<<c<<"\n";
 
         Credits_Categorie=new int[1];
         Credits_Categorie[0]=n;

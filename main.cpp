@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     UV* test = new UV ("LO21", "Programmation Objet", false);
     test->afficherUV();
 
-    test->ajouterCategorie(CS,6);
+    test->ajouterCategorie(TM,6);
     test->afficherUV();
 
 
