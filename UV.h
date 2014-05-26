@@ -32,6 +32,8 @@ public:
 
     void afficherUV();
     void ajouterCategorie(Categorie c, int n); //Ajouter une catégorie et le nombre de crédits
+    void ajouterCursus(Cursus &c); //Ajouter un Cursus
+
 };
 
 #endif
