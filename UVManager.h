@@ -3,6 +3,17 @@
 
 #include "includes.h"
 
+
+template<typename T> class Singleton
+ {
+   public:
+     static T& Instance()
+     {
+         static T theSingleInstance; // suppose que T a un constructeur par d�faut
+         return theSingleInstance;
+     }
+ };
+
 class UVManager : public Singleton<UVManager>
 {
 friend class Singleton<UVManager>;
@@ -18,7 +29,7 @@ public:
     void addUVCursus(QString c, QString cur);
     void afficherUV(QString c);
     void deleteUV(QString c);
-    void check_integrity();
+    int check_integrity();
 };
 
 #endif // UVMANAGER_H_INCLUDED

@@ -8,6 +8,8 @@
 #include <windows.h>
 #include <QProgressBar>
 #include <QPixmap>
+#include <QFile>
+#include <QTextStream>
 
 using namespace std;
 
@@ -18,5 +20,6 @@ using namespace std;
 #include "singletonTemplate.h"
 #include "UVManager.h"
 #include "CursusManager.h"
+
 
 #endif // INCLUDES_H_INCLUDED
