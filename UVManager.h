@@ -41,7 +41,6 @@ public:
     void addUV(string code, string t, bool d);
     void addUVCategorie(string c, Categorie cat, int cre);
     void afficherUV(string c);
-
     void deleteUV(string code);
     void check_integrity();
 };
