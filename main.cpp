@@ -15,10 +15,10 @@ int main(int argc, char *argv[])
     splash.show();
     a.processEvents();
     splash.showMessage("Chargement des UV", Qt::AlignCenter, Qt::black);
-    //for (i=0;i<1000000000;i++){}
+    UVManage->load();
     splash.clearMessage();
     splash.showMessage("Chargement des Cursus", Qt::AlignCenter, Qt::black);
-    //for (i=0;i<1000000000;i++){}
+    for (i=0;i<200000000;i++){}
 
     MainWindow w;
     w.show();

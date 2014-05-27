@@ -104,3 +104,23 @@ void UVManager::check_integrity()
     else
     cout << "Check_Integrity: Impossible d'ouvrir le fichier !" << endl;
 }
+
+void UVManager::load()
+{
+    ifstream fichier("./data/uv.xml", ios::in);  // on ouvre le fichier en lecture
+        if(fichier)  // si l'ouverture a réussi
+        {
+            // ON CREE UNE BOUCLE QUI VA PARCOURIR LE FICHIER
+            QString separateur,code,titre,saison,Tab_Categorie,Credits_Categorie,Nb_Categorie,Tab_Cursus,Nb_Cursus,DemiUV;
+            while(getline(fichier, separateur))
+            {
+
+            // ON RECUPERE LES INFORMATIONS
+            // ON CREE UNE UV AVEC LES INFORMATIONS RECUPEREE
+            // ON AJOUTE L'UV DANS UVManager
+            }
+            fichier.close();  // on ferme le fichier
+        }
+        else
+        cout << "Load: Impossible d'ouvrir le fichier !" << endl;
+}
