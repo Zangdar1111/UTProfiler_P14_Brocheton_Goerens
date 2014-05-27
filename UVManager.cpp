@@ -2,11 +2,16 @@
 
 UVManager *UVManager::instance=NULL;
 
+
+/* Permet d'ajouter ou de mettre à jour une UV à l'UVManager
+ * Arguments : Code de l'UV (chaine de caractères)
+ *              Titre de l'UV (chaine de caractères)
+ *              Demi UV (booléen)
+ */
 void UVManager::addUV(QString c, QString t, bool d){
     if (TabUV.find(c)!=TabUV.end()){
-        cout<<"Modifier UV\n";
         lastUV=getUV(c);
-        lastUV->editUV(c,t,d);
+        lastUV->editUV(t,d);
     }
     else{
         UV* uv = new UV(c, t, d);
@@ -37,6 +42,7 @@ void UVManager::addUVCategorie(QString c, Categorie cat, int cre){
     }
 }
 
+//Afficher une UV via le UVManager en ligne de commande (a supprimer par la suite)
 void UVManager::afficherUV(QString c){
     if(lastUV!=NULL){
         if(c==lastUV->getCode()){
@@ -70,11 +76,15 @@ UV* UVManager::getUV (QString c){
     else return NULL;
 }
 
+/* Permet de supprimer une UV de l'UVManager
+ * Argument : Le code de l'UV (chaine de caractères)
+ */
 void UVManager::deleteUV(QString c)
 {
     TabUV.erase(c);
 }
 
+/*
 void UVManager::check_integrity()
 {
     ifstream fichier("./data/uv.txt", ios::app);  // on ouvre le fichier en écriture seule
@@ -124,3 +134,4 @@ void UVManager::load()
         else
         cout << "Load: Impossible d'ouvrir le fichier !" << endl;
 }
+*/
