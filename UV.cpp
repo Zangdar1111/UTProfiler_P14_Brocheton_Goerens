@@ -1,17 +1,21 @@
 #include "includes.h"
 
-UV::UV(string c, string t, bool d) : Code(c), Titre(t), Tab_Categorie(new Categorie[0]),
+UV::UV(QString c, QString t, bool d) : Code(c), Titre(t), Tab_Categorie(new Categorie[0]),
     Credits_Categorie(new int[0]), Nb_Categorie(0), Tab_Cursus(new Cursus[0]), Nb_Cursus(0), DemiUV(d){}
 
-
-void UV::editUV(string c, string t, bool d)
+/* Permet d'éditer une UV existante
+ * Arguments : Code de l'UV (chaine de caractères)
+ *              Nouveau Titre de l'UV (chaine de caractères)
+ *              Nouvelle valeur de DemiUV (booléen)
+ */
+void UV::editUV(QString c, QString t, bool d)
 {
     Code=c;
     Titre=t;
     DemiUV=d;
-
 }
 
+//Afficher une UV en ligne de commande (a supprimer par la suite)
 void UV::afficherUV(){
     cout<<"Code : "<<Code<<"\nTitre : "<<Titre<<"\n";
     for(unsigned int i=0; i<Nb_Categorie; i++){
@@ -23,6 +27,10 @@ void UV::afficherUV(){
     cout<<"Demi UV : "<<DemiUV<<"\n";
 }
 
+/* Permet d'ajouter une catégorie à une UV
+ * Arguments : Catégorie à ajouter (Categorie)
+ *              Nombres de crédits associés (int)
+ */
 void UV::ajouterCategorie(Categorie c, int n){
     if (Nb_Categorie==0){
         //Cas de la première catégorie
@@ -59,6 +67,9 @@ void UV::ajouterCategorie(Categorie c, int n){
     }
 }
 
+/* Permet d'ajouter un cursus à une UV
+ * Argument : Référence vers le Cursus (&Cursus)
+ */
 void UV::ajouterCursus(Cursus &c){
     if (Nb_Cursus==0){
         //Cas du premier Cursus
@@ -83,21 +94,3 @@ void UV::ajouterCursus(Cursus &c){
         Tab_Cursus[Nb_Cursus-1]=c;
     }
 }
-/*
-UV* UV::operator=(UV& src){
-    if (this==&src) return this;
-
-    this->Code=src.getCode();
-    this->Titre=src.getTitre();
-    this->DemiUV=src.getDemiUV();
-
-    for(unsigned int i=0; i<src.getNb_Categorie(); i++){
-        this->ajouterCategorie(src.getCategorie(i),src.getCreditsCat(i));
-    }
-    for(unsigned int i=0; i<src.getNb_Cursus(); i++){
-        this->ajouterCursus(src.getCursus(i));
-    }
-
-    return this;
-}
-*/

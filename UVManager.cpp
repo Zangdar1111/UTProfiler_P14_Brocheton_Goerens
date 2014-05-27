@@ -2,7 +2,7 @@
 
 UVManager *UVManager::instance=NULL;
 
-void UVManager::addUV(string c, string t, bool d){
+void UVManager::addUV(QString c, QString t, bool d){
     if (TabUV.find(c)!=TabUV.end()){
         cout<<"Modifier UV\n";
         lastUV=getUV(c);
@@ -20,7 +20,7 @@ void UVManager::addUV(string c, string t, bool d){
  *              la catégorie à ajouter (Catégorie)
  *              le nombre de crédits apportés à cette catégorie (int)
  */
-void UVManager::addUVCategorie(string c, Categorie cat, int cre){
+void UVManager::addUVCategorie(QString c, Categorie cat, int cre){
     if(lastUV!=NULL){
         if(c==lastUV->getCode())
             lastUV->ajouterCategorie(cat, cre);
@@ -28,20 +28,16 @@ void UVManager::addUVCategorie(string c, Categorie cat, int cre){
             lastUV=getUV(c);
             if(lastUV!=NULL)
                 lastUV->ajouterCategorie(cat, cre);
-
         }
     }
     else{
         lastUV=getUV(c);
         if(lastUV!=NULL)
             lastUV->ajouterCategorie(cat, cre);
-
     }
 }
 
-
-
-void UVManager::afficherUV(string c){
+void UVManager::afficherUV(QString c){
     if(lastUV!=NULL){
         if(c==lastUV->getCode()){
             lastUV->afficherUV();
@@ -66,27 +62,18 @@ void UVManager::afficherUV(string c){
  * Retour : Un pointeur sur l'objet UV recherché si l'UV est trouvé
  *          Le pointeur NULL si l'UV n'est pas trouvée
  */
-UV* UVManager::getUV (string c){
-    map<string, UV>::iterator it=TabUV.find(c);
+UV* UVManager::getUV (QString c){
+    map<QString, UV>::iterator it=TabUV.find(c);
     if (it!=TabUV.end()){
         return &(it->second);
     }
     else return NULL;
 }
-/*
-const UV& UVManager::getUV (string c) const{
-    return TabUV.find(c)->second;
-}
-*/
-/*
- *map<string, UV>::iterator it=TabUV.find(c)
- *
- *
-void UVManager::deleteUV(string code)
+
+void UVManager::deleteUV(QString c)
 {
-    tabUV.delete(code);
+    TabUV.erase(c);
 }
-*/
 
 void UVManager::check_integrity()
 {
@@ -94,7 +81,7 @@ void UVManager::check_integrity()
     if(fichier)  // si l'ouverture a réussi
     {
         int stop=0;
-        string contenu,code="DEBUT FICHIER";
+        QString contenu,code="DEBUT FICHIER";
         while(getline(fichier, contenu))
         {
             if (contenu!= "#"){stop=1;cout<<"Erreur: Fichier Corrompu. Verifiez a partir de l'UV "<<code<<"."<<endl; break;}

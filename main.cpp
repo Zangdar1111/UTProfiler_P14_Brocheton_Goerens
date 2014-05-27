@@ -66,6 +66,10 @@ int main(int argc, char *argv[])
     UVManage->afficherUV("NF17");
     UVManage->addUVCategorie("NF17",TM,6);
 
+    //Suppresion d'une UV
+    UVManage->deleteUV("LO23");
+    UVManage->afficherUV("LO23");
+
     UVManager::kill();
 
     return a.exec();

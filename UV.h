@@ -6,22 +6,22 @@
 class UV
 {
 private:
-    string Code;
-    string Titre;
+    QString Code;
+    QString Titre;
     Saison saison[];
     Categorie* Tab_Categorie;
     int* Credits_Categorie;
-    int Nb_Categorie;
+    unsigned int Nb_Categorie;
     Cursus* Tab_Cursus;
-    int Nb_Cursus;
+    unsigned int Nb_Cursus;
     bool DemiUV;
 
 public:
-    UV(string c, string t, bool d);
+    UV(QString c, QString t, bool d);
     UV();
-    void editUV(string c, string t, bool d);
-    string getCode() const {return this->Code;}
-    string getTitre() const {return this->Titre;}
+    void editUV(QString c, QString t, bool d);
+    QString getCode() const {return this->Code;}
+    QString getTitre() const {return this->Titre;}
     Saison* getSaison() {return this->saison;}
     Categorie* getTab_Categorie() const {return this->Tab_Categorie;}
     int* getCredits_Categorie() const {return this->Credits_Categorie;}
@@ -34,9 +34,9 @@ public:
     void afficherUV();
     void ajouterCategorie(Categorie c, int n); //Ajouter une catégorie et le nombre de crédits
     void ajouterCursus(Cursus &c); //Ajouter un Cursus
-    UV* operator=(UV& src); //Opérateur de recopie pour le MAP
+    //UV* operator=(UV& src); //Opérateur de recopie pour le MAP
     Categorie& getCategorie(unsigned int i) const {return Tab_Categorie[i];}
-    int getCreditsCat(unsigned int i) const {return Credits_Categorie[i];}
+    unsigned int getCreditsCat(unsigned int i) const {return Credits_Categorie[i];}
     Cursus& getCursus(unsigned int i) const {return Tab_Cursus[i];}
 
 };

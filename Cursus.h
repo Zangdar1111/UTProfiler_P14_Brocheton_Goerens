@@ -5,15 +5,15 @@
 
 class Cursus
 {
-    string Code;
-    string Titre;
-    string Responsable;
+    QString Code;
+    QString Titre;
+    QString Responsable;
 public:
     Cursus() {}
-    Cursus(string c,string t, string r):Code(c),Titre(t),Responsable(r){}
-    string getCode(){return this->Code;}
-    string getTitre(){return this->Titre;}
-    string getResp(){return this->Responsable;}
+    Cursus(QString c,QString t, QString r):Code(c),Titre(t),Responsable(r){}
+    QString getCode(){return this->Code;}
+    QString getTitre(){return this->Titre;}
+    QString getResp(){return this->Responsable;}
 };
 
 

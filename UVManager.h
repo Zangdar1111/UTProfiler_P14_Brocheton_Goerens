@@ -16,7 +16,7 @@ template<typename T> class Singleton
 class UVManager : public Singleton<UVManager>
 {
 friend class Singleton<UVManager>;
-    map<string, UV> TabUV;
+    map<QString, UV> TabUV;
     UV* lastUV=NULL;
     UVManager(){}
     //UVManager(const UVManager& m){}
@@ -33,15 +33,14 @@ public:
             instance=NULL;
         }
     }
-
-    UV *getUV(string c);
-    //const UV& getUV(string c) const;
+    UV *getUV(QString c);
+    //const UV& getUV(QString c) const;
     void load();
     void save();
-    void addUV(string code, string t, bool d);
-    void addUVCategorie(string c, Categorie cat, int cre);
-    void afficherUV(string c);
-    void deleteUV(string code);
+    void addUV(QString code, QString t, bool d);
+    void addUVCategorie(QString c, Categorie cat, int cre);
+    void afficherUV(QString c);
+    void deleteUV(QString c);
     void check_integrity();
 };
 

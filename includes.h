@@ -2,7 +2,7 @@
 #define INCLUDES_H_INCLUDED
 
 #include <iostream>
-#include <string>
+#include <QString>
 #include <map>
 #include <fstream>
 #include <windows.h>
