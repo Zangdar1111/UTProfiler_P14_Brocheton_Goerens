@@ -6,14 +6,12 @@
  *              Demi UV (booléen)
  */
 void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
-    if (TabUV.find(c)!=TabUV.end()){
-        lastUV=getUV(c);
-        lastUV->editUV(t, p, a, d);
-    }
+    UV* findUV=getUV(c);
+    if(findUV!=NULL)
+            findUV->editUV(t, p, a, d);
     else{
         UV* uv = new UV(c, t, p, a, d);
         TabUV.insert(make_pair(c,*uv));
-        lastUV=uv;
     }
 }
 
@@ -23,40 +21,17 @@ void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
  *              le nombre de crédits apportés à cette catégorie (int)
  */
 void UVManager::addUVCategorie(QString c, Categorie cat, int cre){
-    if(lastUV!=NULL){
-        if(c==lastUV->getCode())
-            lastUV->ajouterCategorie(cat, cre);
-        else{
-            lastUV=getUV(c);
-            if(lastUV!=NULL)
-                lastUV->ajouterCategorie(cat, cre);
-        }
-    }
-    else{
-        lastUV=getUV(c);
-        if(lastUV!=NULL)
-            lastUV->ajouterCategorie(cat, cre);
+    UV* findUV=getUV(c);
+    if(findUV!=NULL){
+        findUV->ajouterCategorie(cat, cre);
     }
 }
 
 //Afficher une UV via le UVManager en ligne de commande (a supprimer par la suite)
 void UVManager::afficherUV(QString c){
-    if(lastUV!=NULL){
-        if(c==lastUV->getCode()){
-            lastUV->afficherUV();
-        }
-        else{
-            lastUV=getUV(c);
-            if(lastUV!=NULL){
-                lastUV->afficherUV();
-            }
-        }
-    }
-    else{
-        lastUV=getUV(c);
-        if(lastUV!=NULL){
-            lastUV->afficherUV();
-        }
+    UV* findUV=getUV(c);
+    if(findUV!=NULL){
+        findUV->afficherUV();
     }
 }
 
@@ -86,25 +61,14 @@ void UVManager::deleteUV(QString c)
  *              la code du Cursus à ajouter (chaine de caractères)
  */
 void UVManager::addUVCursus(QString c, QString cur){
-    Cursus* cursus = CursusManager::getInstance()->getCursus(cur);
-    if(cursus!=NULL){
-        if(lastUV!=NULL){
-            if(c==lastUV->getCode())
-                lastUV->ajouterCursus(*cursus);
-            else{
-                lastUV=getUV(c);
-                if(lastUV!=NULL)
-                    lastUV->ajouterCursus(*cursus);
-            }
-        }
-        else{
-            lastUV=getUV(c);
-            if(lastUV!=NULL)
-                lastUV->ajouterCursus(*cursus);
+    Cursus* findCursus = CursusManager::getInstance()->getCursus(cur);
+    if(findCursus!=NULL){
+        UV* findUV=getUV(c);
+        if(findUV!=NULL){
+            findUV->ajouterCursus(*findCursus);
         }
     }
 }
-
 
 /*
 void UVManager::check_integrity()

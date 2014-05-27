@@ -42,7 +42,7 @@ public:
     unsigned int getCreditsCat(unsigned int i) const {return Credits_Categorie[i];}
     Cursus& getCursus(unsigned int i) const {return Tab_Cursus[i];}
     int hasCategorie(Categorie cat) const;
-    int hasCursus(Cursus &cur) const;
+    int hasCursus(const Cursus &cur) const;
 };
 
 #endif

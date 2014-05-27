@@ -7,8 +7,7 @@ class UVManager : public Singleton<UVManager>
 {
 friend class Singleton<UVManager>;
     map<QString, UV> TabUV;
-    UV* lastUV;
-    UVManager():lastUV(NULL){}
+    UVManager(){}
 public:
     UV* getUV(QString c);
     //const UV& getUV(QString c) const;

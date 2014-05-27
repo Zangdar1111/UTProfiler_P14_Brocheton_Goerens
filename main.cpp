@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
     CursusManage->afficherCursus("GI");
 
     //Exemple de création d'UVs
-    UVManage->addUV("LO21","Programmation Objet", true, false, false);
     UVManage->addUV("LO23","Conduite de projet informatique", false, true, false);
+    UVManage->addUV("LO21","Programmation Objet", true, false, false);
 
     //Ajout de catégorie à une UV
     UVManage->addUVCategorie("LO21",TM,3);

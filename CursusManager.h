@@ -5,8 +5,7 @@ class CursusManager : public Singleton<CursusManager>
 {
 friend class Singleton<CursusManager>;
     map<QString, Cursus> TabCursus;
-    Cursus* lastCursus;
-    CursusManager():lastCursus(NULL){}
+    CursusManager(){}
 public:
     Cursus* getCursus(QString c);
     void load();

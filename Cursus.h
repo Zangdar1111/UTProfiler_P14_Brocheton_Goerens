@@ -11,17 +11,17 @@ class Cursus
 public:
     Cursus() {}
     Cursus(QString c,QString t, QString r):Code(c),Titre(t),Responsable(r){}
-    QString getCode(){return this->Code;}
-    QString getTitre(){return this->Titre;}
-    QString getResp(){return this->Responsable;}
+    QString getCode() const {return this->Code;}
+    QString getTitre() const {return this->Titre;}
+    QString getResp() const {return this->Responsable;}
     void editCursus(QString t, QString r){
         Titre=t;
         Responsable=r;
     }
-    void afficherCursus(){
+    void afficherCursus() const{
         cout<<"Code : "<<Code.toStdString()<<"\nTitre : "<<Titre.toStdString()<<"\nResponsable : "<<Responsable.toStdString()<<"\n";
     }
-
+    bool operator==(const Cursus* cur) const;
 };
 
 

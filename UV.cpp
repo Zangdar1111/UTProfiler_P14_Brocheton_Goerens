@@ -132,11 +132,10 @@ int UV::hasCategorie(Categorie cat) const{
  */
 
 /*
-int UV::hasCursus(Cursus& cur) const{
+int UV::hasCursus(const Cursus& cur) const{
     for(unsigned int i=0; i<Nb_Cursus; i++){
-        if(cur==Tab_Cursus[i])
+        if(cur==const_cast<const Cursus*>(Tab_Cursus[i]))
             return i;
     }
     return -1;
-}
-*/
+}*/
