@@ -1,8 +1,5 @@
 #include "includes.h"
 
-UVManager *UVManager::instance=NULL;
-
-
 /* Permet d'ajouter ou de mettre à jour une UV à l'UVManager
  * Arguments : Code de l'UV (chaine de caractères)
  *              Titre de l'UV (chaine de caractères)
@@ -83,6 +80,31 @@ void UVManager::deleteUV(QString c)
 {
     TabUV.erase(c);
 }
+
+/* Permet d'ajouter un Cursus à une UV par le UVManager
+ * Arguments : le code de l'UV (chaine de caractères)
+ *              la code du Cursus à ajouter (chaine de caractères)
+ */
+void UVManager::addUVCursus(QString c, QString cur){
+    Cursus* cursus = CursusManager::getInstance()->getCursus(cur);
+    if(cursus!=NULL){
+        if(lastUV!=NULL){
+            if(c==lastUV->getCode())
+                lastUV->ajouterCursus(*cursus);
+            else{
+                lastUV=getUV(c);
+                if(lastUV!=NULL)
+                    lastUV->ajouterCursus(*cursus);
+            }
+        }
+        else{
+            lastUV=getUV(c);
+            if(lastUV!=NULL)
+                lastUV->ajouterCursus(*cursus);
+        }
+    }
+}
+
 
 /*
 void UVManager::check_integrity()

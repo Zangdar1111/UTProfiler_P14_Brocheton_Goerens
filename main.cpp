@@ -3,6 +3,7 @@
 #include "includes.h"
 
 UVManager* UVManage = UVManager::getInstance();
+CursusManager* CursusManage = CursusManager::getInstance();
 
 int main(int argc, char *argv[])
 {
@@ -25,25 +26,19 @@ int main(int argc, char *argv[])
 
     splash.finish(&w);
 
-    /*
-    Cursus* Curs_GI = new Cursus("GI", "Génie Informatique", "Philippe Trigano");
-    Cursus* Curs_TC = new Cursus("TC", "Tronc commun", "Alain Storck");
+    //Exemple de création de Cursus
+    CursusManage->addCursus("GI", "Génie Informatique", "Philippe Trigano");
+    CursusManage->addCursus("TC", "Tronc Commun", "Obi-Wan Kenobi");
+    CursusManage->addCursus("TCN", "Téchnologie Culturelles Numériques", "Darth Vador");
 
-    UV* test = new UV ("LO21", "Programmation Objet", false);
-    test->afficherUV();
+    //Affichage d'un Cursus
+    CursusManage->afficherCursus("GI");
+    CursusManage->afficherCursus("TC");
+    CursusManage->afficherCursus("TCN");
 
-    test->ajouterCategorie(TM,6);
-    test->afficherUV();
-
-    test->ajouterCategorie(CS,6);
-    test->afficherUV();
-
-    test->ajouterCursus(*Curs_GI);
-    test->afficherUV();
-
-    test->ajouterCursus(*Curs_TC);
-    test->afficherUV();
-    */
+    //Modification d'un Cursus
+    CursusManage->addCursus("GI", "Génie Informatique", "Luke Skywalker");
+    CursusManage->afficherCursus("GI");
 
     //Exemple de création d'UVs
     UVManage->addUV("LO21","Programmation Objet", true, false, false);
@@ -53,6 +48,11 @@ int main(int argc, char *argv[])
     UVManage->addUVCategorie("LO21",TM,3);
     UVManage->addUVCategorie("LO21",CS,3);
     UVManage->addUVCategorie("LO23",TM,6);
+
+    //Ajout d'un cursus à une UV
+    UVManage->addUVCursus("LO21", "GI");
+    UVManage->addUVCursus("LO23", "GI");
+    UVManage->addUVCursus("LO21", "TC");
 
     //Affichage des UVs
     UVManage->afficherUV("LO21");
@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
     UVManage->afficherUV("LO23");
 
     UVManager::kill();
+    CursusManager::kill();
 
     return a.exec();
 }

@@ -15,7 +15,8 @@ using namespace std;
 #include "enum.h"
 #include "Cursus.h"
 #include "UV.h"
+#include "singletonTemplate.h"
 #include "UVManager.h"
-
+#include "CursusManager.h"
 
 #endif // INCLUDES_H_INCLUDED

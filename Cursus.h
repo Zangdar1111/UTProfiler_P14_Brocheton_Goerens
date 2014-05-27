@@ -14,6 +14,14 @@ public:
     QString getCode(){return this->Code;}
     QString getTitre(){return this->Titre;}
     QString getResp(){return this->Responsable;}
+    void editCursus(QString t, QString r){
+        Titre=t;
+        Responsable=r;
+    }
+    void afficherCursus(){
+        cout<<"Code : "<<Code.toStdString()<<"\nTitre : "<<Titre.toStdString()<<"\nResponsable : "<<Responsable.toStdString()<<"\n";
+    }
+
 };
 
 
