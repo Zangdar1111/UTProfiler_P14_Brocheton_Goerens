@@ -4,8 +4,13 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <fstream>
+#include <windows.h>
+#include <QProgressBar>
+#include <QPixmap>
 
 using namespace std;
+
 
 #include "enum.h"
 #include "Cursus.h"

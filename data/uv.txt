@@ -1,0 +1,20 @@
+#
+LO21
+Programmation Objets
+Printemps
+TM
+6
+1
+GI
+1
+0
+#
+BF99
+LE TITRE ICI
+Automne,Printemps
+CS,TM,TSH,SP
+6,2,3,5
+4
+GI,GB,GM,GSM
+4
+0

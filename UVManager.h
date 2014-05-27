@@ -25,6 +25,7 @@ public:
     void save();
     void addUV(string code, string t, ...);
     void deleteUV(string code);
+    void check_integrity();
 };
 
 #endif // UVMANAGER_H_INCLUDED
