@@ -28,17 +28,17 @@ void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
 void UVManager::addUVCategorie(QString c, Categorie cat, int cre){
     if(lastUV!=NULL){
         if(c==lastUV->getCode())
-            lastUV->ajouterCategorie(cat, cre);
+           { lastUV->ajouterCategorie(cat, cre);}
         else{
             lastUV=getUV(c);
-            if(lastUV!=NULL)
-                lastUV->ajouterCategorie(cat, cre);
+            if(lastUV!=NULL){
+                lastUV->ajouterCategorie(cat, cre);}
         }
     }
     else{
         lastUV=getUV(c);
-        if(lastUV!=NULL)
-            lastUV->ajouterCategorie(cat, cre);
+        if(lastUV!=NULL){
+            lastUV->ajouterCategorie(cat, cre);}
     }
 }
 
@@ -84,54 +84,66 @@ void UVManager::deleteUV(QString c)
     TabUV.erase(c);
 }
 
-/*
-void UVManager::check_integrity()
+int UVManager::check_integrity()
 {
-    ifstream fichier("./data/uv.txt", ios::app);  // on ouvre le fichier en écriture seule
-    if(fichier)  // si l'ouverture a réussi
+    unsigned int i;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
-        int stop=0;
-        QString contenu,code="DEBUT FICHIER";
-        while(getline(fichier, contenu))
+        QString test;
+        QTextStream flux(&fichier);
+        while(!flux.atEnd())
         {
-            if (contenu!= "#"){stop=1;cout<<"Erreur: Fichier Corrompu. Verifiez a partir de l'UV "<<code<<"."<<endl; break;}
-            cout<<contenu<<endl;
-            getline(fichier,code);cout<<code<<endl;
-            for (unsigned int i=0;i<8;i++)
+            test = flux.readLine();cout<<test.toStdString()<<"-CODE"<<endl;
+            for (i=0;i<6;i++)
             {
-                getline(fichier,contenu);cout<<contenu<<endl;
-                if (contenu=="#")
-                {
-                    stop=1;
-                    break;
-                }
+                test = flux.readLine();cout<<test.toStdString()<<"-Interieur"<<i<<endl;
+                if (test=="/")
+                    return 1;
             }
-            if (stop==1) {cout<<"Erreur: Fichier Corrompu. Verifiez a partir de l'UV "<<code<<"."<<endl; break;}
+            test = flux.readLine();cout<<test.toStdString()<<"-Fin"<<endl;
+            if (test!="/")
+                return 1;
         }
-        if (stop==0) {cout<<"Aucuns Problemes !";}
-        fichier.close();
     }
     else
-    cout << "Check_Integrity: Impossible d'ouvrir le fichier !" << endl;
+    {
+        return 2;
+    }
+    return 0;
 }
 
 void UVManager::load()
 {
-    ifstream fichier("./data/uv.xml", ios::in);  // on ouvre le fichier en lecture
-        if(fichier)  // si l'ouverture a réussi
+    unsigned int i;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        while(! flux.atEnd())
         {
-            // ON CREE UNE BOUCLE QUI VA PARCOURIR LE FICHIER
-            QString separateur,code,titre,saison,Tab_Categorie,Credits_Categorie,Nb_Categorie,Tab_Cursus,Nb_Cursus,DemiUV;
-            while(getline(fichier, separateur))
-            {
+            QString code = flux.readLine();
+            QString titre= flux.readLine();
+            QString saison = flux.readLine();
+            QStringList tsaison = saison.split(",");
 
-            // ON RECUPERE LES INFORMATIONS
-            // ON CREE UNE UV AVEC LES INFORMATIONS RECUPEREE
-            // ON AJOUTE L'UV DANS UVManager
-            }
-            fichier.close();  // on ferme le fichier
+            QString Tab_Categorie = flux.readLine();
+            QStringList tTab_Categorie = Tab_Categorie.split(",");
+            int taille_cat=tTab_Categorie.size();
+
+            QString Credits_Categorie = flux.readLine();
+            QStringList tCredits_Categorie = Credits_Categorie.split(",");
+
+            QString Tab_Cursus = flux.readLine();
+            QStringList tTab_Cursus = Tab_Cursus.split(",");
+
+            QString DemiUV = flux.readLine();
+            QString separateur = flux.readLine();
+
+            addUV(code,titre,tsaison.at(0).toInt(),tsaison.at(1).toInt(),DemiUV.toInt());
+            for(i=0;i<taille_cat;i++)
+                addUVCategorie(code,(Categorie)tTab_Categorie.at(i).toInt(),tCredits_Categorie.at(i).toInt());
+            cout<<"Cat:"<<lastUV->getNb_Categorie()<<endl;
         }
-        else
-        cout << "Load: Impossible d'ouvrir le fichier !" << endl;
+    }
 }
-*/

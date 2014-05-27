@@ -1,20 +1,16 @@
-#
 LO21
 Programmation Objets
-Printemps
-TM
+1,1
+2
 6
-1
 GI
 1
+/
+NF17
+BDD et UML
+1,0
+1,2,3,4
+6,6,6,6
+GI
 0
-#
-BF99
-LE TITRE ICI
-Automne,Printemps
-CS,TM,TSH,SP
-6,2,3,5
-4
-GI,GB,GM,GSM
-4
-0
+/
