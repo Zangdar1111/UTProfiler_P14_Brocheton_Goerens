@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
     */
 
     //Exemple de création d'UVs
-    UVManage->addUV("LO21","Programmation Objet", false);
-    UVManage->addUV("LO23","Conduite de projet informatique", false);
+    UVManage->addUV("LO21","Programmation Objet", true, false, false);
+    UVManage->addUV("LO23","Conduite de projet informatique", false, true, false);
 
     //Ajout de catégorie à une UV
     UVManage->addUVCategorie("LO21",TM,3);
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     UVManage->afficherUV("LO23");
 
     //Modification d'une UV
-    UVManage->addUV("LO21","Object Oriented Programming", true);
+    UVManage->addUV("LO21","Object Oriented Programming", true, true, true);
     UVManage->addUVCategorie("LO21",TM,6);
     UVManage->afficherUV("LO21");
 

@@ -8,7 +8,8 @@ class UV
 private:
     QString Code;
     QString Titre;
-    Saison saison[];
+    bool presentPrintemps;
+    bool presentAutomne;
     Categorie* Tab_Categorie;
     int* Credits_Categorie;
     unsigned int Nb_Categorie;
@@ -17,13 +18,14 @@ private:
     bool DemiUV;
 
 public:
-    UV(QString c, QString t, bool d) : Code(c), Titre(t), Tab_Categorie(new Categorie[0]),
+    UV(QString c, QString t, bool p, bool a, bool d) : Code(c), Titre(t), presentPrintemps(p), presentAutomne(a), Tab_Categorie(new Categorie[0]),
         Credits_Categorie(new int[0]), Nb_Categorie(0), Tab_Cursus(new Cursus[0]), Nb_Cursus(0), DemiUV(d){}
     UV();
-    void editUV(QString t, bool d);
+    void editUV(QString t, bool p, bool a, bool d);
     QString getCode() const {return this->Code;}
     QString getTitre() const {return this->Titre;}
-    Saison* getSaison() {return this->saison;}
+    bool getPresentPrintemps () const {return presentPrintemps;}
+    bool getPresentAutomne () const {return presentAutomne;}
     Categorie* getTab_Categorie() const {return this->Tab_Categorie;}
     int* getCredits_Categorie() const {return this->Credits_Categorie;}
     int getNb_Categorie() const {return this->Nb_Categorie;}
@@ -41,7 +43,6 @@ public:
     Cursus& getCursus(unsigned int i) const {return Tab_Cursus[i];}
     int hasCategorie(Categorie cat) const;
     int hasCursus(Cursus &cur) const;
-
 };
 
 #endif

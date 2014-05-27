@@ -8,13 +8,13 @@ UVManager *UVManager::instance=NULL;
  *              Titre de l'UV (chaine de caractères)
  *              Demi UV (booléen)
  */
-void UVManager::addUV(QString c, QString t, bool d){
+void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
     if (TabUV.find(c)!=TabUV.end()){
         lastUV=getUV(c);
-        lastUV->editUV(t,d);
+        lastUV->editUV(t, p, a, d);
     }
     else{
-        UV* uv = new UV(c, t, d);
+        UV* uv = new UV(c, t, p, a, d);
         TabUV.insert(make_pair(c,*uv));
         lastUV=uv;
     }

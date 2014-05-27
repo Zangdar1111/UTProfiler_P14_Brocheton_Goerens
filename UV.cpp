@@ -4,15 +4,18 @@
  * Arguments : Nouveau Titre de l'UV (chaine de caractères)
  *              Nouvelle valeur de DemiUV (booléen)
  */
-void UV::editUV(QString t, bool d)
+void UV::editUV(QString t, bool p, bool a, bool d)
 {
     Titre=t;
+    presentPrintemps=p;
+    presentAutomne=a;
     DemiUV=d;
 }
 
 //Afficher une UV en ligne de commande (a supprimer par la suite)
 void UV::afficherUV(){
     cout<<"Code : "<<Code.toStdString()<<"\nTitre : "<<Titre.toStdString()<<"\n";
+    cout<<"Printemps : "<<presentPrintemps<<" - Automne : "<<presentAutomne<<"\n";
     for(unsigned int i=0; i<Nb_Categorie; i++){
         cout<<"Categorie n°"<<i<<" : "<<Tab_Categorie[i]<<" - "<<Credits_Categorie[i]<<" crédits\n";
     }

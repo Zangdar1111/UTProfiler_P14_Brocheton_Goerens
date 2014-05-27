@@ -33,11 +33,11 @@ public:
             instance=NULL;
         }
     }
-    UV *getUV(QString c);
+    UV* getUV(QString c);
     //const UV& getUV(QString c) const;
     void load();
     void save();
-    void addUV(QString code, QString t, bool d);
+    void addUV(QString code, QString t, bool p, bool a, bool d);
     void addUVCategorie(QString c, Categorie cat, int cre);
     void afficherUV(QString c);
     void deleteUV(QString c);
