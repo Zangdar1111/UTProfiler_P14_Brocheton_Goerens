@@ -16,13 +16,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     Cursus.cpp \
     UV.cpp \
-    UVManager.cpp
+    UVManager.cpp \
+    CursusManager.cpp
 
 HEADERS  += mainwindow.h \
     Cursus.h \
     enum.h \
     includes.h \
     UV.h \
-    UVManager.h
+    UVManager.h \
+    CursusManager.h \
+    singletonTemplate.h
 
 FORMS    += mainwindow.ui
