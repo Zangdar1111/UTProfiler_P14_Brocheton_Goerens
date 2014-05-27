@@ -43,6 +43,7 @@ public:
     void afficherUV(string c);
 
     void deleteUV(string code);
+    void check_integrity();
 };
 
 #endif // UVMANAGER_H_INCLUDED

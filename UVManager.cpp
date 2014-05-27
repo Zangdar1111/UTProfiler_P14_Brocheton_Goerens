@@ -87,4 +87,37 @@ void UVManager::deleteUV(string code)
     tabUV.delete(code);
 }
 
+<<<<<<< HEAD
+=======
+void UVManager::check_integrity()
+{
+    ifstream fichier("./data/uv.txt", ios::app);  // on ouvre le fichier en écriture seule
+    if(fichier)  // si l'ouverture a réussi
+    {
+        int stop=0;
+        string contenu,code="DEBUT FICHIER";
+        while(getline(fichier, contenu))
+        {
+            if (contenu!= "#"){stop=1;cout<<"Erreur: Fichier Corrompu. Verifiez a partir de l'UV "<<code<<"."<<endl; break;}
+            cout<<contenu<<endl;
+            getline(fichier,code);cout<<code<<endl;
+            for (unsigned int i=0;i<8;i++)
+            {
+                getline(fichier,contenu);cout<<contenu<<endl;
+                if (contenu=="#")
+                {
+                    stop=1;
+                    break;
+                }
+            }
+            if (stop==1) {cout<<"Erreur: Fichier Corrompu. Verifiez a partir de l'UV "<<code<<"."<<endl; break;}
+        }
+        if (stop==0) {cout<<"Aucuns Problemes !";}
+        fichier.close();
+    }
+    else
+    cout << "Check_Integrity: Impossible d'ouvrir le fichier !" << endl;
+}
+
+>>>>>>> c41a22112227dd4e3b7fa7aac93da4536426f1c4
 */
