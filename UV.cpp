@@ -4,18 +4,10 @@ UV::UV(string c, string t, bool d) : Code(c), Titre(t), Tab_Categorie(new Catego
     Credits_Categorie(new int[0]), Nb_Categorie(0), Tab_Cursus(new Cursus[0]), Nb_Cursus(0), DemiUV(d){}
 
 
-void UV::editUV(string c, string t, Saison s1, Saison s2, Categorie* tab_cat, int* cre_cat, int nb_cat, Cursus* tab_curs, int nb_curs, bool d)
+void UV::editUV(string c, string t, bool d)
 {
-    int i;
     Code=c;
     Titre=t;
-    saison[0]=s1;
-    saison[1]=s2;
-    Tab_Categorie=tab_cat;
-    Credits_Categorie=cre_cat;
-    Nb_Categorie=nb_cat;
-    Tab_Cursus=tab_curs;
-    Nb_Cursus=nb_curs;
     DemiUV=d;
 
 }
@@ -90,7 +82,22 @@ void UV::ajouterCursus(Cursus &c){
         //Ajout du nouveau Cursus
         Tab_Cursus[Nb_Cursus-1]=c;
     }
-
-
 }
+/*
+UV* UV::operator=(UV& src){
+    if (this==&src) return this;
 
+    this->Code=src.getCode();
+    this->Titre=src.getTitre();
+    this->DemiUV=src.getDemiUV();
+
+    for(unsigned int i=0; i<src.getNb_Categorie(); i++){
+        this->ajouterCategorie(src.getCategorie(i),src.getCreditsCat(i));
+    }
+    for(unsigned int i=0; i<src.getNb_Cursus(); i++){
+        this->ajouterCursus(src.getCursus(i));
+    }
+
+    return this;
+}
+*/

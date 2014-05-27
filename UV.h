@@ -18,21 +18,26 @@ private:
 
 public:
     UV(string c, string t, bool d);
-    void editUV(string c, string t, Saison s1, Saison s2, Categorie* tab_cat, int* cre_cat, int nb_cat, Cursus* tab_curs, int nb_curs, bool d);
-    string getCode(){return this->Code;}
-    string getTitre(){return this->Titre;}
-    Saison* getSaison(){return this->saison;}
-    Categorie* getTab_Categorie(){return this->Tab_Categorie;}
-    int* getCredits_Categorie(){return this->Credits_Categorie;}
-    int getNb_Categorie(){return this->Nb_Categorie;}
-    Cursus* getTab_Cursus(){return this->Tab_Cursus;}
-    int getNb_Cursus(){return this->Nb_Cursus;}
-    bool getDemiUV(){return this->DemiUV;}
-    ~UV();
+    UV();
+    void editUV(string c, string t, bool d);
+    string getCode() const {return this->Code;}
+    string getTitre() const {return this->Titre;}
+    Saison* getSaison() {return this->saison;}
+    Categorie* getTab_Categorie() const {return this->Tab_Categorie;}
+    int* getCredits_Categorie() const {return this->Credits_Categorie;}
+    int getNb_Categorie() const {return this->Nb_Categorie;}
+    Cursus* getTab_Cursus() const {return this->Tab_Cursus;}
+    int getNb_Cursus() const {return this->Nb_Cursus;}
+    bool getDemiUV() const {return this->DemiUV;}
+    //~UV();
 
     void afficherUV();
     void ajouterCategorie(Categorie c, int n); //Ajouter une catégorie et le nombre de crédits
     void ajouterCursus(Cursus &c); //Ajouter un Cursus
+    UV* operator=(UV& src); //Opérateur de recopie pour le MAP
+    Categorie& getCategorie(unsigned int i) const {return Tab_Categorie[i];}
+    int getCreditsCat(unsigned int i) const {return Credits_Categorie[i];}
+    Cursus& getCursus(unsigned int i) const {return Tab_Cursus[i];}
 
 };
 
