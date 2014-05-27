@@ -86,9 +86,8 @@ void UVManager::deleteUV(string code)
 {
     tabUV.delete(code);
 }
+*/
 
-<<<<<<< HEAD
-=======
 void UVManager::check_integrity()
 {
     ifstream fichier("./data/uv.txt", ios::app);  // on ouvre le fichier en écriture seule
@@ -118,6 +117,3 @@ void UVManager::check_integrity()
     else
     cout << "Check_Integrity: Impossible d'ouvrir le fichier !" << endl;
 }
-
->>>>>>> c41a22112227dd4e3b7fa7aac93da4536426f1c4
-*/
