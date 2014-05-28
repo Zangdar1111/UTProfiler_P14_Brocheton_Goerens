@@ -62,12 +62,9 @@ void UVManager::deleteUV(QString c)
  *              la code du Cursus à ajouter (chaine de caractères)
  */
 void UVManager::addUVCursus(QString c, QString cur){
-    Cursus* findCursus = CursusManager::getInstance()->getCursus(cur);
-    if(findCursus!=NULL){
-        UV* findUV=getUV(c);
-        if(findUV!=NULL){
-            findUV->ajouterCursus(*findCursus);
-        }
+    UV* findUV=getUV(c);
+    if(findUV!=NULL){
+        findUV->ajouterCursus(cur);
     }
 }
 
@@ -136,3 +133,4 @@ void UVManager::load()
         }
     }
 }
+*/

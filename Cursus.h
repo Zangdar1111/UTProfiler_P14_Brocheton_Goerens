@@ -19,9 +19,12 @@ public:
         Responsable=r;
     }
     void afficherCursus() const{
-        cout<<"Code : "<<Code.toStdString()<<"\nTitre : "<<Titre.toStdString()<<"\nResponsable : "<<Responsable.toStdString()<<"\n";
+        cout<<"***Affichage Cursus***\nCode : "<<Code.toStdString()
+           <<"\nTitre : "<<Titre.toStdString()
+          <<"\nResponsable : "<<Responsable.toStdString()
+         <<"\n******\n";
     }
-    bool operator==(const Cursus* cur) const;
+    //bool operator==(const Cursus* cur) const;
 };
 
 
