@@ -392,6 +392,9 @@
        </property>
       </widget>
       <widget class="QLabel" name="Edit_UV_Label8">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>40</x>
@@ -405,6 +408,9 @@
        </property>
       </widget>
       <widget class="QLabel" name="Edit_UV_Label9">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>210</x>
@@ -444,6 +450,9 @@
        </property>
       </widget>
       <widget class="QListWidget" name="Edit_UV_List1">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -464,28 +473,11 @@
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
-       <item>
-        <property name="text">
-         <string>GI</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>GB</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>TC</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>HuTeck</string>
-        </property>
-       </item>
       </widget>
       <widget class="QListWidget" name="Edit_UV_List2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>180</x>
@@ -506,21 +498,6 @@
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
-       <item>
-        <property name="text">
-         <string>SY14</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY15</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY16</string>
-        </property>
-       </item>
       </widget>
       <zorder>Edit_UV_Code</zorder>
       <zorder>Edit_UV_Label1</zorder>

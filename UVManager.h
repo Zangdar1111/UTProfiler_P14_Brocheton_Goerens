@@ -18,6 +18,7 @@ public:
     void addUVCursus(QString c, QString cur);
     void afficherUV(QString c);
     void deleteUV(QString c);
+    QStringList listerUV();
     int check_integrity();
 };
 

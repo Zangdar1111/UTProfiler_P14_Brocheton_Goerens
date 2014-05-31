@@ -1,6 +1,8 @@
 #ifndef INCLUDES_H_INCLUDED
 #define INCLUDES_H_INCLUDED
 
+#include <QMainWindow>
+#include <QSplashScreen>
 #include <iostream>
 #include <QString>
 #include <QStringList>

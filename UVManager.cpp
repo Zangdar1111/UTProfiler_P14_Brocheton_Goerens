@@ -57,6 +57,21 @@ void UVManager::deleteUV(QString c)
 }
 
 
+/* Permet de lister toutes les UV chargées dans l'application
+ * Argument: aucuns
+ * Retourne une QStringList contenant le code de chaque UV
+ * */
+QStringList UVManager::listerUV()
+{
+    QStringList list;
+    for(map<QString, UV>::iterator it=TabUV.begin() ; it!=TabUV.end() ; ++it)
+    {
+        list.append(it->first); // accede à la clé
+    }
+    return list;
+}
+
+
 /* Permet d'ajouter un Cursus à une UV par le UVManager
  * Arguments : le code de l'UV (chaine de caractères)
  *              la code du Cursus à ajouter (chaine de caractères)

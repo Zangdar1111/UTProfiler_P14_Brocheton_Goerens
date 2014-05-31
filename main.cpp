@@ -3,6 +3,7 @@
 #include "includes.h"
 
 void test_cursus_uv();
+void fin();
 
 UVManager* UVManage = UVManager::getInstance();
 CursusManager* CursusManage = CursusManager::getInstance();
@@ -47,20 +48,21 @@ int main(int argc, char *argv[])
     splash.finish(&w);
 
 
-    UVManage->afficherUV("LO21");
-    UVManage->afficherUV("NF17");
+   // test_cursus_uv();
 
 
 
-    test_cursus_uv();
-
-
-    UVManager::kill();
-    CursusManager::kill();
 
     return a.exec();
-}
+    atexit(fin);
 
+}
+void fin()
+{
+    UVManager::kill();
+    CursusManager::kill();
+}
+/*
 void test_cursus_uv(){
     //Exemple de création de Cursus
     CursusManage->addCursus("GI", "Génie Informatique", "Philippe Trigano");
@@ -108,4 +110,4 @@ void test_cursus_uv(){
     //Suppresion d'une UV
     UVManage->deleteUV("LO23");
     UVManage->afficherUV("LO23");
-}
+}*/
