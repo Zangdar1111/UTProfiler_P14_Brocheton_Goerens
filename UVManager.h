@@ -4,21 +4,12 @@
 #include "includes.h"
 
 
-template<typename T> class Singleton
- {
-   public:
-     static T& Instance()
-     {
-         static T theSingleInstance; // suppose que T a un constructeur par d�faut
-         return theSingleInstance;
-     }
- };
-
 class UVManager : public Singleton<UVManager>
 {
 friend class Singleton<UVManager>;
     map<QString, UV> TabUV;
     UVManager(){}
+    UV* lastUV;
 public:
     UV* getUV(QString c);
     //const UV& getUV(QString c) const;

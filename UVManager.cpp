@@ -108,7 +108,7 @@ void UVManager::addUVCursus(QString c, QString cur){
 
 
 
-void UVManager::check_integrity()
+int UVManager::check_integrity()
 
 {
     unsigned int i;
@@ -123,11 +123,11 @@ void UVManager::check_integrity()
             for (i=0;i<6;i++)
             {
                 test = flux.readLine();cout<<test.toStdString()<<"-Interieur"<<i<<endl;
-                if (test=="/")
+                if (test=="#")
                     return 1;
             }
             test = flux.readLine();cout<<test.toStdString()<<"-Fin"<<endl;
-            if (test!="/")
+            if (test!="#")
                 return 1;
         }
     }

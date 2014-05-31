@@ -57,6 +57,12 @@
        <property name="text">
         <string>CS</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <property name="tristate">
+        <bool>false</bool>
+       </property>
       </widget>
       <widget class="QLineEdit" name="Seek_UV_Code">
        <property name="geometry">
@@ -83,6 +89,9 @@
        <property name="text">
         <string>TSH</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QCheckBox" name="Seek_UV_SP">
        <property name="geometry">
@@ -99,6 +108,9 @@
        <property name="text">
         <string>SP</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QCheckBox" name="Seek_UV_TM">
        <property name="geometry">
@@ -114,6 +126,9 @@
        </property>
        <property name="text">
         <string>TM</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QPushButton" name="Seek_UV_Submit">
@@ -536,21 +551,6 @@
       <property name="dragDropMode">
        <enum>QAbstractItemView::NoDragDrop</enum>
       </property>
-      <item>
-       <property name="text">
-        <string>LO21</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LO22</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>NF17</string>
-       </property>
-      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="Onglet_Cursus">
