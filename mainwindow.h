@@ -18,7 +18,9 @@ public:
 
 public slots:
     void Print_UV();
-    void Create_Reset_UV();
+    void Create_Edit_UV();
+    void Delete_UV();
+    void CreateUV();
 
 private:
     Ui::MainWindow *ui;
