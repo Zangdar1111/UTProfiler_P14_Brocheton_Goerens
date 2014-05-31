@@ -3,13 +3,11 @@
 
 #include "includes.h"
 
-
 class UVManager : public Singleton<UVManager>
 {
 friend class Singleton<UVManager>;
     map<QString, UV> TabUV;
     UVManager(){}
-    UV* lastUV;
 public:
     UV* getUV(QString c);
     //const UV& getUV(QString c) const;

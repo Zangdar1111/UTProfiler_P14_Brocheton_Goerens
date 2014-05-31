@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <QString>
+#include <QStringList>
 #include <map>
 #include <fstream>
 #include <windows.h>

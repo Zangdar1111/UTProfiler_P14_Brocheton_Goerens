@@ -6,14 +6,12 @@
  *              Demi UV (booléen)
  */
 void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
-    if (TabUV.find(c)!=TabUV.end()){
-        lastUV=getUV(c);
-        lastUV->editUV(t, p, a, d);
-    }
+    UV* findUV=getUV(c);
+    if(findUV!=NULL)
+            findUV->editUV(t, p, a, d);
     else{
         UV* uv = new UV(c, t, p, a, d);
         TabUV.insert(make_pair(c,*uv));
-        lastUV=uv;
     }
 }
 
@@ -23,40 +21,17 @@ void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
  *              le nombre de crédits apportés à cette catégorie (int)
  */
 void UVManager::addUVCategorie(QString c, Categorie cat, int cre){
-    if(lastUV!=NULL){
-        if(c==lastUV->getCode())
-           { lastUV->ajouterCategorie(cat, cre);}
-        else{
-            lastUV=getUV(c);
-            if(lastUV!=NULL){
-                lastUV->ajouterCategorie(cat, cre);}
-        }
-    }
-    else{
-        lastUV=getUV(c);
-        if(lastUV!=NULL){
-            lastUV->ajouterCategorie(cat, cre);}
+    UV* findUV=getUV(c);
+    if(findUV!=NULL){
+        findUV->ajouterCategorie(cat, cre);
     }
 }
 
 //Afficher une UV via le UVManager en ligne de commande (a supprimer par la suite)
 void UVManager::afficherUV(QString c){
-    if(lastUV!=NULL){
-        if(c==lastUV->getCode()){
-            lastUV->afficherUV();
-        }
-        else{
-            lastUV=getUV(c);
-            if(lastUV!=NULL){
-                lastUV->afficherUV();
-            }
-        }
-    }
-    else{
-        lastUV=getUV(c);
-        if(lastUV!=NULL){
-            lastUV->afficherUV();
-        }
+    UV* findUV=getUV(c);
+    if(findUV!=NULL){
+        findUV->afficherUV();
     }
 }
 
@@ -87,29 +62,13 @@ void UVManager::deleteUV(QString c)
  *              la code du Cursus à ajouter (chaine de caractères)
  */
 void UVManager::addUVCursus(QString c, QString cur){
-    Cursus* cursus = CursusManager::getInstance()->getCursus(cur);
-    if(cursus!=NULL){
-        if(lastUV!=NULL){
-            if(c==lastUV->getCode())
-                lastUV->ajouterCursus(*cursus);
-            else{
-                lastUV=getUV(c);
-                if(lastUV!=NULL)
-                    lastUV->ajouterCursus(*cursus);
-            }
-        }
-        else{
-            lastUV=getUV(c);
-            if(lastUV!=NULL)
-                lastUV->ajouterCursus(*cursus);
-        }
+    UV* findUV=getUV(c);
+    if(findUV!=NULL){
+        findUV->ajouterCursus(cur);
     }
 }
 
-
-
 int UVManager::check_integrity()
-
 {
     unsigned int i;
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
@@ -119,14 +78,14 @@ int UVManager::check_integrity()
         QTextStream flux(&fichier);
         while(!flux.atEnd())
         {
-            test = flux.readLine();cout<<test.toStdString()<<"-CODE"<<endl;
+            test = flux.readLine();
             for (i=0;i<6;i++)
             {
-                test = flux.readLine();cout<<test.toStdString()<<"-Interieur"<<i<<endl;
+                test = flux.readLine();
                 if (test=="#")
                     return 1;
             }
-            test = flux.readLine();cout<<test.toStdString()<<"-Fin"<<endl;
+            test = flux.readLine();
             if (test!="#")
                 return 1;
         }
@@ -140,7 +99,7 @@ int UVManager::check_integrity()
 
 void UVManager::load()
 {
-    unsigned int i;
+    int i;
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
@@ -168,7 +127,6 @@ void UVManager::load()
             addUV(code,titre,tsaison.at(0).toInt(),tsaison.at(1).toInt(),DemiUV.toInt());
             for(i=0;i<taille_cat;i++)
                 addUVCategorie(code,(Categorie)tTab_Categorie.at(i).toInt(),tCredits_Categorie.at(i).toInt());
-            cout<<"Cat:"<<lastUV->getNb_Categorie()<<endl;
         }
     }
 }

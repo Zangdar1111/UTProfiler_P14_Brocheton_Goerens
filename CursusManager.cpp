@@ -6,14 +6,13 @@
  *              Responsable du Cursus (chaine de caractère)
  */
 void CursusManager::addCursus(QString c, QString t, QString r){
-    if (TabCursus.find(c)!=TabCursus.end()){
-        lastCursus=getCursus(c);
-        lastCursus->editCursus(t, r);
+    Cursus* findCursus=getCursus(c);
+    if(findCursus!=NULL){
+        findCursus->editCursus(t, r);
     }
     else{
         Cursus* new_cur = new Cursus(c, t, r);
         TabCursus.insert(make_pair(c,*new_cur));
-        lastCursus=new_cur;
     }
 }
 
@@ -32,22 +31,9 @@ Cursus* CursusManager::getCursus(QString c){
 
 //Afficher une UV via le UVManager en ligne de commande (a supprimer par la suite)
 void CursusManager::afficherCursus(QString c){
-    if(lastCursus!=NULL){
-        if(c==lastCursus->getCode()){
-            lastCursus->afficherCursus();
-        }
-        else{
-            lastCursus=getCursus(c);
-            if(lastCursus!=NULL){
-                lastCursus->afficherCursus();
-            }
-        }
-    }
-    else{
-        lastCursus=getCursus(c);
-        if(lastCursus!=NULL){
-            lastCursus->afficherCursus();
-        }
+    Cursus* findCursus=getCursus(c);
+    if(findCursus!=NULL){
+        findCursus->afficherCursus();
     }
 }
 
@@ -56,4 +42,5 @@ void CursusManager::afficherCursus(QString c){
  */
 void CursusManager::deleteCursus(QString c){
     TabCursus.erase(c);
+    //Que se passe t il se l'on demande de supprimer un Cursus qui n'existe pas ?
 }
