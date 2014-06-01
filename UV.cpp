@@ -153,3 +153,16 @@ int UV::hasCursus(const QString& cur) const{
 }
 */
 
+/* Permet d'obtenir le nombre de crédits associé à une catégorie
+ * Argument: la Catégorie
+ * Retourne le nombre de crédits associé à la catégorie
+ *              0 si l'UV n'est pas de cette catégorie
+ * */
+unsigned int UV::getCreditsCat(Categorie cat) const
+{
+    for (unsigned int i=0;i<Nb_Categorie;i++)
+    {
+        if (Tab_Categorie[i]==cat) return Credits_Categorie[i];
+    }
+    return 0;
+}

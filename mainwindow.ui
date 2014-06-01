@@ -375,7 +375,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QCheckBox" name="checkBox_7">
+      <widget class="QCheckBox" name="Edit_UV_DemiUV">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -392,9 +392,6 @@
        </property>
       </widget>
       <widget class="QLabel" name="Edit_UV_Label8">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
        <property name="geometry">
         <rect>
          <x>40</x>
@@ -408,9 +405,6 @@
        </property>
       </widget>
       <widget class="QLabel" name="Edit_UV_Label9">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
        <property name="geometry">
         <rect>
          <x>210</x>
@@ -450,9 +444,6 @@
        </property>
       </widget>
       <widget class="QListWidget" name="Edit_UV_List1">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -475,9 +466,6 @@
        </property>
       </widget>
       <widget class="QListWidget" name="Edit_UV_List2">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
        <property name="geometry">
         <rect>
          <x>180</x>
@@ -499,29 +487,6 @@
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
       </widget>
-      <zorder>Edit_UV_Code</zorder>
-      <zorder>Edit_UV_Label1</zorder>
-      <zorder>Edit_UV_Label2</zorder>
-      <zorder>Edit_UV_Titre</zorder>
-      <zorder>Edit_UV_Label3</zorder>
-      <zorder>Edit_UV_Automne</zorder>
-      <zorder>Edit_UV_Printemps</zorder>
-      <zorder>Edit_UV_Label4</zorder>
-      <zorder>Edit_UV_CS</zorder>
-      <zorder>Edit_UV_Label5</zorder>
-      <zorder>Edit_UV_TM</zorder>
-      <zorder>Edit_UV_Label6</zorder>
-      <zorder>Edit_UV_TSH</zorder>
-      <zorder>Edit_UV_Label7</zorder>
-      <zorder>Edit_UV_SP</zorder>
-      <zorder>checkBox_7</zorder>
-      <zorder>Edit_UV_Label8</zorder>
-      <zorder>Edit_UV_Label9</zorder>
-      <zorder>Delete_UV</zorder>
-      <zorder>Save_UV</zorder>
-      <zorder>Edit_UV_List1</zorder>
-      <zorder>Edit_UV_List2</zorder>
-      <zorder>Print_UV_List</zorder>
      </widget>
      <widget class="QPushButton" name="Create_UV">
       <property name="geometry">
@@ -1335,7 +1300,7 @@
   <tabstop>Edit_UV_TM</tabstop>
   <tabstop>Edit_UV_TSH</tabstop>
   <tabstop>Edit_UV_SP</tabstop>
-  <tabstop>checkBox_7</tabstop>
+  <tabstop>Edit_UV_DemiUV</tabstop>
   <tabstop>Delete_UV</tabstop>
   <tabstop>Save_UV</tabstop>
   <tabstop>Edit_UV_List1</tabstop>

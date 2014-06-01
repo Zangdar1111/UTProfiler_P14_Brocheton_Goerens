@@ -7,13 +7,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QObject::connect(ui->Seek_UV_Submit, SIGNAL(clicked()), this, SLOT(Print_UV()));
+    QObject::connect(ui->Seek_UV_Submit, SIGNAL(clicked()), this, SLOT(PrintUV()));
 
-    QObject::connect(ui->Create_UV, SIGNAL(clicked()), this, SLOT(Create_Reset_UV()));
+    QObject::connect(ui->Create_UV, SIGNAL(clicked()), this, SLOT(CreateUV()));
+
+    QObject::connect(ui->Print_UV_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditUV(QListWidgetItem *)));
+
+    QObject::connect(ui->Delete_UV, SIGNAL(clicked()), this, SLOT(DeleteUV()));
+
+    QObject::connect(ui->Save_UV, SIGNAL(clicked()), this, SLOT(SaveUV()));
 
 
     //Recuperation de la liste des UV
-    Print_UV();
+    PrintUV();
 }
 
 
@@ -23,14 +29,75 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::Create_Reset_UV()
+void MainWindow::CreateUV()
 {
     ui->Edit_UV_Group->setEnabled(true);
 }
 
-
-void MainWindow::Print_UV()
+void MainWindow::EditUV(QListWidgetItem * item)
 {
+    //re-initialisation
+    ui->Edit_UV_Code->setText("");
+    ui->Edit_UV_Titre->setText("");
+    ui->Edit_UV_Printemps->setChecked(false);
+    ui->Edit_UV_Automne->setChecked(false);
+    ui->Edit_UV_DemiUV->setChecked(false);
+    ui->Edit_UV_CS->setValue(0);
+    ui->Edit_UV_TM->setValue(0);
+    ui->Edit_UV_TSH->setValue(0);
+    ui->Edit_UV_SP->setValue(0);
+    while (ui->Edit_UV_List1->count () > 0) delete ui->Edit_UV_List1->takeItem (0);
+    while (ui->Edit_UV_List2->count () > 0) delete ui->Edit_UV_List2->takeItem (0);
+
+    //initialisation
+    QString code = item->text();
+    UVManager* UVManage = UVManager::getInstance();
+    UV* uv = UVManage->getUV(code);
+    ui->Edit_UV_Code->setReadOnly(true);
+    ui->Edit_UV_Code->setText(code);
+    ui->Edit_UV_Titre->setText(uv->getTitre());
+    if (uv->getPresentPrintemps()) ui->Edit_UV_Printemps->setChecked(true);
+    if (uv->getPresentAutomne()) ui->Edit_UV_Automne->setChecked(true);
+    if (uv->getDemiUV()) ui->Edit_UV_DemiUV->setChecked(true);
+    ui->Edit_UV_CS->setValue(uv->getCreditsCat(CS));
+    ui->Edit_UV_TM->setValue(uv->getCreditsCat(TM));
+    ui->Edit_UV_TSH->setValue(uv->getCreditsCat(TSH));
+    ui->Edit_UV_SP->setValue(uv->getCreditsCat(SP));
+
+    //Cursus ICI A AJOUTER
+
+    ui->Edit_UV_Group->setEnabled(true);
+}
+
+void MainWindow::DeleteUV()
+{
+    /*int reponse = QMessageBox::question(this, "Supprimer l'UV "+ui->Edit_UV_Code->text(), "Etes vous sûr de vouloir supprimer cette UV ?", QMessageBox::Yes | QMessageBox::No);
+        if (reponse == QMessageBox::Yes)
+        {
+            //récupérer UV dans UVManager
+            UVManager* UVManage = UVManager::getInstance();
+            UV* uv = UVManage->getUV(ui->Edit_UV_code->text());
+            //supprimer l'UV de UVManager
+            UVManage->deleteUV(uv->getCode());
+            //supprimer l'UV du fichier
+
+            //supprimer l'UV elle même
+        }
+    ui->Edit_UV_Group->setEnabled(false);*/
+}
+
+void MainWindow::SaveUV()
+{
+    //récupérer UV dans UVManager
+    //si l'UV existe: mettre a jour
+    //si l'UV n'existe pas: créer l'UV
+    //mettre a jour le fichier
+    ui->Edit_UV_Group->setEnabled(false);
+}
+
+void MainWindow::PrintUV()
+{
+    ui->Edit_UV_Group->setEnabled(false);
     QString code_seek = ui->Seek_UV_Code->text();
     UVManager* UVManage = UVManager::getInstance();
     while (ui->Print_UV_List->count () > 0) delete ui->Print_UV_List->takeItem (0);

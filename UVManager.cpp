@@ -145,3 +145,19 @@ void UVManager::load()
         }
     }
 }
+/*
+void deleteUV_fichier(QString c)
+{
+    int i;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            QStringList.append(flux.readLine());
+        }
+
+    }
+}*/

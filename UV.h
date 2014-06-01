@@ -39,7 +39,7 @@ public:
     void ajouterCursus(QString &c); //Ajouter un Cursus
     //UV* operator=(UV& src); //Opérateur de recopie pour le MAP
     Categorie& getCategorie(unsigned int i) const {return Tab_Categorie[i];}
-    unsigned int getCreditsCat(unsigned int i) const {return Credits_Categorie[i];}
+    unsigned int getCreditsCat(Categorie cat) const;
     QString getCursus(unsigned int i) const {return Tab_Cursus.value(i);}
     int hasCategorie(Categorie cat) const;
     int hasCursus(const QString &cur) const;

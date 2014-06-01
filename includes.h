@@ -13,6 +13,8 @@
 #include <QPixmap>
 #include <QFile>
 #include <QTextStream>
+#include <QMessageBox>
+#include <QListWidgetItem>
 
 using namespace std;
 
