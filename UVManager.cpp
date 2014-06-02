@@ -9,7 +9,8 @@ void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
     UV* findUV=getUV(c);
     if(findUV!=NULL)
             findUV->editUV(t, p, a, d);
-    else{
+    else
+    {
         UV* uv = new UV(c, t, p, a, d);
         TabUV.insert(make_pair(c,*uv));
     }
@@ -145,19 +146,70 @@ void UVManager::load()
         }
     }
 }
-/*
-void deleteUV_fichier(QString c)
+
+void UVManager::deleteUV_fichier(QString c)
 {
-    int i;
+
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
-    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
     {
         QTextStream flux(&fichier);
         QStringList tout;
         while(! flux.atEnd())
         {
-            QStringList.append(flux.readLine());
+            tout.append(flux.readLine());
         }
-
+        int ind=tout.indexOf(c);
+        for (unsigned int i=0;i<8;i++)
+        {
+             tout.removeAt(ind);
+        }
+        fichier.resize(0);
+        for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+        {
+            flux<<*it<<"\n";
+        }
     }
-}*/
+}
+
+void UVManager::addUV_fichier(QString c)
+{
+    UV* uv = getUV(c);
+    int ind;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            tout.append(flux.readLine());
+        }
+        if (tout.contains(c))
+        {
+            ind=tout.indexOf(c);
+            for (unsigned int i=0;i<8;i++)
+            {
+                 tout.removeAt(ind);
+            }
+        }
+        else
+        {
+            ind=tout.size();
+        }
+        tout.insert(ind,"#");
+        tout.insert(ind,QString::number(uv->getDemiUV()));
+        tout.insert(ind,"GI");
+        tout.insert(ind,"6");
+        tout.insert(ind,"0");
+        tout.insert(ind,QString::number(uv->getPresentPrintemps())+","+QString::number(uv->getPresentAutomne()));
+        tout.insert(ind,uv->getTitre());
+        tout.insert(ind,uv->getCode());
+
+        fichier.resize(0);
+        for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+        {
+            flux<<*it<<"\n";
+        }
+    }
+}

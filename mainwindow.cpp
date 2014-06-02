@@ -28,15 +28,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::CreateUV()
+void MainWindow::ResetUV()
 {
-    ui->Edit_UV_Group->setEnabled(true);
-}
-
-void MainWindow::EditUV(QListWidgetItem * item)
-{
-    //re-initialisation
     ui->Edit_UV_Code->setText("");
     ui->Edit_UV_Titre->setText("");
     ui->Edit_UV_Printemps->setChecked(false);
@@ -48,7 +41,18 @@ void MainWindow::EditUV(QListWidgetItem * item)
     ui->Edit_UV_SP->setValue(0);
     while (ui->Edit_UV_List1->count () > 0) delete ui->Edit_UV_List1->takeItem (0);
     while (ui->Edit_UV_List2->count () > 0) delete ui->Edit_UV_List2->takeItem (0);
+}
 
+void MainWindow::CreateUV()
+{
+    ResetUV();
+    ui->Edit_UV_Code->setReadOnly(false);
+    ui->Edit_UV_Group->setEnabled(true);
+}
+
+void MainWindow::EditUV(QListWidgetItem * item)
+{
+    ResetUV();
     //initialisation
     QString code = item->text();
     UVManager* UVManage = UVManager::getInstance();
@@ -71,28 +75,37 @@ void MainWindow::EditUV(QListWidgetItem * item)
 
 void MainWindow::DeleteUV()
 {
-    /*int reponse = QMessageBox::question(this, "Supprimer l'UV "+ui->Edit_UV_Code->text(), "Etes vous sûr de vouloir supprimer cette UV ?", QMessageBox::Yes | QMessageBox::No);
+    int reponse = QMessageBox::question(this, "Supprimer l'UV "+ui->Edit_UV_Code->text(), "Etes vous sûr de vouloir supprimer cette UV ?", QMessageBox::Yes | QMessageBox::No);
         if (reponse == QMessageBox::Yes)
         {
             //récupérer UV dans UVManager
             UVManager* UVManage = UVManager::getInstance();
-            UV* uv = UVManage->getUV(ui->Edit_UV_code->text());
+            UV* uv = UVManage->getUV(ui->Edit_UV_Code->text());
+            //supprimer l'UV du fichier
+            UVManage->deleteUV_fichier(uv->getCode());
             //supprimer l'UV de UVManager
             UVManage->deleteUV(uv->getCode());
-            //supprimer l'UV du fichier
-
             //supprimer l'UV elle même
+            delete uv; //EST-CE QUE CELA MARCHE OU CELA NE SUPPRIME QUE MON POINTEUR
+            ui->Edit_UV_Group->setEnabled(false);
+            PrintUV();
+            ResetUV();
         }
-    ui->Edit_UV_Group->setEnabled(false);*/
 }
 
 void MainWindow::SaveUV()
 {
     //récupérer UV dans UVManager
-    //si l'UV existe: mettre a jour
-    //si l'UV n'existe pas: créer l'UV
-    //mettre a jour le fichier
+    UVManager* UVManage = UVManager::getInstance();
+    //Edition ou Sauvegarde
+    UVManage->addUV(ui->Edit_UV_Code->text(),ui->Edit_UV_Titre->text(),ui->Edit_UV_Printemps->isChecked(),ui->Edit_UV_Automne->isChecked(),ui->Edit_UV_DemiUV->isChecked());
+    //mise à jour du fichier
+    UVManage->addUV_fichier(ui->Edit_UV_Code->text());
+    //information de succès
+    QMessageBox::information(this,"UV "+ui->Edit_UV_Code->text()+" sauvegardée","L'UV "+ui->Edit_UV_Code->text()+" a bien été sauvegardée !",QMessageBox::Ok);
     ui->Edit_UV_Group->setEnabled(false);
+    ResetUV();
+    PrintUV();
 }
 
 void MainWindow::PrintUV()

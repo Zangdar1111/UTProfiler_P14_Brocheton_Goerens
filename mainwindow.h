@@ -19,6 +19,7 @@ public:
 public slots:
     void PrintUV();
     void CreateUV();
+    void ResetUV();
     void EditUV(QListWidgetItem *item);
     void DeleteUV();
     void SaveUV();
