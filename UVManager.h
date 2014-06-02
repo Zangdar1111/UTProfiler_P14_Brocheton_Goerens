@@ -16,9 +16,8 @@ public:
     void addUV_fichier(QString c);
     void save();
     void addUV(QString code, QString t, bool p, bool a, bool d);
-    void addUVCategorie(QString c, Categorie cat, int cre);
+    void editUVCategorie(QString c, Categorie cat, int cre);
     void addUVCursus(QString c, QString cur);
-    void afficherUV(QString c);
     void deleteUV(QString c);
     QStringList listerUV();
     int check_integrity();

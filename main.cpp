@@ -10,7 +10,6 @@ CursusManager* CursusManage = CursusManager::getInstance();
 
 int main(int argc, char *argv[])
 {
-    int i=0;
     QApplication a(argc, argv);
 
 
@@ -19,28 +18,29 @@ int main(int argc, char *argv[])
     splash.show();
     a.processEvents();
         splash.showMessage("Verification de l'intégrité des UV", Qt::AlignCenter, Qt::black);
-        for (i=0;i<200000000;i++){}
+        Sleep(1000);
         int code=UVManage->check_integrity();
         if (code==2)
         {
             splash.clearMessage();
             splash.showMessage("ERREUR lors de l'ouverture du fichier", Qt::AlignCenter, Qt::black);
-            for (i=0;i<400000000;i++){}
+            Sleep(4000);
             return 1;
         }
         if (code==1)
         {
             splash.clearMessage();
             splash.showMessage("ERREUR: Fichier UV Corrompu", Qt::AlignCenter, Qt::black);
-            for (i=0;i<400000000;i++){}
+            Sleep(4000);
             return 1;
         }
         splash.clearMessage();
         splash.showMessage("Chargement des UV", Qt::AlignCenter, Qt::black);
         UVManage->load();
+        Sleep(1000);
         splash.clearMessage();
         splash.showMessage("Chargement des Cursus", Qt::AlignCenter, Qt::black);
-        for (i=0;i<200000000;i++){}
+        Sleep(1000);
 
     MainWindow w;
     w.show();

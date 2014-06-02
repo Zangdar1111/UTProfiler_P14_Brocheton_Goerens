@@ -17,6 +17,7 @@ public:
     ~MainWindow();
 
 public slots:
+    void quit();
     void PrintUV();
     void CreateUV();
     void ResetUV();

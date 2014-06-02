@@ -1,5 +1,4 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+
 #include "includes.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -17,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(ui->Save_UV, SIGNAL(clicked()), this, SLOT(SaveUV()));
 
+    QObject::connect(ui->MenuFichier_Quitter, SIGNAL(triggered()), this, SLOT(quit()));
+
 
     //Recuperation de la liste des UV
     PrintUV();
@@ -26,6 +27,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+void MainWindow::quit()
+{
+    close();
 }
 
 void MainWindow::ResetUV()
@@ -80,13 +85,10 @@ void MainWindow::DeleteUV()
         {
             //récupérer UV dans UVManager
             UVManager* UVManage = UVManager::getInstance();
-            UV* uv = UVManage->getUV(ui->Edit_UV_Code->text());
             //supprimer l'UV du fichier
-            UVManage->deleteUV_fichier(uv->getCode());
-            //supprimer l'UV de UVManager
-            UVManage->deleteUV(uv->getCode());
-            //supprimer l'UV elle même
-            delete uv; //EST-CE QUE CELA MARCHE OU CELA NE SUPPRIME QUE MON POINTEUR
+            UVManage->deleteUV_fichier(ui->Edit_UV_Code->text());
+            //supprimer l'UV de UVManager et elle même
+            UVManage->deleteUV(ui->Edit_UV_Code->text());
             ui->Edit_UV_Group->setEnabled(false);
             PrintUV();
             ResetUV();
@@ -99,6 +101,10 @@ void MainWindow::SaveUV()
     UVManager* UVManage = UVManager::getInstance();
     //Edition ou Sauvegarde
     UVManage->addUV(ui->Edit_UV_Code->text(),ui->Edit_UV_Titre->text(),ui->Edit_UV_Printemps->isChecked(),ui->Edit_UV_Automne->isChecked(),ui->Edit_UV_DemiUV->isChecked());
+    UVManage->editUVCategorie(ui->Edit_UV_Code->text(),CS,ui->Edit_UV_CS->value());
+    UVManage->editUVCategorie(ui->Edit_UV_Code->text(),TM,ui->Edit_UV_TM->value());
+    UVManage->editUVCategorie(ui->Edit_UV_Code->text(),TSH,ui->Edit_UV_TSH->value());
+    UVManage->editUVCategorie(ui->Edit_UV_Code->text(),SP,ui->Edit_UV_SP->value());
     //mise à jour du fichier
     UVManage->addUV_fichier(ui->Edit_UV_Code->text());
     //information de succès
@@ -110,6 +116,7 @@ void MainWindow::SaveUV()
 
 void MainWindow::PrintUV()
 {
+    ResetUV();
     ui->Edit_UV_Group->setEnabled(false);
     QString code_seek = ui->Seek_UV_Code->text();
     UVManager* UVManage = UVManager::getInstance();
@@ -121,7 +128,7 @@ void MainWindow::PrintUV()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (UVManage->getUV(*it)->hasCategorie(CS)==-1)
+            if (UVManage->getUV(*it)->getCreditsCat(CS)==0)
               listnew.append(*it);
         }
         list=listnew;
@@ -131,7 +138,7 @@ void MainWindow::PrintUV()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (UVManage->getUV(*it)->hasCategorie(TM)==-1)
+            if (UVManage->getUV(*it)->getCreditsCat(TM)==0)
               listnew.append(*it);
         }
         list=listnew;
@@ -141,7 +148,7 @@ void MainWindow::PrintUV()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (UVManage->getUV(*it)->hasCategorie(TSH)==-1)
+            if (UVManage->getUV(*it)->getCreditsCat(TSH)==0)
               listnew.append(*it);
         }
         list=listnew;
@@ -151,7 +158,7 @@ void MainWindow::PrintUV()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (UVManage->getUV(*it)->hasCategorie(SP)==-1)
+            if (UVManage->getUV(*it)->getCreditsCat(SP)==0)
               listnew.append(*it);
         }
         list=listnew;

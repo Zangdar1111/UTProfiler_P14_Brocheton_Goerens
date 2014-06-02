@@ -18,7 +18,8 @@
 
 using namespace std;
 
-
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "enum.h"
 #include "Cursus.h"
 #include "UV.h"

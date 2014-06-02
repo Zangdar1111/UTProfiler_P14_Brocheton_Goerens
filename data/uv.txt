@@ -1,16 +1,7 @@
 LO21
 Programmation C++
 1,0
-0
-6
-GI
-0
-#
-NF17
-UML et BDD
-1,0
-0
-6
+0,6,0,0
 GI
 0
 #
