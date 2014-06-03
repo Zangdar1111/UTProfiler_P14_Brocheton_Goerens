@@ -17,7 +17,9 @@ SOURCES += main.cpp\
     Cursus.cpp \
     UV.cpp \
     UVManager.cpp \
-    CursusManager.cpp
+    CursusManager.cpp \
+    CursusSecondaire.cpp \
+    CursusPrincipal.cpp
 
 HEADERS  += mainwindow.h \
     Cursus.h \
@@ -26,6 +28,8 @@ HEADERS  += mainwindow.h \
     UV.h \
     UVManager.h \
     CursusManager.h \
-    singletonTemplate.h
+    singletonTemplate.h \
+    CursusPrincipal.h \
+    CursusSecondaire.h
 
 FORMS    += mainwindow.ui

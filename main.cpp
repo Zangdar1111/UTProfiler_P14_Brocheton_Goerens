@@ -3,6 +3,7 @@
 #include "includes.h"
 
 void test_cursus_uv();
+void test_cursus();
 void fin();
 
 UVManager* UVManage = UVManager::getInstance();
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
     splash.finish(&w);
 
 
-   // test_cursus_uv();
+    test_cursus();
 
 
 
@@ -62,6 +63,39 @@ void fin()
     UVManager::kill();
     CursusManager::kill();
 }
+
+void test_cursus(){
+    //Exemple de Création d'un Cursus
+    CursusManage->addCursusPrincipal("GI","Génie Informatique", "Philippe Trigano", 180, 30, 30, 86, 28, 60, true);
+    CursusManage->addCursusPrincipal("TC","Tronc Commun", "Obi-Wan Kenobi", 120, 20, 20, 60, 16, 20, false);
+    CursusManage->addCursusSecondaire("TCN", "Téchnologie Culturelles Numériques", "Darth Vador", false );
+
+    //Exemple d'affichage
+    CursusManage->afficherCursus("GI");
+    CursusManage->afficherCursus("TC");
+    CursusManage->afficherCursus("TCN");
+
+    //Exemple d'ajout d'une liste d'UV à un Cursus Secondaire
+    int indice_liste1 = CursusManage->addListToCursusSecondaire("TCN",2);
+    //Exemple d'ajout d'une UV à une liste dans un Cursus Secondaire
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","L021",indice_liste1);
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","L022",indice_liste1);
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","L023",indice_liste1);
+    CursusManage->afficherCursus("TCN");
+
+    //Test Erreurs
+    int indice_liste2 = CursusManage->addListToCursusSecondaire("GI",2);
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","L023",indice_liste1+1);
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","L023",-3);
+
+    int indice_liste3 = CursusManage->addListToCursusSecondaire("TCN", 3);
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","NF16",indice_liste3);
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","NF17",indice_liste3);
+    CursusManage->addUVtoListFormCursusSecondaire("TCN","NF18",indice_liste3);
+    CursusManage->afficherCursus("TCN");
+
+}
+
 /*
 void test_cursus_uv(){
     //Exemple de création de Cursus

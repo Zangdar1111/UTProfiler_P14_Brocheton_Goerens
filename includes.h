@@ -23,6 +23,7 @@ using namespace std;
 #include "singletonTemplate.h"
 #include "UVManager.h"
 #include "CursusManager.h"
-
+#include "CursusPrincipal.h"
+#include "CursusSecondaire.h"
 
 #endif // INCLUDES_H_INCLUDED
