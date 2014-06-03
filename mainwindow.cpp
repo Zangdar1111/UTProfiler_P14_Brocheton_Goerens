@@ -6,32 +6,112 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QObject::connect(ui->Seek_UV_Submit, SIGNAL(clicked()), this, SLOT(PrintUV()));
-
-    QObject::connect(ui->Create_UV, SIGNAL(clicked()), this, SLOT(CreateUV()));
-
-    QObject::connect(ui->Print_UV_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditUV(QListWidgetItem *)));
-
-    QObject::connect(ui->Delete_UV, SIGNAL(clicked()), this, SLOT(DeleteUV()));
-
-    QObject::connect(ui->Save_UV, SIGNAL(clicked()), this, SLOT(SaveUV()));
 
     QObject::connect(ui->MenuFichier_Quitter, SIGNAL(triggered()), this, SLOT(quit()));
+
+    QObject::connect(ui->Seek_UV_Submit, SIGNAL(clicked()), this, SLOT(PrintUV()));
+    QObject::connect(ui->Create_UV, SIGNAL(clicked()), this, SLOT(CreateUV()));
+    QObject::connect(ui->Print_UV_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditUV(QListWidgetItem *)));
+    QObject::connect(ui->Delete_UV, SIGNAL(clicked()), this, SLOT(DeleteUV()));
+    QObject::connect(ui->Save_UV, SIGNAL(clicked()), this, SLOT(SaveUV()));
+
+    QObject::connect(ui->Seek_Cursus_Submit, SIGNAL(clicked()), this, SLOT(PrintCursus()));
+    QObject::connect(ui->Create_Cursus, SIGNAL(clicked()), this, SLOT(CreateCursus()));
+    QObject::connect(ui->Print_Cursus_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditCursus(QListWidgetItem *)));
+    QObject::connect(ui->Delete_Cursus, SIGNAL(clicked()), this, SLOT(DeleteCursus()));
+    QObject::connect(ui->Save_Cursus, SIGNAL(clicked()), this, SLOT(SaveCursus()));
+
+    QObject::connect(ui->Edit_Cursus_Prepa, SIGNAL(clicked()), this, SLOT(cursus_diff()));
+    QObject::connect(ui->Edit_Cursus_Branche, SIGNAL(clicked()), this, SLOT(cursus_diff()));
+    QObject::connect(ui->Edit_Cursus_Filiere, SIGNAL(clicked()), this, SLOT(cursus_diff()));
+    QObject::connect(ui->Edit_Cursus_Mineur, SIGNAL(clicked()), this, SLOT(cursus_diff()));
 
 
     //Recuperation de la liste des UV
     PrintUV();
+    PrintCursus();
 }
 
+//CursusManager* CursusManage = CursusManager::getInstance();
+void MainWindow::quit()
+{
+    close();
+}
+
+void MainWindow::PrintCursus()
+{
+
+}
+
+void MainWindow::CreateCursus()
+{
+
+}
+
+void MainWindow::ResetCursus()
+{
+    ui->Edit_Cursus_Code->setText("");
+    ui->Edit_Cursus_Titre->setText("");
+    ui->Edit_Cursus_Resp->setText("");
+    ui->Edit_Cursus_Prepa->setChecked(false);
+    ui->Edit_Cursus_Branche->setChecked(false);
+    ui->Edit_Cursus_Filiere->setChecked(false);
+    ui->Edit_Cursus_Mineur->setChecked(false);
+    ui->Edit_Cursus_CS->setValue(0);
+    ui->Edit_Cursus_TM->setValue(0);
+    ui->Edit_Cursus_TSH->setValue(0);
+    ui->Edit_Cursus_SP->setValue(0);
+    ui->Edit_Cursus_CSTM->setValue(0);
+    ui->Edit_Cursus_Total->setValue(0);
+    while (ui->Edit_Cursus_List1->count () > 0) delete ui->Edit_Cursus_List1->takeItem (0);
+    while (ui->Edit_Cursus_List2->count () > 0) delete ui->Edit_Cursus_List2->takeItem (0);
+    while (ui->Edit_Cursus_List3->count () > 0) delete ui->Edit_Cursus_List3->takeItem (0);
+    ui->Edit_Cursus_Seek_Code->setText("");
+}
+
+void MainWindow::EditCursus(QListWidgetItem *item)
+{
+
+}
+
+void MainWindow::DeleteCursus()
+{
+
+}
+
+void MainWindow::SaveCursus()
+{
+
+}
+
+void MainWindow::cursus_diff()
+{
+    if (ui->Edit_Cursus_Prepa->isChecked() || ui->Edit_Cursus_Branche->isChecked())
+    {
+        ui->Edit_Cursus_GroupCredits->setEnabled(true);
+        ui->Edit_Cursus_GroupUV->setEnabled(false);
+    }
+    else if (ui->Edit_Cursus_Mineur->isChecked())
+    {
+        ui->Edit_Cursus_GroupCredits->setEnabled(false);
+        ui->Edit_Cursus_GroupUV->setEnabled(true);
+        ui->Edit_Cursus_List2->setEnabled(true);
+        ui->Edit_Cursus_List3->setEnabled(true);
+    }
+    else if (ui->Edit_Cursus_Filiere->isChecked())
+    {
+        ui->Edit_Cursus_GroupCredits->setEnabled(false);
+        ui->Edit_Cursus_GroupUV->setEnabled(true);
+        ui->Edit_Cursus_List2->setEnabled(false);
+        ui->Edit_Cursus_List3->setEnabled(false);
+    }
+}
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::quit()
-{
-    close();
-}
+
 
 void MainWindow::ResetUV()
 {

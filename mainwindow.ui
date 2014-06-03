@@ -801,80 +801,6 @@
         <string>Sauvegarder Cursus</string>
        </property>
       </widget>
-      <widget class="QListWidget" name="Edit_Cursus_List1">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>320</y>
-         <width>71</width>
-         <height>121</height>
-        </rect>
-       </property>
-       <property name="dragEnabled">
-        <bool>true</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::DragDrop</enum>
-       </property>
-       <property name="defaultDropAction">
-        <enum>Qt::MoveAction</enum>
-       </property>
-       <property name="selectionBehavior">
-        <enum>QAbstractItemView::SelectRows</enum>
-       </property>
-       <item>
-        <property name="text">
-         <string>NF1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>NF2</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>NF3</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QListWidget" name="Edit_Cursus_List2">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>320</y>
-         <width>71</width>
-         <height>121</height>
-        </rect>
-       </property>
-       <property name="dragEnabled">
-        <bool>true</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::DragDrop</enum>
-       </property>
-       <property name="defaultDropAction">
-        <enum>Qt::MoveAction</enum>
-       </property>
-       <property name="selectionBehavior">
-        <enum>QAbstractItemView::SelectRows</enum>
-       </property>
-       <item>
-        <property name="text">
-         <string>SY14</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY15</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY16</string>
-        </property>
-       </item>
-      </widget>
       <widget class="QLineEdit" name="Edit_Cursus_Resp">
        <property name="geometry">
         <rect>
@@ -902,261 +828,6 @@
        </property>
        <property name="text">
         <string>Responsable:</string>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="Edit_Cursus_List3">
-       <property name="geometry">
-        <rect>
-         <x>230</x>
-         <y>320</y>
-         <width>71</width>
-         <height>121</height>
-        </rect>
-       </property>
-       <property name="dragEnabled">
-        <bool>true</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::DragDrop</enum>
-       </property>
-       <property name="defaultDropAction">
-        <enum>Qt::MoveAction</enum>
-       </property>
-       <property name="selectionBehavior">
-        <enum>QAbstractItemView::SelectRows</enum>
-       </property>
-       <item>
-        <property name="text">
-         <string>SY14</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY15</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY16</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QLineEdit" name="Edit_Cursus_Seek_Code">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>450</y>
-         <width>61</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="placeholderText">
-        <string>Code</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label4">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>150</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Crédits:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label5">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>170</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>CS:</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="Edit_Cursus_CS">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>170</y>
-         <width>42</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="Edit_Cursus_TM">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>200</y>
-         <width>42</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label6">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>200</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>TM:</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="Edit_Cursus_TSH">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>230</y>
-         <width>42</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label7">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>230</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>TSH:</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="Edit_Cursus_SP">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>260</y>
-         <width>42</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label8">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>260</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>SP:</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="Edit_Cursus_CSTM">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>190</y>
-         <width>42</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label9">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>170</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>CS+TM</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="Edit_Cursus_Total">
-       <property name="geometry">
-        <rect>
-         <x>230</x>
-         <y>220</y>
-         <width>42</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label10">
-       <property name="geometry">
-        <rect>
-         <x>230</x>
-         <y>200</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Total</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Edit_Cursus_Label11">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>290</y>
-         <width>81</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>UV à Valider:</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="Edit_Cursus_Seek_Submit">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>450</y>
-         <width>51</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Ajouter</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="Edit_Cursus_Seek_Delete">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>450</y>
-         <width>51</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="cursor">
-        <cursorShape>ArrowCursor</cursorShape>
-       </property>
-       <property name="acceptDrops">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Poubelle</string>
-       </property>
-       <property name="dropAction" stdset="0">
-        <string>delete</string>
        </property>
       </widget>
       <widget class="QWidget" name="widget" native="true">
@@ -1218,6 +889,296 @@
         </property>
         <property name="text">
          <string>Mineur</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="Edit_Cursus_GroupUV">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>300</y>
+         <width>301</width>
+         <height>191</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>UV à Valider:</string>
+       </property>
+       <widget class="QListWidget" name="Edit_Cursus_List2">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>30</y>
+          <width>71</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::MoveAction</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="Edit_Cursus_Seek_Code">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>160</y>
+          <width>61</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>Code</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="Edit_Cursus_Seek_Submit">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>160</y>
+          <width>51</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter</string>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="Edit_Cursus_List3">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>30</y>
+          <width>71</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::MoveAction</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="Edit_Cursus_Seek_Delete">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>160</y>
+          <width>51</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="acceptDrops">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Poubelle</string>
+        </property>
+        <property name="dropAction" stdset="0">
+         <string>delete</string>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="Edit_Cursus_List1">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>30</y>
+          <width>71</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::MoveAction</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="Edit_Cursus_GroupCredits">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>150</y>
+         <width>301</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Crédits:</string>
+       </property>
+       <widget class="QLabel" name="Edit_Cursus_Label10">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>50</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Total</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Cursus_Label5">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CS:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="Edit_Cursus_TM">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>50</y>
+          <width>42</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="Edit_Cursus_TSH">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>80</y>
+          <width>42</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Cursus_Label8">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>110</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>SP:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Cursus_Label9">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>20</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CS+TM</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="Edit_Cursus_CS">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>20</y>
+          <width>42</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="Edit_Cursus_SP">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>110</y>
+          <width>42</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="Edit_Cursus_CSTM">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>40</y>
+          <width>51</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>200</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="Edit_Cursus_Total">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>70</y>
+          <width>51</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>500</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Cursus_Label6">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TM:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Cursus_Label7">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TSH:</string>
         </property>
        </widget>
       </widget>
