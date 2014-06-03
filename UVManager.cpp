@@ -9,7 +9,8 @@ void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
     UV* findUV=getUV(c);
     if(findUV!=NULL)
             findUV->editUV(t, p, a, d);
-    else{
+    else
+    {
         UV* uv = new UV(c, t, p, a, d);
         TabUV.insert(make_pair(c,*uv));
     }
@@ -20,20 +21,13 @@ void UVManager::addUV(QString c, QString t, bool p, bool a, bool d){
  *              la catégorie à ajouter (Catégorie)
  *              le nombre de crédits apportés à cette catégorie (int)
  */
-void UVManager::addUVCategorie(QString c, Categorie cat, int cre){
+void UVManager::editUVCategorie(QString c, Categorie cat, int cre){
     UV* findUV=getUV(c);
     if(findUV!=NULL){
-        findUV->ajouterCategorie(cat, cre);
+        findUV->addCreditsCat(cat, cre);
     }
 }
 
-//Afficher une UV via le UVManager en ligne de commande (a supprimer par la suite)
-void UVManager::afficherUV(QString c){
-    UV* findUV=getUV(c);
-    if(findUV!=NULL){
-        findUV->afficherUV();
-    }
-}
 
 /* Permet d'accéder à une UV existante
  * Argument : Code de l'UV (chaine de caracères)
@@ -94,7 +88,7 @@ int UVManager::check_integrity()
         while(!flux.atEnd())
         {
             test = flux.readLine();
-            for (i=0;i<6;i++)
+            for (i=0;i<5;i++)
             {
                 test = flux.readLine();
                 if (test=="#")
@@ -114,7 +108,6 @@ int UVManager::check_integrity()
 
 void UVManager::load()
 {
-    int i;
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
@@ -126,10 +119,6 @@ void UVManager::load()
             QString saison = flux.readLine();
             QStringList tsaison = saison.split(",");
 
-            QString Tab_Categorie = flux.readLine();
-            QStringList tTab_Categorie = Tab_Categorie.split(",");
-            int taille_cat=tTab_Categorie.size();
-
             QString Credits_Categorie = flux.readLine();
             QStringList tCredits_Categorie = Credits_Categorie.split(",");
 
@@ -140,8 +129,76 @@ void UVManager::load()
             QString separateur = flux.readLine();
 
             addUV(code,titre,tsaison.at(0).toInt(),tsaison.at(1).toInt(),DemiUV.toInt());
-            for(i=0;i<taille_cat;i++)
-                addUVCategorie(code,(Categorie)tTab_Categorie.at(i).toInt(),tCredits_Categorie.at(i).toInt());
+            editUVCategorie(code,CS,tCredits_Categorie.at(0).toInt());
+            editUVCategorie(code,TM,tCredits_Categorie.at(1).toInt());
+            editUVCategorie(code,TSH,tCredits_Categorie.at(2).toInt());
+            editUVCategorie(code,SP,tCredits_Categorie.at(3).toInt());
+        }
+    }
+}
+
+void UVManager::deleteUV_fichier(QString c)
+{
+
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            tout.append(flux.readLine());
+        }
+        int ind=tout.indexOf(c);
+        for (unsigned int i=0;i<7;i++)
+        {
+             tout.removeAt(ind);
+        }
+        fichier.resize(0);
+        for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+        {
+            flux<<*it<<"\n";
+        }
+    }
+}
+
+void UVManager::addUV_fichier(QString c)
+{
+    UV* uv = getUV(c);
+    int ind;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            tout.append(flux.readLine());
+        }
+        if (tout.contains(c))
+        {
+            ind=tout.indexOf(c);
+            for (unsigned int i=0;i<7;i++)
+            {
+                 tout.removeAt(ind);
+            }
+        }
+        else
+        {
+            ind=tout.size();
+        }
+        tout.insert(ind,"#");
+        tout.insert(ind,QString::number(uv->getDemiUV()));
+        tout.insert(ind,"GI");
+        tout.insert(ind,QString::number(uv->getCreditsCat(CS))+","+QString::number(uv->getCreditsCat(TM))+","+QString::number(uv->getCreditsCat(TSH))+","+QString::number(uv->getCreditsCat(SP)));
+        tout.insert(ind,QString::number(uv->getPresentPrintemps())+","+QString::number(uv->getPresentAutomne()));
+        tout.insert(ind,uv->getTitre());
+        tout.insert(ind,uv->getCode());
+
+        fichier.resize(0);
+        for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+        {
+            flux<<*it<<"\n";
         }
     }
 }

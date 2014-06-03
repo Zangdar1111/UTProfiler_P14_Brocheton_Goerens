@@ -11,7 +11,7 @@ void UV::editUV(QString t, bool p, bool a, bool d)
     presentAutomne=a;
     DemiUV=d;
 }
-
+/*
 //Afficher une UV en ligne de commande (a supprimer par la suite)
 void UV::afficherUV(){
     cout<<"###Affichage UV###\n";
@@ -29,57 +29,8 @@ void UV::afficherUV(){
     }
     cout<<"Demi UV : "<<DemiUV<<"\n";
     cout<<"######\n";
-}
+}*/
 
-/* Permet d'ajouter une catégorie à une UV
- * Arguments : Catégorie à ajouter (Categorie)
- *              Nombres de crédits associés (int)
- */
-void UV::ajouterCategorie(Categorie c, int n){
-    if (Nb_Categorie==0){
-        //Cas de la première catégorie
-        //Création d'un tableau de une case et ajout de la catégorie
-        Tab_Categorie=new Categorie[1];
-        Tab_Categorie[0]=c;
-
-        Credits_Categorie=new int[1];
-        Credits_Categorie[0]=n;
-
-        //Incrémentation du nombre de Catégorie
-        Nb_Categorie++;
-    }
-    else{
-        //On vérifie si la catégorie est déjà enregistrée
-        int indice = hasCategorie(c);
-        if(indice!=-1){
-            //Mise à jour du nomre de crédits de la Catégorie
-            Credits_Categorie[indice]=n;
-        }
-        else {
-            //Extension du tableau des catégories
-            Categorie* newCatTab= new Categorie[Nb_Categorie+1];
-            memcpy(newCatTab, Tab_Categorie, sizeof(Categorie) *Nb_Categorie);
-            Categorie* oldCatTab=Tab_Categorie;
-            Tab_Categorie=newCatTab;
-
-            //Extension du tableau des Crédits
-            int* newIntTab= new int[Nb_Categorie+1];
-            memcpy(newIntTab, Credits_Categorie, sizeof(int) *Nb_Categorie);
-            int* oldIntTab=Credits_Categorie;
-            Credits_Categorie=newIntTab;
-
-            //Incrémentation du nombre de Catégorie
-            Nb_Categorie++;
-
-            delete[] oldCatTab;
-            delete[] oldIntTab;
-
-            //Ajout de la nouvelle catégorie et du nombre de crédits associés
-            Tab_Categorie[Nb_Categorie-1]=c;
-            Credits_Categorie[Nb_Categorie-1]=n;
-        }
-    }
-}
 
 /* Permet d'ajouter un cursus à une UV
  * Argument : Code du Cursus (chaine de catactères)
@@ -125,18 +76,7 @@ void UV::ajouterCursus(QString &c){
     */
 }
 
-/* Permet de tester si une catégorie est déjà enregistrée pour cette UV
- * Argument : La catégorie (Categorie)
- * Retour : l'indice (int) de la catégorie dans le tableau si la catégorie est trouvée
- *          -1 si la catégorie n'est pas trouvée
- */
-int UV::hasCategorie(Categorie cat) const{
-    for(unsigned int i=0; i<Nb_Categorie; i++){
-        if(cat==Tab_Categorie[i])
-            return i;
-    }
-    return -1;
-}
+
 
 /* Permet de tester si un cursus est déjà enregistré pour cette UV
  * Argument : Le code du Cursus recherché (chaine de caractères)
@@ -152,4 +92,3 @@ int UV::hasCursus(const QString& cur) const{
     return -1;
 }
 */
-

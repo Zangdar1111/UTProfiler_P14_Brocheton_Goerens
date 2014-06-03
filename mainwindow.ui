@@ -15,6 +15,9 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTabWidget" name="Onglets">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -24,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Onglet_UV">
      <attribute name="title">
@@ -375,7 +378,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QCheckBox" name="checkBox_7">
+      <widget class="QCheckBox" name="Edit_UV_DemiUV">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -464,26 +467,6 @@
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
-       <item>
-        <property name="text">
-         <string>GI</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>GB</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>TC</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>HuTeck</string>
-        </property>
-       </item>
       </widget>
       <widget class="QListWidget" name="Edit_UV_List2">
        <property name="geometry">
@@ -506,45 +489,7 @@
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
-       <item>
-        <property name="text">
-         <string>SY14</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY15</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SY16</string>
-        </property>
-       </item>
       </widget>
-      <zorder>Edit_UV_Code</zorder>
-      <zorder>Edit_UV_Label1</zorder>
-      <zorder>Edit_UV_Label2</zorder>
-      <zorder>Edit_UV_Titre</zorder>
-      <zorder>Edit_UV_Label3</zorder>
-      <zorder>Edit_UV_Automne</zorder>
-      <zorder>Edit_UV_Printemps</zorder>
-      <zorder>Edit_UV_Label4</zorder>
-      <zorder>Edit_UV_CS</zorder>
-      <zorder>Edit_UV_Label5</zorder>
-      <zorder>Edit_UV_TM</zorder>
-      <zorder>Edit_UV_Label6</zorder>
-      <zorder>Edit_UV_TSH</zorder>
-      <zorder>Edit_UV_Label7</zorder>
-      <zorder>Edit_UV_SP</zorder>
-      <zorder>checkBox_7</zorder>
-      <zorder>Edit_UV_Label8</zorder>
-      <zorder>Edit_UV_Label9</zorder>
-      <zorder>Delete_UV</zorder>
-      <zorder>Save_UV</zorder>
-      <zorder>Edit_UV_List1</zorder>
-      <zorder>Edit_UV_List2</zorder>
-      <zorder>Print_UV_List</zorder>
      </widget>
      <widget class="QPushButton" name="Create_UV">
       <property name="geometry">
@@ -1278,6 +1223,300 @@
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Gestion des Dossiers</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>190</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Créer un Dossier</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>101</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Recherche</string>
+      </property>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Rechercher</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>46</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Login:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>10</y>
+        <width>461</width>
+        <height>571</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Modification Dossier</string>
+      </property>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>46</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Login:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_2">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>80</y>
+         <width>46</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Prépa:</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>190</y>
+         <width>70</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Hors UTC</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>80</y>
+         <width>46</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Branche:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>80</y>
+         <width>46</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Filière:</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_2">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>190</y>
+         <width>70</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Aucune</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>80</y>
+         <width>46</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Mineur:</string>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="Print_Cursus_List_3">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>100</y>
+         <width>71</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="showDropIndicator" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::NoDragDrop</enum>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="Print_Cursus_List_4">
+       <property name="geometry">
+        <rect>
+         <x>330</x>
+         <y>100</y>
+         <width>71</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="showDropIndicator" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::NoDragDrop</enum>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="Print_Cursus_List_5">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>100</y>
+         <width>71</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="showDropIndicator" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::NoDragDrop</enum>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="Print_Cursus_List_6">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>100</y>
+         <width>71</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="showDropIndicator" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::NoDragDrop</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="Print_Cursus_Label1_2">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>20</y>
+        <width>46</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Résultats</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="Print_Cursus_List_2">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>50</y>
+        <width>131</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="showDropIndicator" stdset="0">
+       <bool>false</bool>
+      </property>
+      <property name="dragEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::NoDragDrop</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Auto-Complétion d'un dossier</string>
+     </attribute>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -1294,13 +1533,7 @@
      <string>Fichier</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="actionQuitter_2"/>
-   </widget>
-   <widget class="QMenu" name="menuEdition">
-    <property name="title">
-     <string>Login</string>
-    </property>
-    <addaction name="actionSe_D_connecter"/>
+    <addaction name="MenuFichier_Quitter"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -1308,7 +1541,6 @@
     </property>
    </widget>
    <addaction name="menuFichier"/>
-   <addaction name="menuEdition"/>
    <addaction name="menuAide"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -1330,7 +1562,7 @@
     <string>Redémarrer</string>
    </property>
   </action>
-  <action name="actionQuitter_2">
+  <action name="MenuFichier_Quitter">
    <property name="text">
     <string>Quitter</string>
    </property>
@@ -1358,7 +1590,7 @@
   <tabstop>Edit_UV_TM</tabstop>
   <tabstop>Edit_UV_TSH</tabstop>
   <tabstop>Edit_UV_SP</tabstop>
-  <tabstop>checkBox_7</tabstop>
+  <tabstop>Edit_UV_DemiUV</tabstop>
   <tabstop>Delete_UV</tabstop>
   <tabstop>Save_UV</tabstop>
   <tabstop>Edit_UV_List1</tabstop>

@@ -17,8 +17,13 @@ public:
     ~MainWindow();
 
 public slots:
-    void Print_UV();
-    void Create_Reset_UV();
+    void quit();
+    void PrintUV();
+    void CreateUV();
+    void ResetUV();
+    void EditUV(QListWidgetItem *item);
+    void DeleteUV();
+    void SaveUV();
 
 private:
     Ui::MainWindow *ui;
