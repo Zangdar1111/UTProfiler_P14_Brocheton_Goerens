@@ -32,8 +32,11 @@ public slots:
     void EditCursus(QListWidgetItem *item);
     void DeleteCursus();
     void SaveCursus();
+    void addUV_Cursus();
 
     void cursus_diff();
+
+    void poubelle(QListWidgetItem * item);
 
 private:
     Ui::MainWindow *ui;

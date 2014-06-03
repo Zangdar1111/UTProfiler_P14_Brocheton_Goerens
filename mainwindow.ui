@@ -944,8 +944,8 @@
        <widget class="QLineEdit" name="Edit_Cursus_Seek_Code">
         <property name="geometry">
          <rect>
-          <x>50</x>
-          <y>160</y>
+          <x>90</x>
+          <y>130</y>
           <width>61</width>
           <height>20</height>
          </rect>
@@ -960,8 +960,8 @@
        <widget class="QPushButton" name="Edit_Cursus_Seek_Submit">
         <property name="geometry">
          <rect>
-          <x>130</x>
-          <y>160</y>
+          <x>170</x>
+          <y>130</y>
           <width>51</width>
           <height>23</height>
          </rect>
@@ -992,31 +992,6 @@
          <enum>QAbstractItemView::SelectRows</enum>
         </property>
        </widget>
-       <widget class="QPushButton" name="Edit_Cursus_Seek_Delete">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>160</y>
-          <width>51</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
-        </property>
-        <property name="acceptDrops">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Poubelle</string>
-        </property>
-        <property name="dropAction" stdset="0">
-         <string>delete</string>
-        </property>
-       </widget>
        <widget class="QListWidget" name="Edit_Cursus_List1">
         <property name="geometry">
          <rect>
@@ -1037,6 +1012,24 @@
         </property>
         <property name="selectionBehavior">
          <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>160</y>
+          <width>181</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Double Clique pour supprimer une UV</string>
         </property>
        </widget>
       </widget>

@@ -68,7 +68,7 @@ void test_cursus(){
     //Exemple de Création d'un Cursus
     CursusManage->addCursusPrincipal("GI","Génie Informatique", "Philippe Trigano", 180, 30, 30, 86, 28, 60, true);
     CursusManage->addCursusPrincipal("TC","Tronc Commun", "Obi-Wan Kenobi", 120, 20, 20, 60, 16, 20, false);
-    CursusManage->addCursusSecondaire("TCN", "Téchnologie Culturelles Numériques", "Darth Vador", false );
+    CursusManage->addCursusSecondaire("TCN", "Technologie Culturelles Numériques", "Darth Vador", false );
 
     //Exemple d'affichage
     CursusManage->afficherCursus("GI");

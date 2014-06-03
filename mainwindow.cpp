@@ -21,10 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->Delete_Cursus, SIGNAL(clicked()), this, SLOT(DeleteCursus()));
     QObject::connect(ui->Save_Cursus, SIGNAL(clicked()), this, SLOT(SaveCursus()));
 
-    QObject::connect(ui->Edit_Cursus_Prepa, SIGNAL(clicked()), this, SLOT(cursus_diff()));
-    QObject::connect(ui->Edit_Cursus_Branche, SIGNAL(clicked()), this, SLOT(cursus_diff()));
-    QObject::connect(ui->Edit_Cursus_Filiere, SIGNAL(clicked()), this, SLOT(cursus_diff()));
-    QObject::connect(ui->Edit_Cursus_Mineur, SIGNAL(clicked()), this, SLOT(cursus_diff()));
+    QObject::connect(ui->Edit_Cursus_Prepa, SIGNAL(toggled(bool)), this, SLOT(cursus_diff()));
+    QObject::connect(ui->Edit_Cursus_Branche, SIGNAL(toggled(bool)), this, SLOT(cursus_diff()));
+    QObject::connect(ui->Edit_Cursus_Filiere, SIGNAL(toggled(bool)), this, SLOT(cursus_diff()));
+    QObject::connect(ui->Edit_Cursus_Mineur, SIGNAL(toggled(bool)), this, SLOT(cursus_diff()));
+
+
+    QObject::connect(ui->Edit_Cursus_Seek_Submit, SIGNAL(clicked()), this, SLOT(addUV_Cursus()));
+
+    QObject::connect(ui->Edit_Cursus_List1, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
 
     PrintCursus();
     PrintUV();
@@ -51,7 +56,7 @@ void MainWindow::PrintCursus()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (CursusManage->getCursus(*it)->isWhat1()==0 && CursusManage->getCursus(*it)->isPrincipal()==1)
+            if (CursusManage->getCursus(*it)->isWhat1()==0 || CursusManage->getCursus(*it)->isPrincipal()==0)
               listnew.append(*it);
         }
         list=listnew;
@@ -61,7 +66,7 @@ void MainWindow::PrintCursus()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (CursusManage->getCursus(*it)->isWhat2()==0 && CursusManage->getCursus(*it)->isPrincipal()==1)
+            if (CursusManage->getCursus(*it)->isWhat2()==0 || CursusManage->getCursus(*it)->isPrincipal()==0)
               listnew.append(*it);
         }
         list=listnew;
@@ -71,7 +76,7 @@ void MainWindow::PrintCursus()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (CursusManage->getCursus(*it)->isWhat2()==0 && CursusManage->getCursus(*it)->isSecondaire()==1)
+            if (CursusManage->getCursus(*it)->isWhat1()==0 || CursusManage->getCursus(*it)->isSecondaire()==0)
               listnew.append(*it);
         }
         list=listnew;
@@ -81,7 +86,7 @@ void MainWindow::PrintCursus()
     {
         for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         {
-            if (CursusManage->getCursus(*it)->isWhat1()==0 && CursusManage->getCursus(*it)->isSecondaire()==1)
+            if (CursusManage->getCursus(*it)->isWhat2()==0 || CursusManage->getCursus(*it)->isSecondaire()==0)
               listnew.append(*it);
         }
         list=listnew;
@@ -138,7 +143,31 @@ void MainWindow::EditCursus(QListWidgetItem *item)
     ui->Edit_Cursus_Code->setText(code);
     ui->Edit_Cursus_Titre->setText(curs->getTitre());
     ui->Edit_Cursus_Resp->setText(curs->getResp());
-
+    if (curs->isPrincipal()==1)
+    {
+        if (curs->isWhat1()==1) //Prépa
+            ui->Edit_Cursus_Prepa->setChecked(true);
+        else //Branche
+            ui->Edit_Cursus_Branche->setChecked(true);
+        CursusPrincipal* curs1 = dynamic_cast<CursusPrincipal*>(curs);
+        ui->Edit_Cursus_CS->setValue(curs1->getCreditsCS());
+        ui->Edit_Cursus_TM->setValue(curs1->getCreditsTM());
+        ui->Edit_Cursus_TSH->setValue(curs1->getCreditsTSH());
+        ui->Edit_Cursus_SP->setValue(curs1->getCreditsSP());
+        ui->Edit_Cursus_CSTM->setValue(curs1->getCreditsCSTM());
+        ui->Edit_Cursus_Total->setValue(curs1->getCreditsTotal());
+    }
+    else
+    {
+        if (curs->isWhat1()==1) //Filière
+        {
+            ui->Edit_Cursus_Filiere->setChecked(true);
+        }
+        else //Mineur
+        {
+            ui->Edit_Cursus_Mineur->setChecked(true);
+        }
+    }
    //Le Reste ICI
 
     ui->Edit_Cursus_Group->setEnabled(true);
@@ -324,4 +353,20 @@ void MainWindow::PrintUV()
         for(QList<QString>::iterator it=list2.begin() ; it!=list2.end() ; ++it)
             ui->Print_UV_List->addItem(*it);
     }
+}
+
+void MainWindow::addUV_Cursus()
+{
+    QString code_seek = ui->Edit_Cursus_Seek_Code->text();
+    UVManager* UVManage = UVManager::getInstance();
+    if (UVManage->getUV(code_seek)!=NULL)
+    {
+        ui->Edit_Cursus_List1->addItem(code_seek);
+    }
+    ui->Edit_Cursus_Seek_Code->setText("");
+}
+
+void MainWindow::poubelle(QListWidgetItem * item)
+{
+    delete item;
 }
