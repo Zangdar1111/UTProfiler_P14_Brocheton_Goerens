@@ -22,8 +22,11 @@ public :
     int getCreditsCSTM() const {return Credits_CSTM;}
     int getCreditsTSH() const {return Credits_TSH;}
     int getCreditsSP() const {return Credits_SP;}
-    bool isBranche() const {return Branche;}
-    bool isPrepa() const {return !Branche;}
+    bool isPrincipal(){return true;}
+    bool isSecondaire(){return false;}
+    bool isWhat1() {return !Branche;}
+    bool isWhat2() {return Branche;}
+
 
     void setCreditsTotal(int c) {Credits_Total=c;}
     void setCreditsCS(int c) {Credits_CS=c;}
@@ -32,7 +35,7 @@ public :
     void setCreditsTSH(int c) {Credits_TSH=c;}
     void setCreditsSP(int c) {Credits_SP=c;}
 
-    void afficher() const;
+    void afficher();
     ~CursusPrincipal(){}
 };
 

@@ -15,8 +15,10 @@ public :
     QStringList getList(unsigned int i) const {return TabListeUV[i];}
     int getNbUVAValiderfromList(unsigned int i) const {return NbUVsAValider[i];}
     int getTailleTab() const {return tailleTab;}
-    bool isFiliere() const {return Filiere;}
-    bool isMineur() const {return !Filiere;}
+    bool isPrincipal(){return false;}
+    bool isSecondaire(){return true;}
+    bool isWhat1() {return Filiere;}
+    bool isWhat2() {return !Filiere;}
 
     void addUVtoList(QString code, int i);
     void setNbUVsforList(int nb, int i);
@@ -26,7 +28,7 @@ public :
         return true;
     }
 
-    void afficher() const;
+    void afficher() ;
     ~CursusSecondaire(){}
 };
 

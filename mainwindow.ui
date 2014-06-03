@@ -555,6 +555,9 @@
        <property name="text">
         <string>Prépa</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QLineEdit" name="Seek_Cursus_Code">
        <property name="geometry">
@@ -581,6 +584,9 @@
        <property name="text">
         <string>Filière</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QCheckBox" name="Seek_Cursus_Mineur">
        <property name="geometry">
@@ -597,6 +603,9 @@
        <property name="text">
         <string>Mineur</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QCheckBox" name="Seek_Cursus_Branche">
        <property name="geometry">
@@ -612,6 +621,9 @@
        </property>
        <property name="text">
         <string>Branche</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QPushButton" name="Seek_Cursus_Submit">
@@ -712,6 +724,9 @@
       </property>
      </widget>
      <widget class="QGroupBox" name="Edit_Cursus_Group">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>440</x>
@@ -979,7 +994,7 @@
        </widget>
        <widget class="QPushButton" name="Edit_Cursus_Seek_Delete">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="geometry">
          <rect>

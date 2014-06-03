@@ -1,6 +1,6 @@
 #include "includes.h"
 
-void CursusPrincipal::afficher() const{
+void CursusPrincipal::afficher(){
     afficherCursus();
     cout<<"Cursus Principal\n"
        <<"Nombre total de credits a valider : "<<Credits_Total<<"\n"

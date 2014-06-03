@@ -1,7 +1,7 @@
 #include "includes.h"
 
 //Affichage d'un Cursus Secondaire dans la console (à retirer par la suite)
-void CursusSecondaire::afficher() const{
+void CursusSecondaire::afficher(){
     QStringList::const_iterator lit, lend;
 
     afficherCursus();
@@ -19,8 +19,8 @@ void CursusSecondaire::afficher() const{
         cout<<NbUVsAValider[i]<<" Uvs à valider\n";
     }
 
-    if(isFiliere()) cout<<getCode().toStdString()<<" est une filiere\n";
-    if(isMineur()) cout<<getCode().toStdString()<<" est un mineur\n";
+    if(CursusSecondaire::isWhat1()) cout<<getCode().toStdString()<<" est une filiere\n";
+    if(CursusSecondaire::isWhat2()) cout<<getCode().toStdString()<<" est un mineur\n";
     cout<<"******\n";
 }
 

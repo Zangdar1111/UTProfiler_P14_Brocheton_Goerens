@@ -18,6 +18,7 @@ public:
     void addUVtoListFormCursusSecondaire(QString code, QString uv, int i);
     void afficherCursus(QString c);
     void deleteCursus(QString c);
+    QStringList listerCursus();
     //void check_integrity();
 };
 

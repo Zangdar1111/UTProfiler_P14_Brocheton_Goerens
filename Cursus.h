@@ -26,7 +26,11 @@ public:
         Responsable=r;
     }
 
-    virtual void afficher() const =0;
+    virtual bool isPrincipal()=0;
+    virtual bool isSecondaire()=0;
+    virtual bool isWhat1()=0;
+    virtual bool isWhat2()=0;
+    virtual void afficher() =0;
     virtual ~Cursus(){}
 
     //bool operator==(const Cursus* cur) const;

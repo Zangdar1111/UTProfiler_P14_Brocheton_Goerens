@@ -89,3 +89,17 @@ void CursusManager::addUVtoListFormCursusSecondaire(QString c, QString uv, int i
         cout<<"Cursus introuvable\n";
     }
 }
+
+/* Permet de lister tous les Cursus chargés dans l'application
+ * Argument: aucuns
+ * Retourne une QStringList contenant le code de chaque Cursus
+ * */
+QStringList CursusManager::listerCursus()
+{
+    QStringList list;
+    for(map<QString, Cursus*>::iterator it=TabCursus.begin() ; it!=TabCursus.end() ; ++it)
+    {
+        list.append(it->first); // accede à la clé
+    }
+    return list;
+}

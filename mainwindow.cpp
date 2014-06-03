@@ -26,10 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->Edit_Cursus_Filiere, SIGNAL(clicked()), this, SLOT(cursus_diff()));
     QObject::connect(ui->Edit_Cursus_Mineur, SIGNAL(clicked()), this, SLOT(cursus_diff()));
 
-
-    //Recuperation de la liste des UV
-    PrintUV();
     PrintCursus();
+    PrintUV();
+
 }
 
 //CursusManager* CursusManage = CursusManager::getInstance();
@@ -40,12 +39,71 @@ void MainWindow::quit()
 
 void MainWindow::PrintCursus()
 {
-
+    ResetCursus();
+    ui->Edit_Cursus_Group->setEnabled(false);
+    QString code_seek = ui->Seek_Cursus_Code->text();
+    CursusManager* CursusManage = CursusManager::getInstance();
+    while (ui->Print_Cursus_List->count () > 0) delete ui->Print_Cursus_List->takeItem (0);
+    QStringList list = CursusManage->listerCursus();
+    list.sort();
+    QStringList listnew;
+    if (!ui->Seek_Cursus_Prepa->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (CursusManage->getCursus(*it)->isWhat1()==0 && CursusManage->getCursus(*it)->isPrincipal()==1)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (!ui->Seek_Cursus_Branche->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (CursusManage->getCursus(*it)->isWhat2()==0 && CursusManage->getCursus(*it)->isPrincipal()==1)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (!ui->Seek_Cursus_Filiere->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (CursusManage->getCursus(*it)->isWhat2()==0 && CursusManage->getCursus(*it)->isSecondaire()==1)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (!ui->Seek_Cursus_Mineur->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (CursusManage->getCursus(*it)->isWhat1()==0 && CursusManage->getCursus(*it)->isSecondaire()==1)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (list.contains(code_seek))
+    {
+        ui->Print_Cursus_List->addItem(code_seek);
+    }
+    else
+    {
+        QStringList list2 = list.filter(code_seek);
+        for(QList<QString>::iterator it=list2.begin() ; it!=list2.end() ; ++it)
+            ui->Print_Cursus_List->addItem(*it);
+    }
 }
 
 void MainWindow::CreateCursus()
 {
-
+    ResetCursus();
+    ui->Edit_Cursus_Code->setReadOnly(false);
+    ui->Edit_Cursus_Group->setEnabled(true);
 }
 
 void MainWindow::ResetCursus()
@@ -71,7 +129,19 @@ void MainWindow::ResetCursus()
 
 void MainWindow::EditCursus(QListWidgetItem *item)
 {
+    ResetCursus();
+    //initialisation
+    QString code = item->text();
+    CursusManager* CursusManage = CursusManager::getInstance();
+    Cursus* curs = CursusManage->getCursus(code);
+    ui->Edit_Cursus_Code->setReadOnly(true);
+    ui->Edit_Cursus_Code->setText(code);
+    ui->Edit_Cursus_Titre->setText(curs->getTitre());
+    ui->Edit_Cursus_Resp->setText(curs->getResp());
 
+   //Le Reste ICI
+
+    ui->Edit_Cursus_Group->setEnabled(true);
 }
 
 void MainWindow::DeleteCursus()
