@@ -42,6 +42,13 @@ UV* UVManager::getUV (QString c){
     else return NULL;
 }
 
+QStringList UVManager::getTabCursus(QString c){
+    UV* findUV=getUV(c);
+    if(findUV!=NULL)
+        return findUV->getTab_Cursus();
+    else return QStringList();
+}
+
 /* Permet de supprimer une UV de l'UVManager
  * Argument : Le code de l'UV (chaine de caractères)
  */

@@ -191,7 +191,7 @@ void CursusManager::load()
                 QString ensembleuv = flux.readLine();
                 QStringList tabuv = ensembleuv.split(";");
                 QStringList listeuv[tabuv.size()];
-                for(unsigned int i=0;i<tabuv.size();i++)
+                for(int i=0;i<tabuv.size();i++)
                 {
                   listeuv[i]=tabuv.at(i).split(",");
                 }
@@ -203,7 +203,7 @@ void CursusManager::load()
                 QString filiere = flux.readLine();
 
                 addCursusSecondaire(code,titre,resp,filiere.toInt());
-                for (unsigned int i=0;i<tabuv.size();i++)
+                for (int i=0;i<tabuv.size();i++)
                 {
                   addListToCursusSecondaire(code,tabavalider.at(i).toInt());
 

@@ -12,10 +12,19 @@ friend class Singleton<DossierManager>;
     DossierManager(){} //Constructeur privé - DossierManager est un singleton
 
 public:
-    Dossier* getDossier(QString login); //Permet d'accéder à un Dossier de la Map
+    Dossier* getDossier(QString login) const; //Permet d'accéder à un Dossier de la Map
     void addDossier(QString login, QString nom_pre, unsigned int langue); //Ajoute un Dossier dans la Map
     void deleteDossier(QString login); //Supprime un Dossier
-
+    void setPrepa(QString login, QString prepa);
+    void setBranche(QString login, QString branche);
+    void setFiliere(QString login, QString filiere);
+    void addMineur(QString login, QString mineur);
+    QString getNomPrenom(QString login) const;
+    unsigned int getNiveauLangue(QString login) const;
+    QString getPrepa(QString login) const;
+    QString getBranche(QString login) const;
+    QString getFiliere(QString login) const;
+    QStringList getMineur(QString login) const;
 
     //Pour toi Thibault ?
     /*
