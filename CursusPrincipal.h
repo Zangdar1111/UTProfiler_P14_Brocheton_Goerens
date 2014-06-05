@@ -4,8 +4,7 @@
 #include "includes.h"
 
 //Classe CursusPrincipal
-class CursusPrincipal : public Cursus
-{
+class CursusPrincipal : public Cursus{
     //Attributs privés
     unsigned int Credits_Total; //Nombre de crédits total à valider
     unsigned int Credits_CS; //Nombre de crédits CS à valider

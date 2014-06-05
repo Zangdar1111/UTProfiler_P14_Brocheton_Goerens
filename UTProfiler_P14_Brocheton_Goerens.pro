@@ -32,6 +32,9 @@ HEADERS  += mainwindow.h \
     CursusPrincipal.h \
     CursusSecondaire.h \
     DossierManager.h \
-    Dossier.h
+    Dossier.h \
+    Inscription.h \
+    Semestre.h \
+    InscriptionPassee.h
 
 FORMS    += mainwindow.ui

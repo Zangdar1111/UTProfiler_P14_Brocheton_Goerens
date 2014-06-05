@@ -30,5 +30,7 @@ using namespace std;
 #include "CursusSecondaire.h"
 #include "Dossier.h"
 #include "DossierManager.h"
+#include "Semestre.h"
+#include "Inscription.h"
 
 #endif // INCLUDES_H_INCLUDED
