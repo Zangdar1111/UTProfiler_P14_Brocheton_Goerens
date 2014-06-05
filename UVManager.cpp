@@ -163,8 +163,8 @@ void UVManager::deleteUV_fichier(QString c)
 
 void UVManager::addUV_fichier(QString c)
 {
-    UV* uv = getUV(c);
     int ind;
+    UV* uv = getUV(c);
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
     if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
     {

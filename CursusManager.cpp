@@ -141,7 +141,7 @@ void CursusManager::editNbUVsforListOfCursusSecondaire(QString code, unsigned in
 
 int CursusManager::check_integrity()
 {
-  int NbLigne=4;
+  unsigned int NbLigne=4;
   QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/cursus.txt");
   if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
   {
@@ -151,7 +151,11 @@ int CursusManager::check_integrity()
       while(!flux.atEnd())
       {
           test = flux.readLine();
-          if (test=="#Secondaire#") NbLigne=7;
+          if (test=="#Secondaire#")
+          {
+              NbLigne=5;
+              test=flux.readLine();
+          }
               for (unsigned int i=0;i<NbLigne;i++)
               {
                   test = flux.readLine();
@@ -176,39 +180,46 @@ void CursusManager::load()
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/cursus.txt");
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
+        QString code;
         QTextStream flux(&fichier);
         flux.readLine();
-        while(! flux.atEnd())
+        while(!flux.atEnd())
         {
-            QString code = flux.readLine();
+            code = flux.readLine();
             if ((code=="#Secondaire#") || (secondaire==true))
             {
+
                 secondaire=true;
-                if (code=="#Secondaire#") QString code = flux.readLine();
+                if (code=="#Secondaire#") code = flux.readLine();
                 QString titre= flux.readLine();
                 QString resp = flux.readLine();
 
                 QString ensembleuv = flux.readLine();
+
                 QStringList tabuv = ensembleuv.split(";");
+
                 QStringList listeuv[tabuv.size()];
-                for(unsigned int i=0;i<tabuv.size();i++)
+
+                for(int i=0;i<tabuv.size();i++)
                 {
                   listeuv[i]=tabuv.at(i).split(",");
                 }
-
                 QString listeval = flux.readLine();
                 QStringList tabavalider = listeval.split(",");
 
-                QString taille = flux.readLine();
                 QString filiere = flux.readLine();
 
                 addCursusSecondaire(code,titre,resp,filiere.toInt());
-                for (unsigned int i=0;i<tabuv.size();i++)
-                {
-                  addListToCursusSecondaire(code,tabavalider.at(i).toInt());
 
+                for (int i=0;i<tabuv.size();i++)
+                {
+                    addListToCursusSecondaire(code,tabavalider.at(i).toInt());
+                    for (int j=0;j<listeuv[i].size();j++)
+                        addUVtoListFromCursusSecondaire(code,listeuv[i].at(j),i);
                 }
             }
+            else
+            {
             QString titre= flux.readLine();
             QString resp = flux.readLine();
 
@@ -218,7 +229,93 @@ void CursusManager::load()
             QString branche = flux.readLine();
 
             addCursusPrincipal(code,titre,resp,tc.at(0).toInt(),tc.at(1).toInt(),tc.at(2).toInt(),tc.at(3).toInt(),tc.at(4).toInt(),tc.at(5).toInt(),branche.toInt());
+            }
+            flux.readLine();
+        }
+
+    }
+}
+
+void CursusManager::deleteCursus_fichier(QString c)
+{
+    unsigned int taille = 6;
+    if (getCursus(c)->isSecondaire()) taille++;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/cursus.txt");
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            tout.append(flux.readLine());
+        }
+        int ind=tout.indexOf(c);
+        for (unsigned int i=0;i<taille;i++)
+        {
+             tout.removeAt(ind);
+        }
+        fichier.resize(0);
+        for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+        {
+            flux<<*it<<"\n";
         }
     }
 }
 
+void CursusManager::addCursus_fichier(QString c)
+{
+    int ind;
+    unsigned int taille = 6;
+    if (getCursus(c)->isSecondaire()) taille++;
+    Cursus* curs = getCursus(c);
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/cursus.txt");
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            tout.append(flux.readLine());
+        }
+        if (tout.contains(c))
+        {
+            ind=tout.indexOf(c);
+            for (unsigned int i=0;i<taille;i++)
+            {
+                 tout.removeAt(ind);
+            }
+        }
+        else
+        {
+            ind=tout.size();
+        }
+        tout.insert(ind,"#");
+        if (getCursus(c)->isPrincipal())
+        {
+            CursusPrincipal* curs1 = dynamic_cast<CursusPrincipal*>(curs);
+            tout.insert(ind,QString::number(curs1->isWhat2()));
+            tout.insert(ind,QString::number(curs1->getCreditsTotal())+","+
+                        QString::number(curs1->getCreditsCS())+","+
+                        QString::number(curs1->getCreditsTM())+","+
+                        QString::number(curs1->getCreditsCSTM())+","+
+                        QString::number(curs1->getCreditsTSH())+","+
+                        QString::number(curs1->getCreditsSP()));
+        }
+        else
+        {
+            CursusSecondaire* curs2 = dynamic_cast<CursusSecondaire*>(curs);
+            tout.insert(ind,"#");
+            tout.insert(ind,"#");
+            tout.insert(ind,"#");
+        }
+        tout.insert(ind,curs->getResp());
+        tout.insert(ind,curs->getTitre());
+        tout.insert(ind,curs->getCode());
+
+        fichier.resize(0);
+        for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+        {
+            flux<<*it<<"\n";
+        }
+    }
+}

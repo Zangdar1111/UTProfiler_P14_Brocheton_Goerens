@@ -24,6 +24,8 @@ public:
     void deleteCursus(QString c); //Permet de supprimer un Cursus
     QStringList listerCursus();//Liste tous les Cursus
     int check_integrity();
+    void deleteCursus_fichier(QString c);
+    void addCursus_fichier(QString c);
 
     //A supprimer par la suite
     void afficherCursus(QString c);

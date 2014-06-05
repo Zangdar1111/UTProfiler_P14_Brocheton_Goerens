@@ -19,12 +19,12 @@ int main(int argc, char *argv[])
     splash.show();
     a.processEvents();
         splash.showMessage("Verification de l'intégrité des UV", Qt::AlignCenter, Qt::black);
-        Sleep(1000);
         int code=UVManage->check_integrity();
+        Sleep(500);
         if (code==2)
         {
             splash.clearMessage();
-            splash.showMessage("ERREUR lors de l'ouverture du fichier", Qt::AlignCenter, Qt::black);
+            splash.showMessage("ERREUR lors de l'ouverture du fichier UV", Qt::AlignCenter, Qt::black);
             Sleep(4000);
             return 1;
         }
@@ -35,13 +35,31 @@ int main(int argc, char *argv[])
             Sleep(4000);
             return 1;
         }
+        splash.showMessage("Verification de l'intégrité des Cursus", Qt::AlignCenter, Qt::black);
+        code=CursusManage->check_integrity();
+        Sleep(500);
+        if (code==2)
+        {
+            splash.clearMessage();
+            splash.showMessage("ERREUR lors de l'ouverture du fichier Cursus", Qt::AlignCenter, Qt::black);
+            Sleep(4000);
+            return 1;
+        }
+        if (code==1)
+        {
+            splash.clearMessage();
+            splash.showMessage("ERREUR: Fichier Cursus Corrompu", Qt::AlignCenter, Qt::black);
+            Sleep(4000);
+            return 1;
+        }
         splash.clearMessage();
         splash.showMessage("Chargement des UV", Qt::AlignCenter, Qt::black);
         UVManage->load();
-        Sleep(1000);
+        Sleep(500);
         splash.clearMessage();
         splash.showMessage("Chargement des Cursus", Qt::AlignCenter, Qt::black);
-        Sleep(1000);
+        CursusManage->load();
+        Sleep(500);
 
     MainWindow w;
     w.show();
@@ -49,7 +67,7 @@ int main(int argc, char *argv[])
     splash.finish(&w);
 
 
-    test_cursus();
+    //test_cursus();
 
 
 

@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->Edit_Cursus_List3, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
     //Onglet 3
 
-    QObject::connect(ui->Edit_Dossier_No_Prepa,SIGNAL(clicked()),this,SLOT(No_Prepa));
+    QObject::connect(ui->Edit_Dossier_No_Prepa,SIGNAL(clicked()),this,SLOT(No_Prepa()));
 
     //Onglet 4
 
@@ -219,6 +219,9 @@ void MainWindow::ResetCursus()
     while (ui->Edit_Cursus_List1->count () > 0) delete ui->Edit_Cursus_List1->takeItem (0);
     while (ui->Edit_Cursus_List2->count () > 0) delete ui->Edit_Cursus_List2->takeItem (0);
     while (ui->Edit_Cursus_List3->count () > 0) delete ui->Edit_Cursus_List3->takeItem (0);
+    ui->Edit_Cursus_AValider1->setValue(0);
+    ui->Edit_Cursus_AValider2->setValue(0);
+    ui->Edit_Cursus_AValider3->setValue(0);
     ui->Edit_Cursus_Seek_Code->setText("");
 }
 
@@ -249,7 +252,8 @@ void MainWindow::EditCursus(QListWidgetItem *item)
     }
     else
     {
-        if (curs->isWhat1()==1) //Filière
+        CursusSecondaire* curs2 = dynamic_cast<CursusSecondaire*>(curs);
+        if (curs2->isWhat1()==1) //Filière
         {
             ui->Edit_Cursus_Filiere->setChecked(true);
         }
@@ -257,9 +261,25 @@ void MainWindow::EditCursus(QListWidgetItem *item)
         {
             ui->Edit_Cursus_Mineur->setChecked(true);
         }
+        QStringList liste = curs2->getList(0);
+        for (unsigned int i=0;i<liste.size();i++)
+            ui->Edit_Cursus_List1->addItem(liste.at(i));
+        ui->Edit_Cursus_AValider1->setValue(curs2->getNbUVAValiderfromList(0));
+        if (curs2->getTailleTab()>1)
+        {
+            liste = curs2->getList(1);
+            for (unsigned int i=0;i<liste.size();i++)
+                ui->Edit_Cursus_List2->addItem(liste.at(i));
+            ui->Edit_Cursus_AValider2->setValue(curs2->getNbUVAValiderfromList(1));
+        }
+        if (curs2->getTailleTab()>2)
+        {
+            liste = curs2->getList(2);
+            for (unsigned int i=0;i<liste.size();i++)
+                ui->Edit_Cursus_List3->addItem(liste.at(i));
+            ui->Edit_Cursus_AValider3->setValue(curs2->getNbUVAValiderfromList(2));
+        }
     }
-   //Le Reste ICI
-
     ui->Edit_Cursus_Group->setEnabled(true);
 }
 
@@ -270,7 +290,42 @@ void MainWindow::DeleteCursus()
 
 void MainWindow::SaveCursus()
 {
+    //récupérer UV dans UVManager
+    CursusManager* CursusManage = CursusManager::getInstance();
+    //Edition ou Sauvegarde
+    if (CursusManage->getCursus(ui->Edit_Cursus_Code->text())->isPrincipal())
+    {
+        CursusManage->addCursusPrincipal(
+            ui->Edit_Cursus_Code->text(),
+            ui->Edit_Cursus_Titre->text(),
+            ui->Edit_Cursus_Resp->text(),
+            ui->Edit_Cursus_Total->value(),
+            ui->Edit_Cursus_CS->value(),
+            ui->Edit_Cursus_TM->value(),
+            ui->Edit_Cursus_CSTM->value(),
+            ui->Edit_Cursus_TSH->value(),
+            ui->Edit_Cursus_SP->value(),
+            ui->Edit_Cursus_Branche->isChecked()
+            );
+    }
+    else
+    {
+        CursusManage->addCursusSecondaire(
+            ui->Edit_Cursus_Code->text(),
+            ui->Edit_Cursus_Titre->text(),
+            ui->Edit_Cursus_Resp->text(),
+            ui->Edit_Cursus_Filiere->isChecked()
+            );
 
+    }
+
+    //mise à jour du fichier
+    CursusManage->addCursus_fichier(ui->Edit_Cursus_Code->text());
+    //information de succès
+    QMessageBox::information(this,"Cursus "+ui->Edit_Cursus_Code->text()+" sauvegardée","Le Cursus "+ui->Edit_Cursus_Code->text()+" a bien été sauvegardée !",QMessageBox::Ok);
+    ui->Edit_Cursus_Group->setEnabled(false);
+    ResetCursus();
+    PrintCursus();
 }
 
 void MainWindow::cursus_diff()
@@ -286,6 +341,8 @@ void MainWindow::cursus_diff()
         ui->Edit_Cursus_GroupUV->setEnabled(true);
         ui->Edit_Cursus_List2->setEnabled(true);
         ui->Edit_Cursus_List3->setEnabled(true);
+        ui->Edit_Cursus_AValider2->setEnabled(true);
+        ui->Edit_Cursus_AValider3->setEnabled(true);
     }
     else if (ui->Edit_Cursus_Filiere->isChecked())
     {
@@ -293,6 +350,8 @@ void MainWindow::cursus_diff()
         ui->Edit_Cursus_GroupUV->setEnabled(true);
         ui->Edit_Cursus_List2->setEnabled(false);
         ui->Edit_Cursus_List3->setEnabled(false);
+        ui->Edit_Cursus_AValider2->setEnabled(false);
+        ui->Edit_Cursus_AValider3->setEnabled(false);
     }
 }
 
@@ -342,7 +401,9 @@ void MainWindow::EditUV(QListWidgetItem * item)
     ui->Edit_UV_TSH->setValue(uv->getCreditsCat(TSH));
     ui->Edit_UV_SP->setValue(uv->getCreditsCat(SP));
 
-    //Cursus ICI A AJOUTER
+    //QStringList liste = UVManage->getCursus();
+    //for (unsigned int i=0;i<liste.size();i++)
+    //    ui->Edit_Cursus_List2->addItem(liste.at(i));
 
     ui->Edit_UV_Group->setEnabled(true);
 }

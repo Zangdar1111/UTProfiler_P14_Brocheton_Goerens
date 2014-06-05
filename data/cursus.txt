@@ -1,0 +1,28 @@
+#Principal#
+TC
+Tron Commun
+MachinTrucMuche
+320,8,9,21,5,60
+0
+#
+GI
+Genie Informatique
+MachinTruc
+160,18,19,29,25,60
+1
+#
+#Secondaire#
+SRI
+Système Reseaux Informatique
+BiduleQuonSaitPasQui
+LO21,NF17
+2
+1
+#
+TCN
+Truc de Con Numérique
+MachinChose
+LO21,NF17,LO21,NF17;SY14,LO21,NF17;LO21,NF17,LO21
+1,2,3
+0
+#
