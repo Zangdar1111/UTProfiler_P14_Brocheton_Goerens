@@ -11,9 +11,9 @@ void UV::editUV(QString t, bool p, bool a, bool d)
     presentAutomne=a;
     DemiUV=d;
 }
-/*
+
 //Afficher une UV en ligne de commande (a supprimer par la suite)
-void UV::afficherUV(){
+void UV::afficherUV() const{
     cout<<"###Affichage UV###\n";
     cout<<"Code : "<<Code.toStdString()<<"\nTitre : "<<Titre.toStdString()<<"\n";
     cout<<"Printemps : "<<presentPrintemps<<" - Automne : "<<presentAutomne<<"\n";
@@ -29,7 +29,7 @@ void UV::afficherUV(){
     }
     cout<<"Demi UV : "<<DemiUV<<"\n";
     cout<<"######\n";
-}*/
+}
 
 
 /* Permet d'ajouter un cursus à une UV
@@ -40,55 +40,4 @@ void UV::ajouterCursus(QString &c){
         cout<<"Cursus déjà présent !\n";
     else
         Tab_Cursus.append(c);
-
-    /*
-    if (Nb_Cursus==0){
-        //Cas du premier Cursus
-        //Création d'un tableau de une case et ajout du Cursus
-        Tab_Cursus=new QString[1];
-        Tab_Cursus[0]=c;
-
-        //Incrémentation du nombre de Cursus
-        Nb_Cursus++;
-    }
-    else{
-        //On vérifie si le Cursus est déjà enregistré
-        //int indice = hasCursus(c);
-        int indice=-1;
-        //Si le Cursus est déjà enregistré, on ne fait rien
-        if(indice==-1){
-            //Si le Cursus n'est pas encore enregistré
-            //Extension du tableau des Cursus
-            QString* newCurTab= new QString[Nb_Cursus+1];
-            memcpy(newCurTab, Tab_Cursus, sizeof(QString) *Nb_Cursus);
-            QString* oldCurTab=Tab_Cursus;
-            Tab_Cursus=newCurTab;
-
-            //Incrémentation du nombre de Cursus
-            Nb_Cursus++;
-
-            delete[] oldCurTab;
-
-            //Ajout du nouveau Cursus
-            Tab_Cursus[Nb_Cursus-1]=c;
-        }
-    }
-    */
 }
-
-
-
-/* Permet de tester si un cursus est déjà enregistré pour cette UV
- * Argument : Le code du Cursus recherché (chaine de caractères)
- * Retour : l'indice (int) du Cursus dans le tableau si le Cursus est trouvé
- *          -1 si le Cursus n'est pas trouvé
- */
-/*
-int UV::hasCursus(const QString& cur) const{
-    for(unsigned int i=0; i<Nb_Cursus; i++){
-        if(cur==Tab_Cursus[i])
-            return i;
-    }
-    return -1;
-}
-*/

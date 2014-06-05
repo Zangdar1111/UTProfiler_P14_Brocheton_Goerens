@@ -14,7 +14,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    Cursus.cpp \
     UV.cpp \
     UVManager.cpp \
     CursusManager.cpp \

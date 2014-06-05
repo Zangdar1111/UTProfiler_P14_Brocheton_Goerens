@@ -1,5 +1,6 @@
 #include "includes.h"
 
+//A supprimer par la suite
 void CursusPrincipal::afficher(){
     afficherCursus();
     cout<<"Cursus Principal\n"

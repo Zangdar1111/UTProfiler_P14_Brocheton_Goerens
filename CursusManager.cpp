@@ -70,6 +70,11 @@ void CursusManager::deleteCursus(QString c){
     }
 }
 
+/* Permet d'ajouter une liste d'UV à un CursusSecondaire
+ * Arguments : le code du Cursus (chaine de caractères)
+ *              le nombre d'UVs à valider dans cette liste (int)
+ * Retourne l'indice de la chaine créée, ou -1 si le Cursus n'éxiste pas
+ */
 int CursusManager::addListToCursusSecondaire(QString c, int nb){
     CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
     int indice_liste=-1;
@@ -81,6 +86,11 @@ int CursusManager::addListToCursusSecondaire(QString c, int nb){
     return indice_liste;
 }
 
+/* Permet d'ajouter une UV à une liste d'UVs dans un CursusSecondaire
+ * Arguments : le code du Cursus (chaine de caractères)
+ *              le code de l'UV (chaine de caractères)
+ *              l'indice de la liste à modifier (int)
+ */
 void CursusManager::addUVtoListFormCursusSecondaire(QString c, QString uv, int i){
     CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
     if(findCursus!=NULL){
