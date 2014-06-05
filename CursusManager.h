@@ -20,7 +20,7 @@ public:
     void addUVtoListFormCursusSecondaire(QString code, QString uv, int i);//Permet d'ajouter une UV à une liste d'un Cursus Secondaire
     void deleteCursus(QString c); //Permet de supprimer un Cursus
     QStringList listerCursus();//Liste tous les Cursus
-    //void check_integrity();
+    int check_integrity();
 
     //A supprimer par la suite
     void afficherCursus(QString c);

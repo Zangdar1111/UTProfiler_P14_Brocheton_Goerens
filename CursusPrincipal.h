@@ -28,10 +28,10 @@ public :
     int getCreditsCSTM() const {return Credits_CSTM;}
     int getCreditsTSH() const {return Credits_TSH;}
     int getCreditsSP() const {return Credits_SP;}
-    bool isPrincipal() const {return true;}
-    bool isSecondaire() const {return false;}
-    bool isWhat1() const {return !Branche;}
-    bool isWhat2() const {return Branche;}
+    bool isPrincipal() {return true;}
+    bool isSecondaire() {return false;}
+    bool isWhat1() {return !Branche;}
+    bool isWhat2() {return Branche;}
 
     //Mutateurs
     void setCreditsTotal(int c) {Credits_Total=c;}

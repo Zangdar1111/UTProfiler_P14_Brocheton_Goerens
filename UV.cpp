@@ -17,9 +17,7 @@ void UV::afficherUV() const{
     cout<<"###Affichage UV###\n";
     cout<<"Code : "<<Code.toStdString()<<"\nTitre : "<<Titre.toStdString()<<"\n";
     cout<<"Printemps : "<<presentPrintemps<<" - Automne : "<<presentAutomne<<"\n";
-    for(unsigned int i=0; i<Nb_Categorie; i++){
-        cout<<"Categorie n°"<<i+1<<" : "<<Tab_Categorie[i]<<" - "<<Credits_Categorie[i]<<" crédits\n";
-    }
+
 
     CursusManager* CursusManage = CursusManager::getInstance(); //On récupère le CursusManager
     QStringList::const_iterator lit (Tab_Cursus.begin()), lend2(Tab_Cursus.end());

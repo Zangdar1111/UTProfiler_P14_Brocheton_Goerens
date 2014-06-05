@@ -79,7 +79,6 @@ void UVManager::addUVCursus(QString c, QString cur){
 
 int UVManager::check_integrity()
 {
-    unsigned int i;
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
@@ -88,7 +87,7 @@ int UVManager::check_integrity()
         while(!flux.atEnd())
         {
             test = flux.readLine();
-            for (i=0;i<5;i++)
+            for (unsigned int i=0;i<5;i++)
             {
                 test = flux.readLine();
                 if (test=="#")

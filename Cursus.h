@@ -37,7 +37,7 @@ public:
     virtual bool isSecondaire()=0;
     virtual bool isWhat1()=0;
     virtual bool isWhat2()=0;
-    virtual void afficher() =0;
+    virtual void afficher()=0;
     virtual ~Cursus(){}
 
 };

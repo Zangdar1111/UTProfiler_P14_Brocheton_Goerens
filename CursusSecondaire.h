@@ -23,8 +23,8 @@ public :
     int getTailleTab() const {return tailleTab;}
     bool isPrincipal(){return false;}
     bool isSecondaire(){return true;}
-    bool isWhat1() {return Filiere;}
-    bool isWhat2() {return !Filiere;}
+    bool isWhat1(){return Filiere;}
+    bool isWhat2(){return !Filiere;}
 
     //Mutateur
     void setNbUVsforList(int nb, int i);
@@ -42,7 +42,7 @@ public :
     ~CursusSecondaire(){}
 
     //A supprimer par la suite
-    void afficher() ;
+    void afficher();
 };
 
 #endif // CURSUSSECONDAIRE_H

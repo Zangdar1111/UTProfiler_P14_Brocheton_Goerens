@@ -113,3 +113,88 @@ QStringList CursusManager::listerCursus()
     }
     return list;
 }
+
+int CursusManager::check_integrity()
+{
+    int NbLigne=4;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/cursus.txt");
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QString test;
+        QTextStream flux(&fichier);
+        if (flux.readLine()!="#Principal#") return 1;
+        while(!flux.atEnd())
+        {
+            test = flux.readLine();
+            if (test=="#Secondaire#") NbLigne=7;
+                for (unsigned int i=0;i<NbLigne;i++)
+                {
+                    test = flux.readLine();
+                    if (test=="#")
+                        return 1;
+                }
+                test = flux.readLine();
+                if (test!="#")
+                    return 1;
+        }
+    }
+    else
+    {
+        return 2;
+    }
+    return 0;
+}
+
+void CursusManager::load()
+{
+    bool secondaire=false;
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/cursus.txt");
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        flux.readLine();
+        while(! flux.atEnd())
+        {
+            QString code = flux.readLine();
+
+            if ((code=="#Secondaire#") || (secondaire==true))
+            {
+                secondaire=true;
+                if (code=="#Secondaire#") QString code = flux.readLine();
+                QString titre= flux.readLine();
+                QString resp = flux.readLine();
+
+                QString ensembleuv = flux.readLine();
+                QStringList tabuv = ensembleuv.split(";");
+                QStringList listeuv[tabuv.size()];
+                for(unsigned int i=0;i<tabuv.size();i++)
+                {
+                    listeuv[i]=tabuv.at(i).split(",");
+                }
+
+                QString listeval = flux.readLine();
+                QStringList tabavalider = listeval.split(",");
+
+                QString taille = flux.readLine();
+                QString filiere = flux.readLine();
+
+                addCursusSecondaire(code,titre,resp,filiere.toInt());
+                for (unsigned int i=0;i<tabuv.size();i++)
+                {
+                    addListToCursusSecondaire(code,tabavalider.at(i).toInt());
+
+                }
+
+            }
+            QString titre= flux.readLine();
+            QString resp = flux.readLine();
+
+            QString credits = flux.readLine();
+            QStringList tc = credits.split(",");
+
+            QString branche = flux.readLine();
+
+            addCursusPrincipal(code,titre,resp,tc.at(0).toInt(),tc.at(1).toInt(),tc.at(2).toInt(),tc.at(3).toInt(),tc.at(4).toInt(),tc.at(5).toInt(),branche.toInt());
+        }
+    }
+}
