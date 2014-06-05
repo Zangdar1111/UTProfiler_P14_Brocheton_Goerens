@@ -16,6 +16,13 @@ protected :
            <<"\nTitre : "<<Titre.toStdString()
           <<"\nResponsable : "<<Responsable.toStdString()<<"\n";
     }
+
+    //Permet l'édition d'un Cursus
+    void editCursus(QString t, QString r){
+        Titre=t;
+        Responsable=r;
+    }
+
 public:
     //Constructeurs
     Cursus(QString c,QString t, QString r):Code(c),Titre(t),Responsable(r){}
@@ -26,18 +33,12 @@ public:
     QString getTitre() const {return this->Titre;}
     QString getResp() const {return this->Responsable;}
 
-    //Permet l'édition d'un Cursus
-    void editCursus(QString t, QString r){
-        Titre=t;
-        Responsable=r;
-    }
-
     //Fonctions virtuelles pures
-    virtual bool isPrincipal()=0;
-    virtual bool isSecondaire()=0;
-    virtual bool isWhat1()=0;
-    virtual bool isWhat2()=0;
-    virtual void afficher()=0;
+    virtual bool isPrincipal() const=0;
+    virtual bool isSecondaire() const=0;
+    virtual bool isWhat1() const=0;
+    virtual bool isWhat2() const=0;
+    virtual void afficher() const=0;
     virtual ~Cursus(){}
 
 };

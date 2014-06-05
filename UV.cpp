@@ -19,6 +19,7 @@ void UV::afficherUV() const{
     cout<<"Printemps : "<<presentPrintemps<<" - Automne : "<<presentAutomne<<"\n";
 
 
+    cout<<"Info : Manque l'affichage de crédits\n";
     CursusManager* CursusManage = CursusManager::getInstance(); //On récupère le CursusManager
     QStringList::const_iterator lit (Tab_Cursus.begin()), lend2(Tab_Cursus.end());
     for(;lit!=lend2;++lit){

@@ -1,7 +1,7 @@
 #include "includes.h"
 
 //A supprimer par la suite
-void CursusPrincipal::afficher(){
+void CursusPrincipal::afficher() const{
     afficherCursus();
     cout<<"Cursus Principal\n"
        <<"Nombre total de credits a valider : "<<Credits_Total<<"\n"

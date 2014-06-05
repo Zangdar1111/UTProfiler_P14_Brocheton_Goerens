@@ -78,20 +78,20 @@ void test_cursus(){
     //Exemple d'ajout d'une liste d'UV à un Cursus Secondaire
     int indice_liste1 = CursusManage->addListToCursusSecondaire("TCN",2);
     //Exemple d'ajout d'une UV à une liste dans un Cursus Secondaire
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","L021",indice_liste1);
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","L022",indice_liste1);
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","L023",indice_liste1);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","L021",indice_liste1);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","L022",indice_liste1);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","L023",indice_liste1);
     CursusManage->afficherCursus("TCN");
 
     //Test Erreurs
     int indice_liste2 = CursusManage->addListToCursusSecondaire("GI",2);
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","L023",indice_liste1+1);
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","L023",-3);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","L023",indice_liste1+1);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","L023",-3);
 
     int indice_liste3 = CursusManage->addListToCursusSecondaire("TCN", 3);
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","NF16",indice_liste3);
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","NF17",indice_liste3);
-    CursusManage->addUVtoListFormCursusSecondaire("TCN","NF18",indice_liste3);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","NF16",indice_liste3);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","NF17",indice_liste3);
+    CursusManage->addUVtoListFromCursusSecondaire("TCN","NF18",indice_liste3);
     CursusManage->afficherCursus("TCN");
 
 }
