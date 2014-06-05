@@ -12,14 +12,13 @@
  *              Nombre total de crédits SP à valider (int)
  *              Valeure de vérité de branche (bool)
  */
-void CursusManager::addCursusPrincipal(QString c, QString t, QString r, int tot, int cs, int tm, int cstm, int tsh, int sp, bool br){
+void CursusManager::addCursusPrincipal(QString c, QString t, QString r, unsigned int tot, unsigned int cs, unsigned int tm, unsigned int cstm, unsigned int tsh, unsigned int sp, bool br){
     Cursus* findCursus=getCursus(c);
     if(findCursus==NULL){
         Cursus* new_cur = new CursusPrincipal(c, t, r, tot, cs, tm, cstm, tsh, sp, br);
         TabCursus.insert(make_pair(c,new_cur));
-    } else {
-        cout<<"Erreur : Cursus Déjà présent !\n\n";
-    }
+    } else
+        dynamic_cast<CursusPrincipal*>(findCursus)->editCursusPrincipal(t, r, tot, cs, tm, cstm, tsh, sp, br);
 }
 
 /* Permet d'ajouter ou de mettre à jour un CursusSecondaire du CursusManager
@@ -33,9 +32,8 @@ void CursusManager::addCursusSecondaire(QString c, QString t, QString r, bool fi
     if(findCursus==NULL){
         Cursus* new_cur = new CursusSecondaire(c, t, r, fil);
         TabCursus.insert(make_pair(c,new_cur));
-    } else {
-        cout<<"Erreur : Cursus Déjà présent !\n\n";
-    }
+    } else
+        dynamic_cast<CursusSecondaire*>(findCursus)->editCursusSecondaire(t, r, fil);
 }
 
 /* Permet d'accéder à un Cursus existant
@@ -75,7 +73,7 @@ void CursusManager::deleteCursus(QString c){
  *              le nombre d'UVs à valider dans cette liste (int)
  * Retourne l'indice de la chaine créée, ou -1 si le Cursus n'éxiste pas
  */
-int CursusManager::addListToCursusSecondaire(QString c, int nb){
+int CursusManager::addListToCursusSecondaire(QString c, unsigned int nb){
     CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
     int indice_liste=-1;
     if(findCursus!=NULL){
@@ -91,7 +89,7 @@ int CursusManager::addListToCursusSecondaire(QString c, int nb){
  *              le code de l'UV (chaine de caractères)
  *              l'indice de la liste à modifier (int)
  */
-void CursusManager::addUVtoListFormCursusSecondaire(QString c, QString uv, int i){
+void CursusManager::addUVtoListFromCursusSecondaire(QString c, QString uv, unsigned int i){
     CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
     if(findCursus!=NULL){
         findCursus->addUVtoList(uv, i);
@@ -112,4 +110,30 @@ QStringList CursusManager::listerCursus()
         list.append(it->first); // accede à la clé
     }
     return list;
+}
+void CursusManager::removeListFromCursusSecondaire(QString code, unsigned int i){
+    CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(code));
+    if(findCursus!=NULL){
+        findCursus->removeList(i);
+    } else {
+        cout<<"Cursus introuvable\n";
+    }
+}
+
+void CursusManager::removeUVfromListofCursusSecondaire(QString code, QString uv, unsigned int i){
+    CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(code));
+    if(findCursus!=NULL){
+        findCursus->removeUVFromList(uv, i);
+    } else {
+        cout<<"Cursus introuvable\n";
+    }
+}
+
+void CursusManager::editNbUVsforListOfCursusSecondaire(QString code, unsigned int nb, unsigned int i){
+    CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(code));
+    if(findCursus!=NULL){
+        findCursus->setNbUVsforList(nb, i);
+    } else {
+        cout<<"Cursus introuvable\n";
+    }
 }

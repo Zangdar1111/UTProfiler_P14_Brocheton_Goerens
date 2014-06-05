@@ -1,7 +1,7 @@
 #include "includes.h"
 
 //Affichage d'un Cursus Secondaire dans la console (à retirer par la suite)
-void CursusSecondaire::afficher(){
+void CursusSecondaire::afficher() const{
     QStringList::const_iterator lit, lend;
 
     afficherCursus();
@@ -28,8 +28,8 @@ void CursusSecondaire::afficher(){
  * Arguments : le code de l'UV à ajouter (string)
  *              l'indice de la liste dans le tableau des listes (int)
  */
-void CursusSecondaire::addUVtoList(QString code, int i){
-    if(i<0||i>=tailleTab){
+void CursusSecondaire::addUVtoList(QString code, unsigned int i){
+    if(i>=tailleTab){
         cout<<"Liste Inexistante pour ce Cursus\n";
     } else {
         if(TabListeUV[i].contains(code))
@@ -43,7 +43,7 @@ void CursusSecondaire::addUVtoList(QString code, int i){
  * Arguments : le nombre d'UVs à valider parmi celle de la liste (int)
  *              l'indice de la liste dans le tableau des listes (int)
  */
-void CursusSecondaire::setNbUVsforList(int nb, int i){
+void CursusSecondaire::setNbUVsforList(unsigned int nb, unsigned int i){
     NbUVsAValider[i]=nb;
 }
 
@@ -51,12 +51,12 @@ void CursusSecondaire::setNbUVsforList(int nb, int i){
  * Argument : le nombre d'UVs à valider parmi celle de la liste (int)
  * Sortie : L'indice de la liste dans le tableau des listes
  */
-int CursusSecondaire::creerList(int nb){
+int CursusSecondaire::creerList(unsigned int nb){
     if (tailleTab==0){
         //Cas de la première liste
         //Création d'un tableau de une case et ajout d'une QStringList
         TabListeUV=new QStringList[1];
-        NbUVsAValider=new int[1];
+        NbUVsAValider=new unsigned int[1];
         setNbUVsforList(nb, 0);
         //Incrémentation de la taille des tableaux
         tailleTab++;
@@ -64,14 +64,14 @@ int CursusSecondaire::creerList(int nb){
     else{
         //Extension du tableau des Listes d'UVs et du nombre d'UVs à valider
         QStringList* newListTab= new QStringList[tailleTab+1];
-        int* newIntTab = new int[tailleTab+1];
+        unsigned int* newIntTab = new unsigned int[tailleTab+1];
 
         //Recopie de chaque liste d'UVs dans le nouveau tableau
         //QStringList définie un opérateur d'affectation (=)
         for(unsigned int i=0; i<tailleTab; i++)
             newListTab[i]=TabListeUV[i];
 
-        memcpy(newIntTab, NbUVsAValider, sizeof(int)*tailleTab);
+        memcpy(newIntTab, NbUVsAValider, sizeof(unsigned int)*tailleTab);
 
         QStringList* oldListTab=TabListeUV;
         TabListeUV=newListTab;
