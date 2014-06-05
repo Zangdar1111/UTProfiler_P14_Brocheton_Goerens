@@ -1,0 +1,33 @@
+#ifndef DOSSIERMANAGER_H
+#define DOSSIERMANAGER_H
+
+#include "includes.h"
+
+//Class DossierManager - Classe responsable du cycle de Vie des objets Dossier
+class DossierManager : public Singleton<DossierManager>{
+friend class Singleton<DossierManager>;
+    //Attribut
+    map<QString, Dossier*> TabDossier; //Map associant un Dossier à une chaine de caractères (son login)
+
+    DossierManager(){} //Constructeur privé - DossierManager est un singleton
+
+public:
+    Dossier* getDossier(QString login); //Permet d'accéder à un Dossier de la Map
+    void addDossier(QString login, QString nom_pre, unsigned int langue); //Ajoute un Dossier dans la Map
+    void deleteDossier(QString login); //Supprime un Dossier
+
+
+    //Pour toi Thibault ?
+    /*
+    QStringList listerDossier(); // Permet de lister toutes les Dossier chargées dans l'application
+    void load(); //Charge les Dossiers depuis un fichier
+    void deleteDossier_fichier(QString c); //Supprime une Dossier du fichier de saDossieregarde
+    void addDossier_fichier(QString c); //Ajoute une Dossier au fichier de saDossieregarde
+    void save(); //SaDossieregarde les Dossier dans un fichier
+    int check_integrity(); //Vérifie l'intégrité du fichier de saDossieregarde
+    */
+
+};
+
+
+#endif // DOSSIERMANAGER_H

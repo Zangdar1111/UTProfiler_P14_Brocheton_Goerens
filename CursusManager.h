@@ -16,7 +16,7 @@ public:
     void save(); //Sauvegarde les Cursus dans un fichier
     void addCursusPrincipal(QString code, QString t, QString r, unsigned int tot, unsigned int cs, unsigned int tm, unsigned int cstm, unsigned int tsh, unsigned int sp, bool br); //Permet d'ajouter un Cursus Principal
     void addCursusSecondaire(QString code, QString t, QString r, bool fil); //Permet d'ajouter un Cursus Secondaire
-    unsigned int addListToCursusSecondaire(QString code, unsigned int nb); //Permet d'ajouter une liste d'UV à un Cursus Secondaire
+    int addListToCursusSecondaire(QString code, unsigned int nb); //Permet d'ajouter une liste d'UV à un Cursus Secondaire
     void addUVtoListFromCursusSecondaire(QString code, QString uv, unsigned int i);//Permet d'ajouter une UV à une liste d'un Cursus Secondaire
     void removeListFromCursusSecondaire(QString code, unsigned int i);
     void removeUVfromListofCursusSecondaire(QString code, QString uv, unsigned int i);
