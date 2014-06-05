@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Onglet_UV">
      <attribute name="title">
@@ -684,31 +684,6 @@
       <property name="dragDropMode">
        <enum>QAbstractItemView::NoDragDrop</enum>
       </property>
-      <item>
-       <property name="text">
-        <string>GI</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>TS</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>GB</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>TSN</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>SRI</string>
-       </property>
-      </item>
      </widget>
      <widget class="QLabel" name="Print_Cursus_Label1">
       <property name="geometry">
@@ -1196,7 +1171,7 @@
      <attribute name="title">
       <string>Gestion des Dossiers</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="Create_Dossier">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -1209,7 +1184,7 @@
        <string>Créer un Dossier</string>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="Seek_Dossier_Group">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -1221,7 +1196,7 @@
       <property name="title">
        <string>Recherche</string>
       </property>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="Seek_Dossier_Submit">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1234,7 +1209,7 @@
         <string>Rechercher</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="Seek_Dossier_Label">
        <property name="geometry">
         <rect>
          <x>30</x>
@@ -1247,7 +1222,7 @@
         <string>Login:</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="Seek_Dossier_Login">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1258,7 +1233,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_2">
+     <widget class="QGroupBox" name="Edit_Dossier_Group">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -1270,10 +1245,10 @@
       <property name="title">
        <string>Modification Dossier</string>
       </property>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="Edit_Dossier_Label1">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>150</x>
          <y>40</y>
          <width>46</width>
          <height>13</height>
@@ -1283,172 +1258,172 @@
         <string>Login:</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="Edit_Dossier_login">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>190</x>
          <y>40</y>
          <width>71</width>
          <height>20</height>
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="label_3">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>80</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Prépa:</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QGroupBox" name="Edit_Dossier_Cursus_Group">
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>190</y>
-         <width>70</width>
-         <height>17</height>
+         <y>70</y>
+         <width>391</width>
+         <height>161</height>
         </rect>
        </property>
-       <property name="text">
-        <string>Hors UTC</string>
+       <property name="title">
+        <string>Cursus:</string>
        </property>
-      </widget>
-      <widget class="QLabel" name="label_4">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>80</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Branche:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>80</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Filière:</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_2">
-       <property name="geometry">
-        <rect>
-         <x>240</x>
-         <y>190</y>
-         <width>70</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Aucune</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>350</x>
-         <y>80</y>
-         <width>46</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Mineur:</string>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="Print_Cursus_List_3">
-       <property name="geometry">
-        <rect>
-         <x>230</x>
-         <y>100</y>
-         <width>71</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="showDropIndicator" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="dragEnabled">
-        <bool>false</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::NoDragDrop</enum>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="Print_Cursus_List_4">
-       <property name="geometry">
-        <rect>
-         <x>330</x>
-         <y>100</y>
-         <width>71</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="showDropIndicator" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="dragEnabled">
-        <bool>false</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::NoDragDrop</enum>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="Print_Cursus_List_5">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>100</y>
-         <width>71</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="showDropIndicator" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="dragEnabled">
-        <bool>false</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::NoDragDrop</enum>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="Print_Cursus_List_6">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>100</y>
-         <width>71</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="showDropIndicator" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="dragEnabled">
-        <bool>false</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::NoDragDrop</enum>
-       </property>
+       <widget class="QLabel" name="Edit_Dossier_Label5">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>20</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Mineur:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Dossier_Label3">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>20</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Branche:</string>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="Edit_Dossier_Prepa">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>71</width>
+          <height>81</height>
+         </rect>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::NoDragDrop</enum>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="Edit_Dossier_Branche">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>40</y>
+          <width>71</width>
+          <height>111</height>
+         </rect>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::NoDragDrop</enum>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="Edit_Dossier_Mineur">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>40</y>
+          <width>71</width>
+          <height>111</height>
+         </rect>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::NoDragDrop</enum>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="Edit_Dossier_Filiere">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>40</y>
+          <width>71</width>
+          <height>111</height>
+         </rect>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::NoDragDrop</enum>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="Edit_Dossier_No_Prepa">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>70</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Hors UTC</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Dossier_Label4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>20</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Filière:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Edit_Dossier_Label2">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>46</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Prépa:</string>
+        </property>
+       </widget>
       </widget>
      </widget>
-     <widget class="QLabel" name="Print_Cursus_Label1_2">
+     <widget class="QLabel" name="Print_Dossier_Label">
       <property name="geometry">
        <rect>
         <x>190</x>
@@ -1461,7 +1436,7 @@
        <string>Résultats</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="Print_Cursus_List_2">
+     <widget class="QListWidget" name="Print_Dossier_List">
       <property name="geometry">
        <rect>
         <x>150</x>

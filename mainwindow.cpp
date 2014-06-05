@@ -6,15 +6,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //Menu
     QObject::connect(ui->MenuFichier_Quitter, SIGNAL(triggered()), this, SLOT(quit()));
-
+    //Onglet 1
     QObject::connect(ui->Seek_UV_Submit, SIGNAL(clicked()), this, SLOT(PrintUV()));
     QObject::connect(ui->Create_UV, SIGNAL(clicked()), this, SLOT(CreateUV()));
     QObject::connect(ui->Print_UV_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditUV(QListWidgetItem *)));
     QObject::connect(ui->Delete_UV, SIGNAL(clicked()), this, SLOT(DeleteUV()));
     QObject::connect(ui->Save_UV, SIGNAL(clicked()), this, SLOT(SaveUV()));
-
+    //Onglet 2
     QObject::connect(ui->Seek_Cursus_Submit, SIGNAL(clicked()), this, SLOT(PrintCursus()));
     QObject::connect(ui->Create_Cursus, SIGNAL(clicked()), this, SLOT(CreateCursus()));
     QObject::connect(ui->Print_Cursus_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditCursus(QListWidgetItem *)));
@@ -26,17 +26,107 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->Edit_Cursus_Filiere, SIGNAL(toggled(bool)), this, SLOT(cursus_diff()));
     QObject::connect(ui->Edit_Cursus_Mineur, SIGNAL(toggled(bool)), this, SLOT(cursus_diff()));
 
-
     QObject::connect(ui->Edit_Cursus_Seek_Submit, SIGNAL(clicked()), this, SLOT(addUV_Cursus()));
 
     QObject::connect(ui->Edit_Cursus_List1, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Cursus_List2, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Cursus_List3, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
+    //Onglet 3
 
-    PrintCursus();
+    QObject::connect(ui->Edit_Dossier_No_Prepa,SIGNAL(clicked()),this,SLOT(No_Prepa));
+
+    //Onglet 4
+
+
+
+    //Configuration au lancement
     PrintUV();
 
+    PrintCursus();
+
+    Print_Prepa();
+    Print_Branche();
+    Print_Filiere();
+    Print_Mineur();
 }
 
-//CursusManager* CursusManage = CursusManager::getInstance();
+void MainWindow::No_Prepa()
+{
+    if (ui->Edit_Dossier_No_Prepa->isChecked()==true)
+        ui->Edit_Dossier_Prepa->setEnabled(false);
+    else
+        ui->Edit_Dossier_Prepa->setEnabled(true);
+}
+
+void MainWindow::Print_Mineur()
+{
+    CursusManager* CursusManage = CursusManager::getInstance();
+    QStringList list = CursusManage->listerCursus();
+    list.sort();
+    QStringList listnew;
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+    {
+        if (CursusManage->getCursus(*it)->isWhat2()==1 && CursusManage->getCursus(*it)->isSecondaire()==1)
+          listnew.append(*it);
+    }
+    list=listnew;
+    listnew.clear();
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        ui->Edit_Dossier_Mineur->addItem(*it);
+}
+
+void MainWindow::Print_Filiere()
+{
+    CursusManager* CursusManage = CursusManager::getInstance();
+    QStringList list = CursusManage->listerCursus();
+    list.sort();
+    QStringList listnew;
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+    {
+        if (CursusManage->getCursus(*it)->isWhat1()==1 && CursusManage->getCursus(*it)->isSecondaire()==1)
+          listnew.append(*it);
+    }
+    list=listnew;
+    listnew.clear();
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        ui->Edit_Dossier_Filiere->addItem(*it);
+}
+
+void MainWindow::Print_Branche()
+{
+    CursusManager* CursusManage = CursusManager::getInstance();
+    QStringList list = CursusManage->listerCursus();
+    list.sort();
+    QStringList listnew;
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+    {
+        if (CursusManage->getCursus(*it)->isWhat2()==1 && CursusManage->getCursus(*it)->isPrincipal()==1)
+          listnew.append(*it);
+    }
+    list=listnew;
+    listnew.clear();
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        ui->Edit_Dossier_Branche->addItem(*it);
+}
+
+void MainWindow::Print_Prepa()
+{
+    CursusManager* CursusManage = CursusManager::getInstance();
+    QStringList list = CursusManage->listerCursus();
+    list.sort();
+    QStringList listnew;
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+    {
+        if (CursusManage->getCursus(*it)->isWhat1()==1 && CursusManage->getCursus(*it)->isPrincipal()==1)
+          listnew.append(*it);
+    }
+    list=listnew;
+    listnew.clear();
+    for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        ui->Edit_Dossier_Prepa->addItem(*it);
+}
+
+
 void MainWindow::quit()
 {
     close();
