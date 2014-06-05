@@ -28,5 +28,7 @@ using namespace std;
 #include "CursusManager.h"
 #include "CursusPrincipal.h"
 #include "CursusSecondaire.h"
+#include "Dossier.h"
+#include "DossierManager.h"
 
 #endif // INCLUDES_H_INCLUDED

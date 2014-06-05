@@ -13,6 +13,7 @@ friend class Singleton<UVManager>;
 
 public:
     UV* getUV(QString c); //Permet d'accéder à une UV de la Map
+    QStringList getTabCursus(QString c);
     void load(); //Charge les UVs depuis un fichier
     void deleteUV_fichier(QString c); //Supprime une UV du fichier de sauvegarde
     void addUV_fichier(QString c); //Ajoute une UV au fichier de sauvegarde
