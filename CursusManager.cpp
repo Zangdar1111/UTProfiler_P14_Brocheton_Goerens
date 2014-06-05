@@ -73,7 +73,7 @@ void CursusManager::deleteCursus(QString c){
  *              le nombre d'UVs à valider dans cette liste (int)
  * Retourne l'indice de la chaine créée, ou -1 si le Cursus n'éxiste pas
  */
-int CursusManager::addListToCursusSecondaire(QString c, unsigned int nb){
+unsigned int CursusManager::addListToCursusSecondaire(QString c, unsigned int nb){
     CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
     int indice_liste=-1;
     if(findCursus!=NULL){
