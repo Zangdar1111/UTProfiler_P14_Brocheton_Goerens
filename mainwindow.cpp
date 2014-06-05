@@ -389,6 +389,7 @@ void MainWindow::EditUV(QListWidgetItem * item)
     //initialisation
     QString code = item->text();
     UVManager* UVManage = UVManager::getInstance();
+    CursusManager* CursusManage = CursusManager::getInstance();
     UV* uv = UVManage->getUV(code);
     ui->Edit_UV_Code->setReadOnly(true);
     ui->Edit_UV_Code->setText(code);
@@ -401,9 +402,19 @@ void MainWindow::EditUV(QListWidgetItem * item)
     ui->Edit_UV_TSH->setValue(uv->getCreditsCat(TSH));
     ui->Edit_UV_SP->setValue(uv->getCreditsCat(SP));
 
-    //QStringList liste = UVManage->getCursus();
-    //for (unsigned int i=0;i<liste.size();i++)
-    //    ui->Edit_Cursus_List2->addItem(liste.at(i));
+    QStringList liste = UVManage->getTabCursus(code);
+    liste.sort();
+    for (int i=0;i<liste.size();i++)
+        ui->Edit_UV_List2->addItem(liste.at(i));
+
+    QStringList liste2= CursusManage->listerCursus();
+    QStringList liste3;
+    for (int i=0;i<liste2.size();i++)
+        if(!liste.contains(liste2.at(i)))
+            liste3.append(liste2.at(i));
+    liste3.sort();
+    for (int i=0;i<liste3.size();i++)
+        ui->Edit_UV_List1->addItem(liste3.at(i));
 
     ui->Edit_UV_Group->setEnabled(true);
 }
@@ -427,7 +438,8 @@ void MainWindow::DeleteUV()
 
 void MainWindow::SaveUV()
 {
-    //récupérer UV dans UVManager
+
+    //récupérer l'UVManager
     UVManager* UVManage = UVManager::getInstance();
     //Edition ou Sauvegarde
     UVManage->addUV(ui->Edit_UV_Code->text(),ui->Edit_UV_Titre->text(),ui->Edit_UV_Printemps->isChecked(),ui->Edit_UV_Automne->isChecked(),ui->Edit_UV_DemiUV->isChecked());
@@ -435,6 +447,13 @@ void MainWindow::SaveUV()
     UVManage->editUVCategorie(ui->Edit_UV_Code->text(),TM,ui->Edit_UV_TM->value());
     UVManage->editUVCategorie(ui->Edit_UV_Code->text(),TSH,ui->Edit_UV_TSH->value());
     UVManage->editUVCategorie(ui->Edit_UV_Code->text(),SP,ui->Edit_UV_SP->value());
+    UVManage->removeAllUVCursus(ui->Edit_UV_Code->text());
+    while (ui->Edit_UV_List2->count () > 0)
+    {
+        QListWidgetItem* item = ui->Edit_UV_List2->item(0);
+        UVManage->addUVCursus(ui->Edit_UV_Code->text(),item->text());
+        delete ui->Edit_UV_List2->takeItem(0);
+    }
     //mise à jour du fichier
     UVManage->addUV_fichier(ui->Edit_UV_Code->text());
     //information de succès
@@ -450,7 +469,7 @@ void MainWindow::PrintUV()
     ui->Edit_UV_Group->setEnabled(false);
     QString code_seek = ui->Seek_UV_Code->text();
     UVManager* UVManage = UVManager::getInstance();
-    while (ui->Print_UV_List->count () > 0) delete ui->Print_UV_List->takeItem (0);
+    while (ui->Print_UV_List->count () > 0) ui->Print_UV_List->takeItem (0);
     QStringList list = UVManage->listerUV();
     list.sort();
     QStringList listnew;

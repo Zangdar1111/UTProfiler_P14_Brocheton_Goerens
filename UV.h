@@ -39,6 +39,7 @@ public:
 
     void editUV(QString t, bool p, bool a, bool d); //Permet d'éditer une UV existante
     void ajouterCursus(QString &c); //Permet d'ajouter un Cursus à une UV
+    void deleteAllCursus(); //Permet de supprimer tous les Cursus d'une UV
     void addCreditsCat(Categorie cat, int cred) {Credits_Categorie[cat]=cred;} //Ajouter des Crédits à une Catégorie
     QString getCursus(unsigned int i) const {return Tab_Cursus.value(i);} //Obtenir un Cursus de la liste des Cursus
 

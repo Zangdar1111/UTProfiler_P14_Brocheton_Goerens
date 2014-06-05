@@ -40,3 +40,11 @@ void UV::ajouterCursus(QString &c){
     else
         Tab_Cursus.append(c);
 }
+
+/* Permet de supprimer tous les cursus d'une UV
+ * Argument : Aucuns
+ */
+void UV::deleteAllCursus(){
+    while(Tab_Cursus.size()>0)
+        Tab_Cursus.removeFirst();
+}

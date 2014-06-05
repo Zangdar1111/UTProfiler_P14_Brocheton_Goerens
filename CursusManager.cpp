@@ -211,6 +211,7 @@ void CursusManager::load()
 
                 addCursusSecondaire(code,titre,resp,filiere.toInt());
 
+
                 for (int i=0;i<tabuv.size();i++)
                 {
                     addListToCursusSecondaire(code,tabavalider.at(i).toInt());

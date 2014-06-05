@@ -84,6 +84,17 @@ void UVManager::addUVCursus(QString c, QString cur){
     }
 }
 
+/* Permet de retirer tous les Cursus d'une UV par le UVManager
+ * Arguments : le code de l'UV (chaine de caractères)
+ */
+void UVManager::removeAllUVCursus(QString c)
+{
+    UV* findUV=getUV(c);
+    if(findUV!=NULL){
+        findUV->deleteAllCursus();
+    }
+}
+
 int UVManager::check_integrity()
 {
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/uv.txt");
@@ -139,6 +150,11 @@ void UVManager::load()
             editUVCategorie(code,TM,tCredits_Categorie.at(1).toInt());
             editUVCategorie(code,TSH,tCredits_Categorie.at(2).toInt());
             editUVCategorie(code,SP,tCredits_Categorie.at(3).toInt());
+            if(tTab_Cursus.at(0)!="")
+            {
+            for(int i=0;i<tTab_Cursus.size();i++)
+                addUVCursus(code,tTab_Cursus.at(i));
+            }
         }
     }
 }
@@ -193,9 +209,21 @@ void UVManager::addUV_fichier(QString c)
         {
             ind=tout.size();
         }
+
         tout.insert(ind,"#");
         tout.insert(ind,QString::number(uv->getDemiUV()));
-        tout.insert(ind,"GI");
+        QString cursus;
+        QStringList tabCursus = getTabCursus(uv->getCode());
+            for(int i=0;i<tabCursus.size();i++)
+            {
+                if (i==tabCursus.size()-1)
+                    cursus+=tabCursus.at(i);
+                else
+                cursus+=tabCursus.at(i)+",";
+            }
+        tout.insert(ind,cursus);
+
+
         tout.insert(ind,QString::number(uv->getCreditsCat(CS))+","+QString::number(uv->getCreditsCat(TM))+","+QString::number(uv->getCreditsCat(TSH))+","+QString::number(uv->getCreditsCat(SP)));
         tout.insert(ind,QString::number(uv->getPresentPrintemps())+","+QString::number(uv->getPresentAutomne()));
         tout.insert(ind,uv->getTitre());
