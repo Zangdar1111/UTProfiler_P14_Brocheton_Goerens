@@ -1,14 +1,28 @@
 #Principal#
-code
-titre
-resp
-total,cs,tm,cstm,tsh,sp
-branche
+TC
+Tron Commun
+MachinTrucMuche
+320,8,9,21,5,60
+0
+#
+GI
+Genie Informatique
+MachinTruc
+160,18,19,29,25,60
+1
+#
 #Secondaire#
-code
-titre
-resp
-uv,uv,uv,uv,uv;uv,uv,uv;uv,uv,uv
-a valid,a valid,a valid
-taille tab
-filiere
+SRI
+Système Reseaux Informatique
+BiduleQuonSaitPasQui
+LO21,NF17
+2
+1
+#
+TCN
+Truc de Con Numérique
+MachinChose
+LO21,NF17
+2
+1
+#

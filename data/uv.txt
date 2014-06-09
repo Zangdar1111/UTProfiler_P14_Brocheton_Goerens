@@ -9,6 +9,13 @@ NF17
 LOL
 1,0
 4,6,0,0
+Mineur,SRI,GI
+0
+#
+SY14
 
+0,0
+0,0,0,0
+SRI,Mineur,GI
 0
 #

@@ -31,7 +31,7 @@ public :
     //Mutateur
     void setNbUVsforList(unsigned int nb, unsigned int i);
 
-    int creerList(unsigned int nb); //Créé une liste d'UV
+    int creerList(unsigned int nb); //Crée une liste d'UV
     void addUVtoList(QString code, unsigned int i); //Ajoute une UV à une liste d'UVs
 
     //Teste l'éxistance d'une liste

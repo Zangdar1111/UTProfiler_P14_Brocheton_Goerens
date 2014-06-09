@@ -22,7 +22,14 @@ LO21,NF17
 TCN
 Truc de Con Numérique
 MachinChose
-LO21,NF17;SY14,LO21,NF17;LO21,NF17
-1,2,3
-0
+LO21,NF17
+2
+1
+#
+fil
+dswfxg
+dfg
+LO21
+1
+1
 #

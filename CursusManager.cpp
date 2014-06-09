@@ -288,8 +288,13 @@ void CursusManager::addCursus_fichier(QString c)
         }
         else
         {
-            ind=tout.size();
+            if(curs->isPrincipal())
+                ind=tout.indexOf("#Secondaire#");
+            else
+                ind=tout.size();
         }
+        cout<<tout.indexOf("#Secondaire#")<<endl;
+        cout<<tout.indexOf("SRI")<<endl;
         tout.insert(ind,"#");
         if (getCursus(c)->isPrincipal())
         {
@@ -305,9 +310,33 @@ void CursusManager::addCursus_fichier(QString c)
         else
         {
             CursusSecondaire* curs2 = dynamic_cast<CursusSecondaire*>(curs);
-            tout.insert(ind,"#");
-            tout.insert(ind,"#");
-            tout.insert(ind,"#");
+            curs2->afficher();
+            unsigned int ttab = curs2->getTailleTab();
+            QString nbuv,uvs;
+            QStringList listeuv;
+            for (unsigned int i=0;i<ttab;i++)
+            {
+                 nbuv+=QString::number(curs2->getNbUVAValiderfromList(i));
+                 if (i<ttab-1)
+                     nbuv+=",";
+
+                 listeuv=curs2->getList(i);
+                 for (unsigned int j=0;j<listeuv.size();j++)
+                 {
+                     uvs+=listeuv.at(j);
+                     if (j<listeuv.size()-1)
+                         uvs+=",";
+                     else
+                     {
+                         if(i<ttab-1)
+                            uvs+=";";
+                     }
+                 }
+            }
+
+            tout.insert(ind,QString::number(curs2->isWhat1()));
+            tout.insert(ind,nbuv);
+            tout.insert(ind,uvs);
         }
         tout.insert(ind,curs->getResp());
         tout.insert(ind,curs->getTitre());

@@ -285,7 +285,19 @@ void MainWindow::EditCursus(QListWidgetItem *item)
 
 void MainWindow::DeleteCursus()
 {
-
+    int reponse = QMessageBox::question(this, "Supprimer le Cursus "+ui->Edit_Cursus_Code->text(), "Etes vous sûr de vouloir supprimer ce Cursus ?", QMessageBox::Yes | QMessageBox::No);
+        if (reponse == QMessageBox::Yes)
+        {
+            //récupérer UV dans CursusManager
+            CursusManager* CursusManage = CursusManager::getInstance();
+            //supprimer l'UV du fichier
+            CursusManage->deleteCursus_fichier(ui->Edit_Cursus_Code->text());
+            //supprimer l'UV de UVManager et elle même
+            CursusManage->deleteCursus(ui->Edit_Cursus_Code->text());
+            ui->Edit_Cursus_Group->setEnabled(false);
+            PrintCursus();
+            ResetCursus();
+        }
 }
 
 void MainWindow::SaveCursus()
@@ -293,7 +305,16 @@ void MainWindow::SaveCursus()
     //récupérer UV dans UVManager
     CursusManager* CursusManage = CursusManager::getInstance();
     //Edition ou Sauvegarde
-    if (CursusManage->getCursus(ui->Edit_Cursus_Code->text())->isPrincipal())
+    int quel=0;
+    if (CursusManage->getCursus(ui->Edit_Cursus_Code->text())==NULL)
+    {
+        if(ui->Edit_Cursus_Prepa->isChecked() ||  ui->Edit_Cursus_Branche->isChecked())
+            quel=1;
+    }
+    else if (CursusManage->getCursus(ui->Edit_Cursus_Code->text())->isPrincipal())
+        quel=1;
+
+    if (quel==1)
     {
         CursusManage->addCursusPrincipal(
             ui->Edit_Cursus_Code->text(),
@@ -316,7 +337,46 @@ void MainWindow::SaveCursus()
             ui->Edit_Cursus_Resp->text(),
             ui->Edit_Cursus_Filiere->isChecked()
             );
+        Cursus* curs = CursusManage->getCursus(ui->Edit_Cursus_Code->text());
+        CursusSecondaire* curs2 = dynamic_cast<CursusSecondaire*>(curs);
+        unsigned int ttab = curs2->getTailleTab();
+        for (unsigned int i=0;i<ttab;i++)
+        {
+            curs2->removeList(i);
+            curs2->setNbUVsforList(0,i);
+        }
 
+        if (ui->Edit_Cursus_List1->count () > 0)
+        {cout<<"B";
+            curs2->creerList(ui->Edit_Cursus_AValider1->value());
+
+            while (ui->Edit_Cursus_List1->count () > 0)
+            {
+                QListWidgetItem* item = ui->Edit_Cursus_List1->item(0);
+                curs2->addUVtoList(item->text(),0);
+                delete ui->Edit_Cursus_List1->takeItem(0);
+            }
+        }
+        if (ui->Edit_Cursus_List2->count () > 0)
+        {
+            curs2->creerList(ui->Edit_Cursus_AValider2->value());
+            while (ui->Edit_Cursus_List2->count () > 0)
+            {
+                QListWidgetItem* item = ui->Edit_Cursus_List2->item(0);
+                curs2->addUVtoList(item->text(),1);
+                delete ui->Edit_Cursus_List2->takeItem(0);
+            }
+        }
+        if (ui->Edit_Cursus_List3->count () > 0)
+        {
+            curs2->creerList(ui->Edit_Cursus_AValider3->value());
+            while (ui->Edit_Cursus_List3->count () > 0)
+            {
+                QListWidgetItem* item = ui->Edit_Cursus_List3->item(0);
+                curs2->addUVtoList(item->text(),2);
+                delete ui->Edit_Cursus_List3->takeItem(0);
+            }
+        }
     }
 
     //mise à jour du fichier
@@ -334,6 +394,12 @@ void MainWindow::cursus_diff()
     {
         ui->Edit_Cursus_GroupCredits->setEnabled(true);
         ui->Edit_Cursus_GroupUV->setEnabled(false);
+        while (ui->Edit_Cursus_List2->count () > 0) delete ui->Edit_Cursus_List1->takeItem (0);
+        while (ui->Edit_Cursus_List2->count () > 0) delete ui->Edit_Cursus_List2->takeItem (0);
+        while (ui->Edit_Cursus_List3->count () > 0) delete ui->Edit_Cursus_List3->takeItem (0);
+        ui->Edit_Cursus_AValider1->setValue(0);
+        ui->Edit_Cursus_AValider2->setValue(0);
+        ui->Edit_Cursus_AValider3->setValue(0);
     }
     else if (ui->Edit_Cursus_Mineur->isChecked())
     {
@@ -343,6 +409,12 @@ void MainWindow::cursus_diff()
         ui->Edit_Cursus_List3->setEnabled(true);
         ui->Edit_Cursus_AValider2->setEnabled(true);
         ui->Edit_Cursus_AValider3->setEnabled(true);
+        ui->Edit_Cursus_CS->setValue(0);
+        ui->Edit_Cursus_TM->setValue(0);
+        ui->Edit_Cursus_TSH->setValue(0);
+        ui->Edit_Cursus_SP->setValue(0);
+        ui->Edit_Cursus_CSTM->setValue(0);
+        ui->Edit_Cursus_Total->setValue(0);
     }
     else if (ui->Edit_Cursus_Filiere->isChecked())
     {
@@ -352,6 +424,16 @@ void MainWindow::cursus_diff()
         ui->Edit_Cursus_List3->setEnabled(false);
         ui->Edit_Cursus_AValider2->setEnabled(false);
         ui->Edit_Cursus_AValider3->setEnabled(false);
+        while (ui->Edit_Cursus_List2->count () > 0) delete ui->Edit_Cursus_List2->takeItem (0);
+        while (ui->Edit_Cursus_List3->count () > 0) delete ui->Edit_Cursus_List3->takeItem (0);
+        ui->Edit_Cursus_AValider2->setValue(0);
+        ui->Edit_Cursus_AValider3->setValue(0);
+        ui->Edit_Cursus_CS->setValue(0);
+        ui->Edit_Cursus_TM->setValue(0);
+        ui->Edit_Cursus_TSH->setValue(0);
+        ui->Edit_Cursus_SP->setValue(0);
+        ui->Edit_Cursus_CSTM->setValue(0);
+        ui->Edit_Cursus_Total->setValue(0);
     }
 }
 
