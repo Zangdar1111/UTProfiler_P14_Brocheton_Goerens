@@ -129,3 +129,31 @@ QStringList DossierManager::getMineur(QString login) const{
     else
         return QStringList();
 }
+
+void DossierManager::addParcours(QString login, InscriptionPassee& pass){
+    Dossier* findDossier=getDossier(login);
+    if(findDossier!=NULL)
+        findDossier->addParcours(pass);
+}
+
+void DossierManager::addSolution(QString login, Solution& sol){
+    Dossier* findDossier=getDossier(login);
+    if(findDossier!=NULL)
+        findDossier->addSolution(sol);
+}
+
+QList<InscriptionPassee> DossierManager::getAllParcours(QString login) const{
+    Dossier* findDossier=getDossier(login);
+    if(findDossier!=NULL)
+        return findDossier->getListeParcours();
+    else
+        return QList<InscriptionPassee>();
+}
+
+QList<Solution> DossierManager::getAllSolutions(QString login) const{
+    Dossier* findDossier=getDossier(login);
+    if(findDossier!=NULL)
+        return findDossier->getListeSolutions();
+    else
+        return QList<Solution>();
+}

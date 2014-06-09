@@ -49,6 +49,24 @@ QStringList UVManager::getTabCursus(QString c){
     else return QStringList();
 }
 
+unsigned int UVManager::getNbCreditsCategorie(QString c, Categorie cat){
+    UV* findUV=getUV(c);
+    if(findUV!=NULL)
+        return findUV->getCreditsCat(cat);
+    else return 0;
+}
+
+unsigned int UVManager::getNbTotCredits(QString c){
+    UV* findUV=getUV(c);
+    if(findUV!=NULL)
+        return findUV->getCreditsCat(CS)+
+                 findUV->getCreditsCat(TM)+
+                 findUV->getCreditsCat(TSH)+
+                 findUV->getCreditsCat(SP);
+    else return 0;
+}
+
+
 /* Permet de supprimer une UV de l'UVManager
  * Argument : Le code de l'UV (chaine de caractères)
  */

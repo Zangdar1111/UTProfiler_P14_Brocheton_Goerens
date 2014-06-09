@@ -29,9 +29,54 @@ public:
     QString getCursusPrincipal() const {return CursusPpal;}
     unsigned int getTailleTab() const {return tailleTab;}
 
-   // void addUV(QString code) {TabUVs.append(code);}
+    //Récupère le nombre de crédits CS pouvant être validés au maximum
+    unsigned int getNbCreditsCSMax() const{
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], CS);
+        return res;
+    }
 
-    virtual ~Inscription()=0;
+    //Récupère le nombre de crédits TM pouvant être validés au maximum
+    unsigned int getNbCreditsTMMax() const{
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], TM);
+        return res;
+    }
+
+    //Récupère le nombre de crédits TSH pouvant être validés au maximum
+    unsigned int getNbCreditsTSHMax() const{
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], TSH);
+        return res;
+    }
+
+    //Récupère le nombre de crédits SP pouvant être validés au maximum
+    unsigned int getNbCreditsSPMax() const{
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], SP);
+        return res;
+    }
+
+    //Récupère le nombre de crédits Total pouvant être validés au maximum
+    unsigned int getNbCreditsTotMax() const{
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbTotCredits(TabUVs[i]);
+        return res;
+    }
+
+    //Test si l'index fourni est bien dans le tableau d'UVs
+    bool existUV(unsigned int i) const{
+        if(i>getTailleTab())
+            return false;
+        return true;
+    }
+
+    virtual ~Inscription(){}
 };
 
 

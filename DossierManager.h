@@ -26,6 +26,12 @@ public:
     QString getFiliere(QString login) const;
     QStringList getMineur(QString login) const;
 
+    void addParcours(QString login, InscriptionPassee &pass);
+    void addSolution(QString login, Solution& sol);
+    QList<InscriptionPassee> getAllParcours(QString login) const;
+    QList<Solution> getAllSolutions(QString login) const;
+
+
     //Pour toi Thibault ?
     /*
     QStringList listerDossier(); // Permet de lister toutes les Dossier chargées dans l'application

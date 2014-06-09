@@ -35,6 +35,8 @@ HEADERS  += mainwindow.h \
     Dossier.h \
     Inscription.h \
     Semestre.h \
-    InscriptionPassee.h
+    InscriptionPassee.h \
+    InscriptionFuture.h \
+    Solution.h
 
 FORMS    += mainwindow.ui

@@ -29,6 +29,62 @@ public:
             cout<<"Erreur : L'UV demandée n'existe pas (index out of range)\n";
     }
 
+
+    unsigned int getNbCreditsCS() const {
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<getTailleTab(); i++)
+            if(isValidee(i))
+                res+=UVManage->getNbCreditsCategorie(getListUV()[i], CS);
+        return res;
+    }
+
+    unsigned int getNbCreditsTM() const {
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<getTailleTab(); i++)
+            if(isValidee(i))
+                res+=UVManage->getNbCreditsCategorie(getListUV()[i], TM);
+        return res;
+    }
+
+    unsigned int getNbCreditsTSH() const {
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<getTailleTab(); i++)
+            if(isValidee(i))
+                res+=UVManage->getNbCreditsCategorie(getListUV()[i], TSH);
+        return res;
+    }
+
+    unsigned int getNbCreditsSP() const {
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<getTailleTab(); i++)
+            if(isValidee(i))
+                res+=UVManage->getNbCreditsCategorie(getListUV()[i], SP);
+        return res;
+    }
+
+    unsigned int getNbCreditsTot() const {
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<getTailleTab(); i++)
+            if(isValidee(i))
+                res+=UVManage->getNbTotCredits(getListUV()[i]);
+        return res;
+    }
+
+    //Retourne true si l'UV est validée, false sinon
+    bool isValidee(unsigned int i) const{
+        if(existUV(i)){
+            if(Resultat[i]!=FX&&Resultat[i]!=F&&Resultat[i]!=RES&&Resultat[i]!=ABS&&Resultat[i]!=EC)
+                return true;
+        }
+        return false;
+    }
+
+    ~InscriptionPassee(){}
 };
 
 

@@ -28,9 +28,15 @@ using namespace std;
 #include "CursusManager.h"
 #include "CursusPrincipal.h"
 #include "CursusSecondaire.h"
-#include "Dossier.h"
-#include "DossierManager.h"
+
 #include "Semestre.h"
 #include "Inscription.h"
+#include "InscriptionPassee.h"
+#include "InscriptionFuture.h"
+#include "Solution.h"
+#include "Dossier.h"
+#include "DossierManager.h"
+
+
 
 #endif // INCLUDES_H_INCLUDED
