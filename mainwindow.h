@@ -37,11 +37,12 @@ public slots:
     void cursus_diff();
     void poubelle(QListWidgetItem * item);
     //Onglet 3
-    void Print_Prepa();
-    void Print_Branche();
-    void Print_Filiere();
-    void Print_Mineur();
+    void Print_ListeCursus_Dossier();
     void No_Prepa();
+    void PrintDossier();
+    void CreateDossier();
+    void ResetDossier();
+    void EditDossier(QListWidgetItem* item);
     //Onglet 4
 
 private:

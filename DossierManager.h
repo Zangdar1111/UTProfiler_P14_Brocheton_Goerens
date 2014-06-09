@@ -33,8 +33,9 @@ public:
 
 
     //Pour toi Thibault ?
-    /*
+
     QStringList listerDossier(); // Permet de lister toutes les Dossier chargées dans l'application
+    /*
     void load(); //Charge les Dossiers depuis un fichier
     void deleteDossier_fichier(QString c); //Supprime une Dossier du fichier de saDossieregarde
     void addDossier_fichier(QString c); //Ajoute une Dossier au fichier de saDossieregarde

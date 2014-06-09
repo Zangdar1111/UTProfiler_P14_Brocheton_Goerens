@@ -157,3 +157,13 @@ QList<Solution> DossierManager::getAllSolutions(QString login) const{
     else
         return QList<Solution>();
 }
+
+QStringList DossierManager::listerDossier()
+{
+    QStringList list;
+    for(map<QString, Dossier*>::iterator it=TabDossier.begin() ; it!=TabDossier.end() ; ++it)
+    {
+        list.append(it->first); // accede à la clé
+    }
+    return list;
+}
