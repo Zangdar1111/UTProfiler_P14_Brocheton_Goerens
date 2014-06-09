@@ -38,11 +38,19 @@ public slots:
     void poubelle(QListWidgetItem * item);
     //Onglet 3
     void Print_ListeCursus_Dossier();
-    void No_Prepa();
     void PrintDossier();
     void CreateDossier();
     void ResetDossier();
     void EditDossier(QListWidgetItem* item);
+    void EtapeSemestre();
+    void ResetCurrent();
+    void EditDossierPrepa(QListWidgetItem *);
+    void EditDossierBranche(QListWidgetItem *);
+    void EditDossierFiliere(QListWidgetItem *);
+    void EditDossierMineur(QListWidgetItem *);
+    void DossierPrintUV();
+    void ChangeNote(QListWidgetItem *);
+    //void EditDossierMineurDel(QListWidgetItem *);
     //Onglet 4
 
 private:

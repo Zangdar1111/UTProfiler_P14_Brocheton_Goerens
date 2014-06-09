@@ -33,9 +33,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->Edit_Cursus_List3, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
     //Onglet 3
     QObject::connect(ui->Create_Dossier, SIGNAL(clicked()), this, SLOT(CreateDossier()));
-    QObject::connect(ui->Edit_Dossier_No_Prepa,SIGNAL(clicked()),this,SLOT(No_Prepa()));
     QObject::connect(ui->Seek_Dossier_Submit, SIGNAL(clicked()), this, SLOT(PrintDossier()));
     QObject::connect(ui->Print_Dossier_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditDossier(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_Prepa, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(EditDossierPrepa(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_Branche, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(EditDossierBranche(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_Filiere, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(EditDossierFiliere(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_Mineur, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(EditDossierMineur(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_Current_Valider, SIGNAL(clicked()), this, SLOT(EtapeSemestre()));
+    QObject::connect(ui->Edit_Dossier_Current_Reset, SIGNAL(clicked()), this, SLOT(ResetCurrent()));
+    QObject::connect(ui->Edit_Dossier_UV_Seek, SIGNAL(clicked()), this, SLOT(DossierPrintUV()));
+    QObject::connect(ui->Edit_Dossier_Semestre1_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_Semestre1_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNote(QListWidgetItem *)));
+
     //Onglet 4
 
 
@@ -46,20 +55,195 @@ MainWindow::MainWindow(QWidget *parent) :
     PrintDossier();
 }
 
+void MainWindow::ChangeNote(QListWidgetItem* item)
+{
+    QString ancien = item->text(),New;
+    if(ancien=="")
+        New="EC";
+    else if(ancien=="EC")
+        New="A";
+    else if(ancien=="A")
+        New="B";
+    else if(ancien=="B")
+        New="C";
+    else if(ancien=="C")
+        New="D";
+    else if(ancien=="D")
+        New="E";
+    else if(ancien=="E")
+        New="F";
+    else if(ancien=="F")
+        New="FX";
+    else if(ancien=="FX")
+        New="RES";
+    else if(ancien=="RES")
+        New="ABS";
+    else if(ancien=="ABS")
+        New="";
+
+    item->setText(New);
+}
+
+void MainWindow::DossierPrintUV()
+{
+    QString code_seek = ui->Edit_Dossier_UV_Code->text();
+    UVManager* UVManage = UVManager::getInstance();
+    while (ui->Edit_Dossier_UV_List->count () > 0) ui->Edit_Dossier_UV_List->takeItem (0);
+    QStringList list = UVManage->listerUV();
+    list.sort();
+    QStringList listnew;
+    if (!ui->Edit_Dossier_UV_CS->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (UVManage->getUV(*it)->getCreditsCat(CS)==0)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (!ui->Edit_Dossier_UV_TM->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (UVManage->getUV(*it)->getCreditsCat(TM)==0)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (!ui->Edit_Dossier_UV_TSH->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (UVManage->getUV(*it)->getCreditsCat(TSH)==0)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (!ui->Edit_Dossier_UV_SP->isChecked())
+    {
+        for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
+        {
+            if (UVManage->getUV(*it)->getCreditsCat(SP)==0)
+              listnew.append(*it);
+        }
+        list=listnew;
+        listnew.clear();
+    }
+    if (list.contains(code_seek))
+    {
+        ui->Edit_Dossier_UV_List->addItem(code_seek);
+    }
+    else
+    {
+        QStringList list2 = list.filter(code_seek);
+        for(QList<QString>::iterator it=list2.begin() ; it!=list2.end() ; ++it)
+            ui->Edit_Dossier_UV_List->addItem(*it);
+    }
+}
+
+void MainWindow::EditDossierPrepa(QListWidgetItem *item)
+{
+    ui->Edit_Dossier_Current_Prepa->setText(item->text());
+}
+
+void MainWindow::EditDossierBranche(QListWidgetItem *item)
+{
+    ui->Edit_Dossier_Current_Branche->setText(item->text());
+}
+
+void MainWindow::EditDossierFiliere(QListWidgetItem *item)
+{
+    ui->Edit_Dossier_Current_Filiere->setText(item->text());
+}
+
+void MainWindow::EditDossierMineur(QListWidgetItem *item)
+{
+    QString min = ui->Edit_Dossier_Current_Mineur->text();
+    QStringList mineur = min.split(",");
+    if (mineur.contains(item->text()))
+    {}
+    else
+    {
+        if(min!="")
+            min+=",";
+        min+=item->text();
+        ui->Edit_Dossier_Current_Mineur->setText(min);
+    }
+}
+
+void MainWindow::EtapeSemestre()
+{
+    ui->Edit_Dossier_Semestre_Group->setEnabled(true);
+    ui->Edit_Dossier_Cursus_Group->setEnabled(false);
+    ui->Edit_Dossier_InfosBase_Group->setEnabled(false);
+    ui->Edit_Dossier_Anglais->setEnabled(false);
+    ui->Edit_Dossier_Current_Frame->setEnabled(false);
+    ui->Edit_Dossier_Current_Valider->setEnabled(false);
+    ui->Edit_Dossier_Current_Reset->setText("Retour");
+}
+
+void MainWindow::ResetCurrent()
+{
+    if(ui->Edit_Dossier_Current_Valider->isEnabled()==true)
+    {
+        ui->Edit_Dossier_Semestre_Group->setEnabled(false);
+        ui->Edit_Dossier_Infos_Group->setEnabled(true);
+        ui->Edit_Dossier_Current_Prepa->setText("");
+        ui->Edit_Dossier_Current_Branche->setText("");
+        ui->Edit_Dossier_Current_Filiere->setText("");
+        ui->Edit_Dossier_Current_Mineur->setText("");
+    }
+    else
+    {
+        ui->Edit_Dossier_Semestre_Group->setEnabled(false);
+        ui->Edit_Dossier_Cursus_Group->setEnabled(true);
+        ui->Edit_Dossier_InfosBase_Group->setEnabled(true);
+        ui->Edit_Dossier_Anglais->setEnabled(true);
+        ui->Edit_Dossier_Current_Frame->setEnabled(true);
+        ui->Edit_Dossier_Current_Valider->setEnabled(true);
+        ui->Edit_Dossier_Current_Reset->setText("Reset");
+    }
+}
+
 void MainWindow::EditDossier(QListWidgetItem* item)
 {
     ResetDossier();
-    Print_ListeCursus_Dossier();
+    ui->Edit_Dossier_Group->setEnabled(true);
     QString login = item->text();
     DossierManager* DossierManage = DossierManager::getInstance();
     Dossier* dossier = DossierManage->getDossier(login);
     ui->Edit_Dossier_Login->setText(login);
+    ui->Edit_Dossier_NomPrenom->setText(dossier->getNomPrenom());
+    if(dossier->getNiveauLangue()==1) ui->Edit_Dossier_Anglais1->setChecked(true);
+    if(dossier->getNiveauLangue()==2) ui->Edit_Dossier_Anglais2->setChecked(true);
+    if(dossier->getNiveauLangue()==3) ui->Edit_Dossier_Anglais3->setChecked(true);
+    if(dossier->getNiveauLangue()==4) ui->Edit_Dossier_Anglais4->setChecked(true);
+    if(dossier->getNiveauLangue()==5) ui->Edit_Dossier_Anglais5->setChecked(true);
+    if(dossier->getNiveauLangue()==6) ui->Edit_Dossier_Anglais6->setChecked(true);
+    Print_ListeCursus_Dossier();
+    if (!dossier->getMineur().empty())
+    {
+        QStringList mineur= dossier->getMineur();
+        QString listemineur;
+        for(int i=0;i<mineur.size();i++)
+        {
+            listemineur+=mineur.at(i);
+            if(i<mineur.size()-1)
+                listemineur+=",";
+        }
+        ui->Edit_Dossier_Current_Prepa->setText(listemineur);
+    }
+    if (dossier->getPrepa()!=NULL) ui->Edit_Dossier_Current_Prepa->setText(dossier->getPrepa());
+    if (dossier->getBranche()!=NULL) ui->Edit_Dossier_Current_Branche->setText(dossier->getBranche());
+    if (dossier->getFiliere()!=NULL) ui->Edit_Dossier_Current_Filiere->setText(dossier->getFiliere());
 }
 
 void MainWindow::ResetDossier()
 {
     ui->Edit_Dossier_Login->setText("");
-    ui->Edit_Dossier_No_Prepa->setChecked(false);
     while (ui->Edit_Dossier_Prepa->count () > 0) ui->Edit_Dossier_Prepa->takeItem (0);
     while (ui->Edit_Dossier_Branche->count () > 0) ui->Edit_Dossier_Branche->takeItem (0);
     while (ui->Edit_Dossier_Filiere->count () > 0) ui->Edit_Dossier_Filiere->takeItem (0);
@@ -94,15 +278,6 @@ void MainWindow::PrintDossier()
     }
 }
 
-
-
-void MainWindow::No_Prepa()
-{
-    if (ui->Edit_Dossier_No_Prepa->isChecked()==true)
-        ui->Edit_Dossier_Prepa->setEnabled(false);
-    else
-        ui->Edit_Dossier_Prepa->setEnabled(true);
-}
 
 void MainWindow::Print_ListeCursus_Dossier()
 {
@@ -311,6 +486,13 @@ void MainWindow::EditCursus(QListWidgetItem *item)
             ui->Edit_Cursus_AValider3->setValue(curs2->getNbUVAValiderfromList(2));
         }
     }
+    if (item->text()=="EXT")
+    {
+        ui->Delete_Cursus->setEnabled(false);
+        ui->Edit_Cursus_Branche->setEnabled(false);
+        ui->Edit_Cursus_Filiere->setEnabled(false);
+        ui->Edit_Cursus_Mineur->setEnabled(false);
+    }
     ui->Edit_Cursus_Group->setEnabled(true);
 }
 
@@ -371,14 +553,14 @@ void MainWindow::SaveCursus()
         Cursus* curs = CursusManage->getCursus(ui->Edit_Cursus_Code->text());
         CursusSecondaire* curs2 = dynamic_cast<CursusSecondaire*>(curs);
         unsigned int ttab = curs2->getTailleTab();
-        for (unsigned int i=0;i<ttab;i++)
+        for (unsigned int i=ttab-1;i>-1;i--)
         {
             curs2->removeList(i);
             curs2->setNbUVsforList(0,i);
         }
 
         if (ui->Edit_Cursus_List1->count () > 0)
-        {cout<<"B";
+        {
             curs2->creerList(ui->Edit_Cursus_AValider1->value());
 
             while (ui->Edit_Cursus_List1->count () > 0)
