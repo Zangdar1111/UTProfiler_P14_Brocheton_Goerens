@@ -321,7 +321,7 @@ void CursusManager::addCursus_fichier(QString c)
                      nbuv+=",";
 
                  listeuv=curs2->getList(i);
-                 for (unsigned int j=0;j<listeuv.size();j++)
+                 for (int j=0;j<listeuv.size();j++)
                  {
                      uvs+=listeuv.at(j);
                      if (j<listeuv.size()-1)

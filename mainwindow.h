@@ -19,6 +19,7 @@ public:
 public slots:
     //Menu
     void quit();
+    void poubelle(QListWidgetItem * item);
     //Onglet 1
     void PrintUV();
     void CreateUV();
@@ -35,7 +36,6 @@ public slots:
     void SaveCursus();
     void addUV_Cursus();
     void cursus_diff();
-    void poubelle(QListWidgetItem * item);
     //Onglet 3
     void Print_ListeCursus_Dossier();
     void PrintDossier();
@@ -50,7 +50,19 @@ public slots:
     void EditDossierMineur(QListWidgetItem *);
     void DossierPrintUV();
     void ChangeNote(QListWidgetItem *);
-    //void EditDossierMineurDel(QListWidgetItem *);
+    void ChangeNoteS1(QListWidgetItem *);
+    void ChangeNoteS2(QListWidgetItem *);
+    void ChangeNoteS3(QListWidgetItem *);
+    void ChangeNoteS4(QListWidgetItem *);
+    void ChangeNoteS5(QListWidgetItem *);
+    void ChangeNoteS6(QListWidgetItem *);
+    void poubelleS1(QListWidgetItem*);
+    void poubelleS2(QListWidgetItem*);
+    void poubelleS3(QListWidgetItem*);
+    void poubelleS4(QListWidgetItem*);
+    void poubelleS5(QListWidgetItem*);
+    void poubelleS6(QListWidgetItem*);
+    void VerifierCurrentCursus();
     //Onglet 4
 
 private:

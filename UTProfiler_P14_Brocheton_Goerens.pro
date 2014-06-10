@@ -19,7 +19,11 @@ SOURCES += main.cpp\
     CursusManager.cpp \
     CursusSecondaire.cpp \
     CursusPrincipal.cpp \
-    DossierManager.cpp
+    DossierManager.cpp \
+    Onglet1.cpp \
+    Onglet2.cpp \
+    Onglet3.cpp \
+    Onglet4.cpp
 
 HEADERS  += mainwindow.h \
     Cursus.h \

@@ -73,10 +73,12 @@ int main(int argc, char *argv[])
 
     return a.exec();
     atexit(fin);
-
+    return 0;
 }
+
 void fin()
 {
     UVManager::kill();
     CursusManager::kill();
+    DossierManager::kill();
 }
