@@ -167,3 +167,74 @@ QStringList DossierManager::listerDossier()
     }
     return list;
 }
+
+void DossierManager::load()
+{
+    /*
+    QFile liste_dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/liste.txt");
+    if(liste_dossier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux_liste(&liste_dossier);
+        QStringList liste_login;
+        while(! flux_liste.atEnd())
+        {
+            liste_login.append(flux_liste.readLine());
+        }
+        for(int i=0;i<liste_login.size();i++)
+        {
+            QFile dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+liste_login.at(i)+".txt");
+            if(dossier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+            {
+                QTextStream flux(&liste_dossier);
+                QString login = flux.readLine();
+                QString NomPrenom = flux.readLine();
+                int anglais = QString::number(flux.readLine());
+                QString Prepa = flux.readLine();
+                QString Branche = flux.readLine();
+                QString Filiere = flux.readLine();
+                QString Mineurs = flux.readLine();
+                QStringList liste_mineur = Mineurs.split(",");
+
+                addDossier(login,NomPrenom,anglais);
+                setPrepa(login,Prepa);
+                setBranche(login,Branche);
+                setFiliere(login,Filiere);
+                for (i=0;i<liste_mineur.size();i++)
+                    addMineur(liste_mineur.at(i));
+
+                while(! flux.atEnd())
+                {
+                    flux.readLine();
+                    QString saison = flux.readLine();
+                    if(saison=="Automne")
+                        Saison sais=Automne;
+                    else
+                        Saison sais=Printemps;
+                    unsigned int annee = flux.readLine.toInt()
+                    Semestre sem = new Semestre(sais,annee);
+                    QString cursus = flux.readLine();
+                    InscriptionPassee IP = new InscriptionPassee(sem,cursus);
+                    QString uvs = flux.readLine();
+                    QStringList uvs_liste = uvs.split(",");
+                    QString notes = flux.readLine();
+                    QStringList notes_liste = notes.split(",");
+                    for(int i=0;i<uvs_liste.size();i++)
+                    {
+                        IP.
+                        IP.setResultat(i,notes_liste.at(i));
+                    }
+                }
+            }
+        }
+    }*/
+}
+
+
+
+
+void DossierManager::deleteDossier_fichier(QString c)
+{
+
+
+
+}

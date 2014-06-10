@@ -53,6 +53,26 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent), ui(new Ui::MainWin
     QObject::connect(ui->Edit_Dossier_Semestre5_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteS5(QListWidgetItem *)));
     QObject::connect(ui->Edit_Dossier_Semestre6_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleS6(QListWidgetItem *)));
     QObject::connect(ui->Edit_Dossier_Semestre6_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteS6(QListWidgetItem *)));
+
+    QObject::connect(ui->Edit_Dossier_SemestreB1_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB1(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB1_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB1(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB2_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB2(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB2_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB2(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB3_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB3(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB3_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB3(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB4_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB4(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB4_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB4(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB5_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB5(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB5_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB5(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB6_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB6(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB6_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB6(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB7_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB7(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB7_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB7(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB8_UV, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelleB8(QListWidgetItem *)));
+    QObject::connect(ui->Edit_Dossier_SemestreB8_Notes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(ChangeNoteB8(QListWidgetItem *)));
+
+    QObject::connect(ui->Edit_Dossier_Save, SIGNAL(clicked()), this, SLOT(SaveDossier()));
+    QObject::connect(ui->Edit_Dossier_Delete, SIGNAL(clicked()), this, SLOT(DeleteDossier()));
     //Onglet 4
 
 

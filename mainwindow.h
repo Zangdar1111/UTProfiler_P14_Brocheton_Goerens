@@ -63,6 +63,24 @@ public slots:
     void poubelleS5(QListWidgetItem*);
     void poubelleS6(QListWidgetItem*);
     void VerifierCurrentCursus();
+    void SaveDossier();
+    void DeleteDossier();
+    void poubelleB1(QListWidgetItem*);
+    void poubelleB2(QListWidgetItem*);
+    void poubelleB3(QListWidgetItem*);
+    void poubelleB4(QListWidgetItem*);
+    void poubelleB5(QListWidgetItem*);
+    void poubelleB6(QListWidgetItem*);
+    void poubelleB7(QListWidgetItem*);
+    void poubelleB8(QListWidgetItem*);
+    void ChangeNoteB1(QListWidgetItem *);
+    void ChangeNoteB2(QListWidgetItem *);
+    void ChangeNoteB3(QListWidgetItem *);
+    void ChangeNoteB4(QListWidgetItem *);
+    void ChangeNoteB5(QListWidgetItem *);
+    void ChangeNoteB6(QListWidgetItem *);
+    void ChangeNoteB7(QListWidgetItem *);
+    void ChangeNoteB8(QListWidgetItem *);
     //Onglet 4
 
 private:

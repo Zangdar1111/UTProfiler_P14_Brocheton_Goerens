@@ -49,6 +49,75 @@ void MainWindow::poubelleS6(QListWidgetItem* item)
     delete item;
 }
 
+void MainWindow::poubelleB1(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB1_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB1_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB1_Notes->addItem("");
+    delete item;
+}
+
+void MainWindow::poubelleB2(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB2_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB2_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB2_Notes->addItem("");
+    delete item;
+}
+
+void MainWindow::poubelleB3(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB3_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB3_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB3_Notes->addItem("");
+    delete item;
+}
+
+void MainWindow::poubelleB4(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB4_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB4_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB4_Notes->addItem("");
+    delete item;
+}
+
+void MainWindow::poubelleB5(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB5_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB5_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB5_Notes->addItem("");
+    delete item;
+}
+
+void MainWindow::poubelleB6(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB6_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB6_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB6_Notes->addItem("");
+    delete item;
+}
+
+void MainWindow::poubelleB7(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB7_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB7_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB7_Notes->addItem("");
+    delete item;
+}
+
+void MainWindow::poubelleB8(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB8_UV->currentRow();
+    delete ui->Edit_Dossier_SemestreB8_Notes->takeItem(ind);
+    ui->Edit_Dossier_SemestreB8_Notes->addItem("");
+    delete item;
+}
+
+
+
+
+
+
 void MainWindow::ChangeNote(QListWidgetItem* item)
 {
     QString ancien = item->text(),New;
@@ -126,6 +195,78 @@ void MainWindow::ChangeNoteS6(QListWidgetItem* item)
 {
     int ind = ui->Edit_Dossier_Semestre6_Notes->currentRow();
     if(ui->Edit_Dossier_Semestre6_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB1(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB1_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB1_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB2(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB2_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB2_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB3(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB3_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB3_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB4(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB4_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB4_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB5(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB5_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB5_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB6(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB6_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB6_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB7(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB7_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB7_UV->count()>ind)
+    {
+       ChangeNote(item);
+    }
+}
+
+void MainWindow::ChangeNoteB8(QListWidgetItem* item)
+{
+    int ind = ui->Edit_Dossier_SemestreB8_Notes->currentRow();
+    if(ui->Edit_Dossier_SemestreB8_UV->count()>ind)
     {
        ChangeNote(item);
     }
@@ -238,11 +379,25 @@ void MainWindow::EtapeSemestre()
     {
         ui->Edit_Dossier_SemestrePrepa_Group->setEnabled(true);
         ui->Edit_Dossier_UV_Group->setEnabled(true);
+        ui->Edit_Dossier_Semestre1_Nom->setText(ui->Edit_Dossier_Current_Prepa->text()+"01");
+        ui->Edit_Dossier_Semestre2_Nom->setText(ui->Edit_Dossier_Current_Prepa->text()+"02");
+        ui->Edit_Dossier_Semestre3_Nom->setText(ui->Edit_Dossier_Current_Prepa->text()+"03");
+        ui->Edit_Dossier_Semestre4_Nom->setText(ui->Edit_Dossier_Current_Prepa->text()+"04");
+        ui->Edit_Dossier_Semestre5_Nom->setText(ui->Edit_Dossier_Current_Prepa->text()+"05");
+        ui->Edit_Dossier_Semestre6_Nom->setText(ui->Edit_Dossier_Current_Prepa->text()+"06");
     }
     if (ui->Edit_Dossier_Current_Branche->text()!="")
     {
         ui->Edit_Dossier_SemestreBranche_Group->setEnabled(true);
         ui->Edit_Dossier_UV_Group->setEnabled(true);
+        ui->Edit_Dossier_SemestreB1_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"01");
+        ui->Edit_Dossier_SemestreB2_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"02");
+        ui->Edit_Dossier_SemestreB3_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"03");
+        ui->Edit_Dossier_SemestreB4_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"04");
+        ui->Edit_Dossier_SemestreB5_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"05");
+        ui->Edit_Dossier_SemestreB6_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"06");
+        ui->Edit_Dossier_SemestreB7_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"07");
+        ui->Edit_Dossier_SemestreB8_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"08");
     }
 }
 
@@ -363,6 +518,7 @@ void MainWindow::ResetDossier()
 void MainWindow::CreateDossier()
 {
     ResetDossier();
+    Print_ListeCursus_Dossier();
     ui->Edit_Dossier_Group->setEnabled(true);
     ui->Edit_Dossier_Infos_Group->setEnabled(true);
 }
@@ -440,4 +596,26 @@ void MainWindow::Print_ListeCursus_Dossier()
     list=listnew;
     for(QList<QString>::iterator it=list.begin() ; it!=list.end() ; ++it)
         ui->Edit_Dossier_Prepa->addItem(*it);
+}
+
+
+void MainWindow::SaveDossier()
+{
+
+}
+
+void MainWindow::DeleteDossier()
+{
+    int reponse = QMessageBox::question(this, "Supprimer le dossier "+ui->Edit_Dossier_Login->text(), "Etes vous sûr de vouloir supprimer ce Dossier ?", QMessageBox::Yes | QMessageBox::No);
+        if (reponse == QMessageBox::Yes)
+        {
+            //récupérer UV dans UVManager
+            DossierManager* DossierManage = DossierManager::getInstance();
+            //supprimer l'UV du fichier
+            DossierManage->deleteDossier_fichier(ui->Edit_Dossier_Login->text());
+            //supprimer l'UV de UVManager et elle même
+            DossierManage->deleteDossier(ui->Edit_Dossier_Login->text());
+            PrintDossier();
+            ResetDossier();
+        }
 }
