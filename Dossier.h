@@ -34,6 +34,7 @@ public:
     QStringList getMineur() const {return Cursus_Mineur;}
     QList<InscriptionPassee> getListeParcours() const {return ListeParcours;}
     QList<Solution> getListeSolutions() const {return ListeSolutions;}
+    QStringList getListeUvs() const;
 
     bool PrepaValide() const;
     bool BrancheValide() const;
@@ -51,6 +52,9 @@ public:
 
     bool NiveauLangueValide() const;
     bool estDiplome() const;
+
+    void proposerSolution();
+    void proposerSolutionPrepa();
 
 };
 

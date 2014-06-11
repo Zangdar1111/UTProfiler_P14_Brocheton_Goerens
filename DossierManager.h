@@ -32,7 +32,7 @@ public:
     QList<Solution> getAllSolutions(QString login) const;
 
     bool estDiplome(QString login) const;
-
+    void proposerSolution(QString login);
 
     //Pour toi Thibault ?
 

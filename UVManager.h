@@ -29,6 +29,7 @@ public:
     int check_integrity(); //Vérifie l'intégrité du fichier de sauvegarde
     bool hasCursus(QString c, QString cursus);
 
+    QString getUVfromCatCursus(Categorie cat, QString cursus, QStringList listeUVsPresentes);
 };
 
 #endif // UVMANAGER_H_INCLUDED

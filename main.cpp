@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
     }
     splash.clearMessage();
     splash.showMessage("Chargement des UV", Qt::AlignCenter, Qt::black);
-    UVManage->load();
+    //UVManage->load();
     Sleep(500);
     splash.clearMessage();
     splash.showMessage("Chargement des Cursus", Qt::AlignCenter, Qt::black);
-    CursusManage->load();
+    //CursusManage->load();
     Sleep(500);
 
     MainWindow w;
@@ -66,14 +66,13 @@ int main(int argc, char *argv[])
 
     splash.finish(&w);
 
-    //test_dossier();
-
+    test_dossier();
+/*
     DossierManage->addDossier("tbrochet","Brocheton Thibault",3);
     DossierManage->addDossier("mgoerens","Goerens Matthias",5);
-
+*/
     return a.exec();
     atexit(fin);
-    return 0;
 }
 
 void fin()
@@ -121,7 +120,7 @@ void test_dossier(){
     cout<<"Creation des Cursus\n";
     //Exemple de Création d'un Cursus
     CursusManage->addCursusPrincipal("GI","Génie Informatique", "Philippe Trigano", 50, 6, 6, 12, 8, 30, true);
-    CursusManage->addCursusPrincipal("TC","Tronc Commun", "Obi-Wan Kenobi", 20, 6, 6, 12, 8, 0, false);
+    CursusManage->addCursusPrincipal("TC","Tronc Commun", "Obi-Wan Kenobi", 20, 12, 6, 18, 8, 0, false);
     CursusManage->addCursusSecondaire("SRI", "Systèmes et Réseaux Informatiques", "Darth Vador", true );
 
     cout<<"Ajout de Cursus aux UVs\n";
@@ -205,10 +204,23 @@ void test_dossier(){
     DossierManage->addParcours("someone", *TC01);
     DossierManage->addParcours("someone", *GI01);
 
+    UVManage->addUV("XX01","Blabla", true, false, false);
+    UVManage->addUVCursus("XX01", "TC");
+    UVManage->editUVCategorie("XX01",CS,6);
+
     cout<<"Test du diplome du dossier\n";
     if(DossierManage->estDiplome("someone"))
         cout<<"Le dossier est validé!\n";
-    else cout<<"Le dossier est refusé!\n";
+    else{ cout<<"Le dossier est refusé!\n";
+        DossierManage->proposerSolution("someone");
+    }
+
+
+
+    /*
+    QString test = UVManage->getUVfromCatCursus(TM, "TC", *TabUVTC);
+    cout<<"UV trouvee : "<<test.toStdString()<<"\n";
+    */
 }
 
 /*

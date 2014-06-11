@@ -164,7 +164,13 @@ bool DossierManager::estDiplome(QString login) const{
         return findDossier->estDiplome();
     else
         return false;
+}
 
+void DossierManager::proposerSolution(QString login){
+    Dossier* findDossier=getDossier(login);
+    if(findDossier!=NULL)
+        //cout<<"coucou";
+        return findDossier->proposerSolution();
 }
 
 QStringList DossierManager::listerDossier()

@@ -110,6 +110,13 @@ void UVManager::addUVCursus(QString c, QString cur){
     }
 }
 
+QString UVManager::getUVfromCatCursus(Categorie cat, QString cursus, QStringList listeUVsPresentes){
+    for(map<QString, UV>::const_iterator it=TabUV.begin() ; it!=TabUV.end() ; ++it)
+        if(hasCursus(it->first, cursus)&&!listeUVsPresentes.contains(it->first)&&(it->second).hasCategorie(cat))
+            return it->first;
+    return QString::null;
+}
+
 /* Permet de retirer tous les Cursus d'une UV par le UVManager
  * Arguments : le code de l'UV (chaine de caractères)
  */

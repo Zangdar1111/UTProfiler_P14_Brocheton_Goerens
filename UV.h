@@ -36,6 +36,10 @@ public:
     QStringList getTab_Cursus() const {return this->Tab_Cursus;}
     int getNb_Cursus() const {return this->Nb_Cursus;}
     bool getDemiUV() const {return this->DemiUV;}
+    bool hasCategorie(Categorie cat) const{
+        if(Credits_Categorie[cat]!=0) return true;
+        return false;
+    }
 
     void editUV(QString t, bool p, bool a, bool d); //Permet d'éditer une UV existante
     void ajouterCursus(QString &c); //Permet d'ajouter un Cursus à une UV

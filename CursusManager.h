@@ -40,6 +40,8 @@ public:
 
     //A supprimer par la suite
     void afficherCursus(QString c);
+
+    //QString getUVfromCursus(QString code, QStringList listeUVs) const;
 };
 
 #endif // CURSUSMANAGER_H

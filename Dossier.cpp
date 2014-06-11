@@ -118,6 +118,17 @@ unsigned int Dossier::getNbCreditsTot(QString cursus) const {
     return res;
 }
 
+QStringList Dossier::getListeUvs() const{
+    QStringList ListeUVs;
+    for(int i=0; i<(getListeParcours().size()); i++){
+        for(unsigned int j=0; j<getListeParcours()[i].getTailleTab(); j++){
+            cout<<"uv : "<<getListeParcours()[i].getListUV()[j].toStdString()<<"\n";
+            ListeUVs.append(getListeParcours()[i].getListUV()[j]);
+        }
+    }
+    return ListeUVs;
+}
+
 bool Dossier::estListeUVsCompletee(QStringList liste, unsigned int nb) const{
     for(int i=0; i<(getListeParcours().size()); i++){
         for(unsigned int j=0; j<getListeParcours()[i].getTailleTab(); j++){
@@ -140,4 +151,37 @@ bool Dossier::estDiplome() const{
     if(PrepaValide()&&BrancheValide()&&NiveauLangueValide())
         return true;
     return false;
+}
+
+void Dossier::proposerSolution(){
+    if(!PrepaValide()){
+        proposerSolutionPrepa();
+    }
+}
+
+void Dossier::proposerSolutionPrepa(){
+
+    CursusManager* CursusManage = CursusManager::getInstance();
+    UVManager* UVManage = UVManager::getInstance();
+    QStringList listeUVsPresentes = getListeUvs();
+    bool impossible=false;
+
+    //Semestre* SemCourant = getSemestreCourant();
+    InscriptionFuture* proposition;
+    unsigned int nbCredCSTheo = getNbCreditsCS(getPrepa());
+    unsigned int nbCredCSAValider = CursusManage->getNbCreditsCSAValider(getPrepa());
+    while(nbCredCSTheo<nbCredCSAValider&&!impossible){
+       // proposition = new InscriptionFuture(NULL, getPrepa());
+        QString uv = UVManage->getUVfromCatCursus(CS, getPrepa(), listeUVsPresentes);
+        if(uv==QString::null){
+            impossible=false;
+        } else {
+            cout<<"uv trouvee : "<<uv.toStdString()<<"\n";
+            nbCredCSTheo+=UVManage->getNbCreditsCategorie(uv,CS);
+            cout<<"Cred a valider : "<<nbCredCSAValider<<"\n";
+            cout<<"new cred theo : "<<nbCredCSTheo<<"\n";
+            //Ajouter le nb de crédits
+            //GO ON
+        }
+    }
 }

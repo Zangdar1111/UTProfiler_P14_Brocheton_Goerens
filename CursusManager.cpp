@@ -209,6 +209,20 @@ void CursusManager::editNbUVsforListOfCursusSecondaire(QString code, unsigned in
         cout<<"Cursus introuvable\n";
     }
 }
+/*
+QString CursusManager::getUVfromCursus(QString code, QStringList listeUVs) const{
+    CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(code));
+    unsigned int i=0;
+    if(findCursus!=NULL){
+        while(i<findCursus->getTailleTab()&&!trouve){
+
+            i++;
+        }
+    } else {
+        cout<<"Cursus introuvable\n";
+    }
+}*/
+
 
 int CursusManager::check_integrity()
 {
