@@ -105,40 +105,34 @@ void InscriptionPassee::addUV(QString uv){
     cout<<"Erreur : Il faut une note avec l UV. Utiliser 'addUVwithNote()'\n";
 }
 
-/*
+
 void InscriptionPassee::addUVwithNote(QString uv, Note res){
-    if (tailleTab==0){
-        //Cas de la première UV
-        //Création d'un tableau de une case et ajout d'une QString
-        TabUVs=new QString[1];
-        Resultat=new Note[1];
-
-        TabUVs[0]=uv;
-        Resultat[0]=res;
-
-        //Incrémentation de la taille du tableau
-        tailleTab++;
-    }
-    else{
-        //Extension du tableau des UVs
-        QString* newTab= new QString[tailleTab+1];
-        Note* newRes= new Note[tailleTab+1];
-
-        //Recopie de chaque UV dans le nouveau tableau
-        for(unsigned int i=0; i<tailleTab; i++){
-            newTab[i]=TabUVs[i];
-            newRes[i]=Resultat[i];
+    if(TabUVs.contains(uv))
+        cout<<"Erreur:UV deja dans le tableau";
+    else
+    {
+        TabUVs.append(uv);
+        if (tailleTab==0){
+            //Cas de la première UV
+            //Création d'un tableau de une case et ajout d'une QString
+            Resultat=new Note[1];
+            Resultat[0]=res;
+            //Incrémentation de la taille du tableau
+            tailleTab++;
         }
-
-        QString* oldTab=TabUVs;
-        Note* oldRes=Resultat;
-
-        //Incrémentation de la taille du tableau
-        tailleTab++;
-
-        delete[] oldTab;
-        delete[] oldRes;
+        else
+        {
+            Note* newRes= new Note[tailleTab+1];
+            for(unsigned int i=0; i<tailleTab; i++){
+                newRes[i]=Resultat[i];
+            }
+            Note* oldRes=Resultat;
+            Resultat=newRes;
+            Resultat[tailleTab]=res;
+            tailleTab++;
+            delete[] oldRes;
+        }
     }
 }
-*/
+
 

@@ -185,7 +185,6 @@ QStringList DossierManager::listerDossier()
 
 void DossierManager::load()
 {
-    /*
     QFile liste_dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/liste.txt");
     if(liste_dossier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
@@ -200,10 +199,11 @@ void DossierManager::load()
             QFile dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+liste_login.at(i)+".txt");
             if(dossier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
             {
-                QTextStream flux(&liste_dossier);
+                cout<<"Dossier "+liste_login.at(i).toStdString()+" bien trouvé";
+                QTextStream flux(&dossier);
                 QString login = flux.readLine();
                 QString NomPrenom = flux.readLine();
-                int anglais = QString::number(flux.readLine());
+                int anglais = flux.readLine().toInt();
                 QString Prepa = flux.readLine();
                 QString Branche = flux.readLine();
                 QString Filiere = flux.readLine();
@@ -211,37 +211,44 @@ void DossierManager::load()
                 QStringList liste_mineur = Mineurs.split(",");
 
                 addDossier(login,NomPrenom,anglais);
+                cout<<"dossier normalement enregistré";
                 setPrepa(login,Prepa);
                 setBranche(login,Branche);
                 setFiliere(login,Filiere);
                 for (i=0;i<liste_mineur.size();i++)
-                    addMineur(liste_mineur.at(i));
+                    addMineur(login,liste_mineur.at(i));
 
                 while(! flux.atEnd())
                 {
                     flux.readLine();
                     QString saison = flux.readLine();
+                    Saison sais;
                     if(saison=="Automne")
-                        Saison sais=Automne;
+                        sais=Automne;
                     else
-                        Saison sais=Printemps;
-                    unsigned int annee = flux.readLine.toInt()
-                    Semestre sem = new Semestre(sais,annee);
+                        sais=Printemps;
+                    unsigned int annee = flux.readLine().toInt();
+                    Semestre* sem = new Semestre(sais,annee);
                     QString cursus = flux.readLine();
-                    InscriptionPassee IP = new InscriptionPassee(sem,cursus);
+                    InscriptionPassee IP = InscriptionPassee(sem,cursus);
                     QString uvs = flux.readLine();
                     QStringList uvs_liste = uvs.split(",");
                     QString notes = flux.readLine();
                     QStringList notes_liste = notes.split(",");
                     for(int i=0;i<uvs_liste.size();i++)
                     {
-                        IP.
-                        IP.setResultat(i,notes_liste.at(i));
+                        Note nott = QStringtoNote(notes_liste.at(i));
+                        IP.addUVwithNote(uvs_liste.at(i),nott);
                     }
+                    addParcours(login,IP);
                 }
             }
+            else
+                cout<<"Dossier "+liste_login.at(i).toStdString()+" non trouvé";
         }
-    }*/
+    }
+    else
+        cout<<"Liste non trouvee";
 }
 
 

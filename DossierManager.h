@@ -42,7 +42,6 @@ public:
     void deleteDossier_fichier(QString c); //Supprime une Dossier du fichier de saDossieregarde
     void addDossier_fichier(QString c); //Ajoute une Dossier au fichier de saDossieregarde
     void save(); //SaDossieregarde les Dossier dans un fichier
-    int check_integrity(); //Vérifie l'intégrité du fichier de saDossieregarde
 
 
 };

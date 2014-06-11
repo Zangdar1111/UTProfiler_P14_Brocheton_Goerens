@@ -1,6 +1,8 @@
 #ifndef ENUM_H_INCLUDED
 #define ENUM_H_INCLUDED
 
+#include "includes.h"
+
 enum Saison
 {
     Printemps,
@@ -28,5 +30,10 @@ enum Categorie
     TSH,
     SP
 };
+
+QString NotetoQString(Note n);
+
+Note QStringtoNote(QString note);
+
 
 #endif // ENUM_H_INCLUDED

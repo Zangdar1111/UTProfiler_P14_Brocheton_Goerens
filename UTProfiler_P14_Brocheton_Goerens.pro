@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     Onglet1.cpp \
     Onglet2.cpp \
     Onglet3.cpp \
-    Onglet4.cpp
+    Onglet4.cpp \
+    enum.cpp
 
 HEADERS  += mainwindow.h \
     Cursus.h \
