@@ -113,11 +113,6 @@ void MainWindow::poubelleB8(QListWidgetItem* item)
     delete item;
 }
 
-
-
-
-
-
 void MainWindow::ChangeNote(QListWidgetItem* item)
 {
     QString ancien = item->text(),New;
@@ -449,6 +444,7 @@ void MainWindow::EditDossier(QListWidgetItem* item)
     ui->Edit_Dossier_Login->setReadOnly(true);
     QString login = item->text();
     DossierManager* DossierManage = DossierManager::getInstance();
+    CursusManager* CursusManage = CursusManager::getInstance();
     Dossier* dossier = DossierManage->getDossier(login);
     ui->Edit_Dossier_Login->setText(login);
     ui->Edit_Dossier_NomPrenom->setText(dossier->getNomPrenom());
@@ -474,6 +470,198 @@ void MainWindow::EditDossier(QListWidgetItem* item)
     if (dossier->getPrepa()!=NULL) ui->Edit_Dossier_Current_Prepa->setText(dossier->getPrepa());
     if (dossier->getBranche()!=NULL) ui->Edit_Dossier_Current_Branche->setText(dossier->getBranche());
     if (dossier->getFiliere()!=NULL) ui->Edit_Dossier_Current_Filiere->setText(dossier->getFiliere());
+    QList<InscriptionPassee> Lsem = DossierManage->getAllParcours(item->text());
+    int indexprepa=1,indexbranche=1;
+    Note* result;
+    for(QList<InscriptionPassee>::iterator it=Lsem.begin() ; it!=Lsem.end() ; ++it)
+    {
+        if(CursusManage->getCursus(it->getCursusPrincipal())->isWhat1()==1)
+        {
+            switch(indexprepa)
+            {
+                case 1:
+                    ui->Edit_Dossier_Semestre1_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_Semestre1_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_Semestre1_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_Semestre1_Nom->setText(it->getCursusPrincipal()+"01");
+                break;
+
+                case 2:
+                    ui->Edit_Dossier_Semestre2_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_Semestre2_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_Semestre2_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_Semestre2_Nom->setText(it->getCursusPrincipal()+"02");
+                break;
+
+                case 3:
+                    ui->Edit_Dossier_Semestre3_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_Semestre3_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_Semestre3_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_Semestre3_Nom->setText(it->getCursusPrincipal()+"03");
+                break;
+
+                case 4:
+                    ui->Edit_Dossier_Semestre4_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_Semestre4_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_Semestre4_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_Semestre4_Nom->setText(it->getCursusPrincipal()+"04");
+                break;
+
+                case 5:
+                    ui->Edit_Dossier_Semestre5_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_Semestre5_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_Semestre5_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_Semestre5_Nom->setText(it->getCursusPrincipal()+"05");
+                break;
+
+                case 6:
+                    ui->Edit_Dossier_Semestre6_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_Semestre6_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_Semestre6_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_Semestre6_Nom->setText(it->getCursusPrincipal()+"06");
+                break;
+            }
+            indexprepa++;
+        }
+        else
+        {
+            switch(indexbranche)
+            {
+                case 1:
+                    ui->Edit_Dossier_SemestreB1_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB1_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB1_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB1_Nom->setText(it->getCursusPrincipal()+"01");
+                break;
+
+                case 2:
+                    ui->Edit_Dossier_SemestreB2_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB2_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB2_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB2_Nom->setText(it->getCursusPrincipal()+"02");
+                break;
+
+                case 3:
+                    ui->Edit_Dossier_SemestreB3_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB3_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB3_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB3_Nom->setText(it->getCursusPrincipal()+"03");
+                break;
+
+                case 4:
+                    ui->Edit_Dossier_SemestreB4_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB4_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB4_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB4_Nom->setText(it->getCursusPrincipal()+"04");
+                break;
+
+                case 5:
+                    ui->Edit_Dossier_SemestreB5_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB5_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB5_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB5_Nom->setText(it->getCursusPrincipal()+"05");
+                break;
+
+                case 6:
+                    ui->Edit_Dossier_SemestreB6_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB6_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB6_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB6_Nom->setText(it->getCursusPrincipal()+"06");
+                break;
+
+                case 7:
+                    ui->Edit_Dossier_SemestreB7_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB7_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB7_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB7_Nom->setText(it->getCursusPrincipal()+"07");
+                break;
+
+                case 8:
+                    ui->Edit_Dossier_SemestreB8_UV->addItems(it->getListUV());
+                    ui->Edit_Dossier_SemestreB8_Notes->clear();
+                    result = it->getResultat();
+                    for(unsigned int i=0;i<it->getTailleTab();i++)
+                    {
+                        QString note = NotetoQString(result[i]);
+                        ui->Edit_Dossier_SemestreB8_Notes->addItem(note);
+                    }
+                    ui->Edit_Dossier_SemestreB8_Nom->setText(it->getCursusPrincipal()+"08");
+                break;
+            }
+            indexbranche++;
+        }
+    }
+
+
+
+
+
+
 }
 
 void MainWindow::ResetDossier()

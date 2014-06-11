@@ -33,16 +33,12 @@ public:
 
     bool estDiplome(QString login) const;
 
-
-    //Pour toi Thibault ?
-
     QStringList listerDossier(); // Permet de lister toutes les Dossier chargées dans l'application
 
     void load(); //Charge les Dossiers depuis un fichier
     void deleteDossier_fichier(QString c); //Supprime une Dossier du fichier de saDossieregarde
     void addDossier_fichier(QString c); //Ajoute une Dossier au fichier de saDossieregarde
     void save(); //SaDossieregarde les Dossier dans un fichier
-    int check_integrity(); //Vérifie l'intégrité du fichier de saDossieregarde
 
 
 };

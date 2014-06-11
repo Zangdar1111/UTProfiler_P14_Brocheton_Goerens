@@ -60,7 +60,10 @@ int main(int argc, char *argv[])
     splash.showMessage("Chargement des Cursus", Qt::AlignCenter, Qt::black);
     CursusManage->load();
     Sleep(500);
-
+    splash.clearMessage();
+    splash.showMessage("Chargement des Dossiers", Qt::AlignCenter, Qt::black);
+    DossierManage->load();
+    Sleep(500);
     MainWindow w;
     w.show();
 
@@ -68,8 +71,8 @@ int main(int argc, char *argv[])
 
     //test_dossier();
 
-    DossierManage->addDossier("tbrochet","Brocheton Thibault",3);
-    DossierManage->addDossier("mgoerens","Goerens Matthias",5);
+    //DossierManage->addDossier("tbrochet","Brocheton Thibault",3);
+    //DossierManage->addDossier("mgoerens","Goerens Matthias",5);
 
     return a.exec();
     atexit(fin);
