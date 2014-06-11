@@ -157,3 +157,12 @@ QList<Solution> DossierManager::getAllSolutions(QString login) const{
     else
         return QList<Solution>();
 }
+
+
+bool DossierManager::estDiplome(QString login) const{
+    Dossier* findDossier=getDossier(login);
+    if(findDossier!=NULL)
+        return findDossier->estDiplome();
+    else
+        return false;
+}

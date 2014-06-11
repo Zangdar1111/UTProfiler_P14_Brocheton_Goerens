@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     CursusManager.cpp \
     CursusSecondaire.cpp \
     CursusPrincipal.cpp \
-    DossierManager.cpp
+    DossierManager.cpp \
+    Dossier.cpp \
+    InscriptionPassee.cpp
 
 HEADERS  += mainwindow.h \
     Cursus.h \

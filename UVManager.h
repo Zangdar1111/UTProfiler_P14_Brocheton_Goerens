@@ -27,6 +27,7 @@ public:
     void deleteUV(QString c); //Supprime une UV
     QStringList listerUV(); // Permet de lister toutes les UV chargées dans l'application
     int check_integrity(); //Vérifie l'intégrité du fichier de sauvegarde
+    bool hasCursus(QString c, QString cursus);
 
 };
 

@@ -27,6 +27,17 @@ public:
     void deleteCursus_fichier(QString c);
     void addCursus_fichier(QString c);
 
+    unsigned int getNbCreditsCSAValider(QString c);
+    unsigned int getNbCreditsTMAValider(QString c);
+    unsigned int getNbCreditsCSTMAValider(QString c);
+    unsigned int getNbCreditsTSHAValider(QString c);
+    unsigned int getNbCreditsSPAValider(QString c);
+    unsigned int getNbCreditsTotAValider(QString c);
+
+    QStringList getListFromCursusSecondaire(QString c, unsigned int i);
+    unsigned int getTailleTabFromCursusSecondaire(QString c);
+    int getNbUVsAValiderFromCursusSecondaire(QString c, unsigned int i);
+
     //A supprimer par la suite
     void afficherCursus(QString c);
 };

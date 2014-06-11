@@ -5,27 +5,26 @@
 
 //Classe Abstraite
 class Inscription{
-    Semestre Sem;
-    QString* TabUVs;
+    Semestre* Sem;
     QString CursusPpal;
+protected :
+    QStringList TabUVs;
     unsigned int tailleTab;
 public:
 
     //NOTE : A préciser : de quelle fonctions avons nous besoin pour l'interface graphique ?
-    Inscription(Semestre s, QString cp):Sem(s), CursusPpal(cp), tailleTab(0){}
-    Inscription(Semestre s, QString* uvs, QString cp, unsigned int t): Sem(s), CursusPpal(cp), tailleTab(t){
-        TabUVs=new QString[tailleTab];
-        for(unsigned int i=0;i<tailleTab;i++)
-            TabUVs[i]=uvs[i];
-    }
+    Inscription(Semestre* s, QString cp):Sem(s), CursusPpal(cp), tailleTab(0){}
+    Inscription(Semestre* s, QStringList uvs, QString cp, unsigned int t): Sem(s), CursusPpal(cp), TabUVs(uvs), tailleTab(t){}
 
-    void editInscription(Semestre s, QString cp) {
+    void editInscription(Semestre* s, QString cp) {
         Sem=s;
         CursusPpal=cp;
     }
 
-    Semestre getSemestre() const {return Sem;}
-    QString* getListUV() const {return TabUVs;}
+    virtual void addUV(QString uv)=0;
+
+    Semestre* getSemestre() const {return Sem;}
+    QStringList getListUV() const {return TabUVs;}
     QString getCursusPrincipal() const {return CursusPpal;}
     unsigned int getTailleTab() const {return tailleTab;}
 
@@ -33,7 +32,7 @@ public:
     unsigned int getNbCreditsCSMax() const{
         unsigned int res=0;
         UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], CS);
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs.at(i), CS);
         return res;
     }
 
@@ -41,7 +40,7 @@ public:
     unsigned int getNbCreditsTMMax() const{
         unsigned int res=0;
         UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], TM);
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs.at(i), TM);
         return res;
     }
 
@@ -49,7 +48,7 @@ public:
     unsigned int getNbCreditsTSHMax() const{
         unsigned int res=0;
         UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], TSH);
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs.at(i), TSH);
         return res;
     }
 
@@ -57,7 +56,7 @@ public:
     unsigned int getNbCreditsSPMax() const{
         unsigned int res=0;
         UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs[i], SP);
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs.at(i), SP);
         return res;
     }
 
@@ -65,7 +64,7 @@ public:
     unsigned int getNbCreditsTotMax() const{
         unsigned int res=0;
         UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbTotCredits(TabUVs[i]);
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbTotCredits(TabUVs.at(i));
         return res;
     }
 

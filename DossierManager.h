@@ -31,6 +31,8 @@ public:
     QList<InscriptionPassee> getAllParcours(QString login) const;
     QList<Solution> getAllSolutions(QString login) const;
 
+    bool estDiplome(QString login) const;
+
 
     //Pour toi Thibault ?
     /*

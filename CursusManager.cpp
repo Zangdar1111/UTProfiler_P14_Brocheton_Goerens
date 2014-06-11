@@ -49,6 +49,77 @@ Cursus* CursusManager::getCursus(QString c){
     else return NULL;
 }
 
+unsigned int CursusManager::getNbCreditsCSAValider(QString c){
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL)
+        return findCursus->getCreditsCS();
+    else return 0;
+}
+
+unsigned int CursusManager::getNbCreditsTMAValider(QString c){
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->getCreditsTM();
+    }
+    else return 0;
+}
+
+unsigned int CursusManager::getNbCreditsCSTMAValider(QString c){
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->getCreditsCSTM();
+    }
+    else return 0;
+}
+
+unsigned int CursusManager::getNbCreditsTSHAValider(QString c){
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->getCreditsTSH();
+    }
+    else return 0;
+}
+
+unsigned int CursusManager::getNbCreditsSPAValider(QString c){
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->getCreditsSP();
+    }
+    else return 0;
+}
+
+unsigned int CursusManager::getNbCreditsTotAValider(QString c){
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->getCreditsTotal();
+    }
+    else return 0;
+}
+
+QStringList CursusManager::getListFromCursusSecondaire(QString c, unsigned int i){
+    CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
+    if(findCursus!=NULL){
+        return (findCursus->getList(i));
+    }
+    else return QStringList();
+}
+
+unsigned int CursusManager::getTailleTabFromCursusSecondaire(QString c){
+    CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->getTailleTab();
+    }
+    else return 0;
+}
+
+int CursusManager::getNbUVsAValiderFromCursusSecondaire(QString c, unsigned int i){
+    CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->getNbUVAValiderfromList(i);
+    }
+    else return -1;
+}
+
 //Afficher un Cursus via le CursusManager en ligne de commande (a supprimer par la suite)
 void CursusManager::afficherCursus(QString c){
     Cursus* findCursus=getCursus(c);

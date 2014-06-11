@@ -35,6 +35,23 @@ public:
     QList<InscriptionPassee> getListeParcours() const {return ListeParcours;}
     QList<Solution> getListeSolutions() const {return ListeSolutions;}
 
+    bool PrepaValide() const;
+    bool BrancheValide() const;
+    bool FiliereValide() const;
+    bool MineurValide(unsigned int numMineur) const;
+
+    unsigned int getNbCreditsCS(QString cursus) const;
+    unsigned int getNbCreditsTM(QString cursus) const;
+    unsigned int getNbCreditsCSTM(QString cursus) const;
+    unsigned int getNbCreditsTSH(QString cursus) const;
+    unsigned int getNbCreditsSP(QString cursus) const;
+    unsigned int getNbCreditsTot(QString cursus) const;
+
+    bool estListeUVsCompletee(QStringList liste, unsigned int nb) const;
+
+    bool NiveauLangueValide() const;
+    bool estDiplome() const;
+
 };
 
 

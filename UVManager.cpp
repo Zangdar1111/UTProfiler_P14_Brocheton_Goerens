@@ -66,6 +66,14 @@ unsigned int UVManager::getNbTotCredits(QString c){
     else return 0;
 }
 
+bool UVManager::hasCursus(QString c, QString cursus){
+    UV* findUV=getUV(c);
+    if(findUV!=NULL)
+        if(findUV->getTab_Cursus().contains(cursus))
+            return true;
+    return false;
+}
+
 
 /* Permet de supprimer une UV de l'UVManager
  * Argument : Le code de l'UV (chaine de caractères)

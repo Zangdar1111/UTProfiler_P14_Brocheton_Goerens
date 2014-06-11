@@ -23,6 +23,7 @@ public:
         std::cout << "singleton already created!" << std::endl;
       }
 
+    std::cout<<"Valeure de retour de la fonction : "<<instance<<"\n";
     return (static_cast<T*> (instance));
   }
 

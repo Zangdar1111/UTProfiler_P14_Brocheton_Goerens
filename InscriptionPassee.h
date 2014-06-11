@@ -6,8 +6,9 @@
 class InscriptionPassee : public Inscription{
     Note* Resultat;
 public:
-    InscriptionPassee(Semestre s, QString cp):Inscription(s, cp){}
-    InscriptionPassee(Semestre s, QString* uvs, QString cp, unsigned int t, Note* res):Inscription(s, uvs, cp, t){
+    InscriptionPassee(Semestre* s, QString cp):Inscription(s, cp){}
+    InscriptionPassee(Semestre* s, QStringList uvs, QString cp, unsigned int t, Note* res):Inscription(s, uvs, cp, t){
+        Resultat = new Note[getTailleTab()];
         for(unsigned int i=0; i<getTailleTab(); i++){
             Resultat[i]=res[i];
         }
@@ -22,67 +23,18 @@ public:
             cout<<"Erreur : L'UV demandée n'existe pas (index out of range)\n";
     }
 
-    void setResultat(unsigned int i, Note res){
-        if(existUV(i))
-            Resultat[i]=res;
-        else
-            cout<<"Erreur : L'UV demandée n'existe pas (index out of range)\n";
-    }
+    void setResultat(unsigned int i, Note res);
+    void addUV(QString uv);
+    void addUVwithNote(QString uv, Note res);
 
-
-    unsigned int getNbCreditsCS() const {
-        unsigned int res=0;
-        UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<getTailleTab(); i++)
-            if(isValidee(i))
-                res+=UVManage->getNbCreditsCategorie(getListUV()[i], CS);
-        return res;
-    }
-
-    unsigned int getNbCreditsTM() const {
-        unsigned int res=0;
-        UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<getTailleTab(); i++)
-            if(isValidee(i))
-                res+=UVManage->getNbCreditsCategorie(getListUV()[i], TM);
-        return res;
-    }
-
-    unsigned int getNbCreditsTSH() const {
-        unsigned int res=0;
-        UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<getTailleTab(); i++)
-            if(isValidee(i))
-                res+=UVManage->getNbCreditsCategorie(getListUV()[i], TSH);
-        return res;
-    }
-
-    unsigned int getNbCreditsSP() const {
-        unsigned int res=0;
-        UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<getTailleTab(); i++)
-            if(isValidee(i))
-                res+=UVManage->getNbCreditsCategorie(getListUV()[i], SP);
-        return res;
-    }
-
-    unsigned int getNbCreditsTot() const {
-        unsigned int res=0;
-        UVManager* UVManage = UVManager::getInstance();
-        for (unsigned int i=0; i<getTailleTab(); i++)
-            if(isValidee(i))
-                res+=UVManage->getNbTotCredits(getListUV()[i]);
-        return res;
-    }
+    unsigned int getNbCreditsCS(QString cursus="") const;
+    unsigned int getNbCreditsTM(QString cursus="") const;
+    unsigned int getNbCreditsTSH(QString cursus="") const;
+    unsigned int getNbCreditsSP(QString cursus="") const;
+    unsigned int getNbCreditsTot(QString cursus="") const;
 
     //Retourne true si l'UV est validée, false sinon
-    bool isValidee(unsigned int i) const{
-        if(existUV(i)){
-            if(Resultat[i]!=FX&&Resultat[i]!=F&&Resultat[i]!=RES&&Resultat[i]!=ABS&&Resultat[i]!=EC)
-                return true;
-        }
-        return false;
-    }
+    bool isValidee(unsigned int i) const;
 
     ~InscriptionPassee(){}
 };
