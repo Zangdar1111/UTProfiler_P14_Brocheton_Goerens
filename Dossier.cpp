@@ -42,14 +42,14 @@ bool Dossier::BrancheValide() const{
 bool Dossier::FiliereValide() const{
     cout<<"Validation de la Filiere\n";
 
-    /*
+
     CursusManager* CursusManage = CursusManager::getInstance();
     for(unsigned int i=0; i<CursusManage->getTailleTabFromCursusSecondaire(getFiliere()); i++){
         if(!estListeUVsCompletee(CursusManage->getListFromCursusSecondaire(getFiliere(), i),
                                  CursusManage->getNbUVsAValiderFromCursusSecondaire(getFiliere(), i)))
             return true;
     }
-    */
+
     return false;
 }
 

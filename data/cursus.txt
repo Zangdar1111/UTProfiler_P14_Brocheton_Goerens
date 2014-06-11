@@ -11,6 +11,12 @@ MachinTruc
 160,18,19,29,25,60
 1
 #
+EXT
+Cursus Extérieur à l'UTC
+none
+180,48,48,80,48,60
+0
+#
 #Secondaire#
 SRI
 Système Reseaux Informatique
@@ -22,7 +28,35 @@ LO21,NF17
 TCN
 Truc de Con Numérique
 MachinChose
-LO21,NF17;SY14,LO21,NF17;LO21,NF17
-1,2,3
+LO21,NF17;SY14,LO21;LO21,NF17;;
+2,1,1,2,2,1,1,2,1,1
+0
+#
+fil
+dswfxg
+dfg
+LO21
+1
+1
+#
+mineur1
+
+
+
+
+0
+#
+mineur2
+
+
+
+
+0
+#
+mineur3
+
+
+
+
 0
 #

@@ -7,7 +7,7 @@ void fin();
 
 UVManager* UVManage = UVManager::getInstance();
 CursusManager* CursusManage = CursusManager::getInstance();
-DossierManager* DossierManage= DossierManager::getInstance();
+DossierManager* DossierManage = DossierManager::getInstance();
 
 int main(int argc, char *argv[])
 {
@@ -66,13 +66,16 @@ int main(int argc, char *argv[])
 
     splash.finish(&w);
 
-    // test_dossier();
+    //test_dossier();
 
+    DossierManage->addDossier("tbrochet","Brocheton Thibault",3);
+    DossierManage->addDossier("mgoerens","Goerens Matthias",5);
 
     return a.exec();
     atexit(fin);
-
+    return 0;
 }
+
 void fin()
 {
     UVManager::kill();
@@ -81,7 +84,6 @@ void fin()
 }
 
 void test_dossier(){
-    /*
 
     //Création d'UVs
     cout<<"Creation des UVs\n";
@@ -207,7 +209,6 @@ void test_dossier(){
     if(DossierManage->estDiplome("someone"))
         cout<<"Le dossier est validé!\n";
     else cout<<"Le dossier est refusé!\n";
-    */
 }
 
 /*
@@ -259,3 +260,4 @@ void test_cursus_uv(){
     UVManage->deleteUV("LO23");
     UVManage->afficherUV("LO23");
 }*/
+

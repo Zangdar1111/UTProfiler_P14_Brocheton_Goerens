@@ -1,0 +1,19 @@
+login
+nom prenom
+niveau_langue
+Prepa
+Branche
+Filiere
+Mineur,Mineur,Mineur
+#
+Saison
+Annee
+Cursus
+uvs (LO21,NF17,...)
+Notes
+#
+Saison
+Annee
+Cursus
+uvs (LO21,NF17,...)
+Notes

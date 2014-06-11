@@ -245,7 +245,7 @@ void UVManager::addUV_fichier(QString c)
                 if (i==tabCursus.size()-1)
                     cursus+=tabCursus.at(i);
                 else
-                cursus+=tabCursus.at(i)+",";
+                    cursus+=tabCursus.at(i)+",";
             }
         tout.insert(ind,cursus);
 
