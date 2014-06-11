@@ -27,6 +27,7 @@ public:
     void addUV(QString uv);
     void addUVwithNote(QString uv, Note res);
 
+    unsigned int getNbCreditsCat(Categorie cat, QString cursus =QString::null) const;
     unsigned int getNbCreditsCS(QString cursus="") const;
     unsigned int getNbCreditsTM(QString cursus="") const;
     unsigned int getNbCreditsTSH(QString cursus="") const;

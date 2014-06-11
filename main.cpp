@@ -69,11 +69,11 @@ int main(int argc, char *argv[])
 
     splash.finish(&w);
 
-    //test_dossier();
-
+    test_dossier();
+/*
     DossierManage->addDossier("tbrochet","Brocheton Thibault",3);
     DossierManage->addDossier("mgoerens","Goerens Matthias",5);
-
+*/
     return a.exec();
     atexit(fin);
 }
@@ -157,18 +157,17 @@ void test_dossier(){
 
     cout<<"Creation d'un dossier\n";
     //Création d'un dossier
+    Semestre* A11 = new Semestre(Automne, 2011);
+    Semestre* P12 = new Semestre(Printemps, 2012);
 
-    DossierManage->addDossier("someone", "Coucou Coucou", 4);
+    DossierManage->addDossier("someone", "Coucou Coucou", 4, A11);
     DossierManage->setPrepa("someone", "TC");
     DossierManage->setBranche("someone", "GI");
     DossierManage->setFiliere("someone", "SRI");
 
-
-
     cout<<"Creation des inscriptions\n";
     //Création des inscriptions passées de 'someone'
 
-    Semestre* A11 = new Semestre(Automne, 2011);
     QStringList* TabUVTC = new QStringList("LO20");
     TabUVTC->append("LO22");
     TabUVTC->append("NF16");
@@ -181,7 +180,6 @@ void test_dossier(){
     InscriptionPassee* TC01 = new InscriptionPassee(A11, *TabUVTC, "TC", 4, TabResTC);
 
 
-    Semestre* P12 = new Semestre(Printemps, 2012);
     QStringList* TabUVGI = new QStringList("LO21");
     TabUVGI->append("LO23");
     TabUVGI->append("NF18");

@@ -13,7 +13,7 @@ friend class Singleton<DossierManager>;
 
 public:
     Dossier* getDossier(QString login) const; //Permet d'accéder à un Dossier de la Map
-    void addDossier(QString login, QString nom_pre, unsigned int langue); //Ajoute un Dossier dans la Map
+    void addDossier(QString login, QString nom_pre, unsigned int langue, Semestre *sem); //Ajoute un Dossier dans la Map
     void deleteDossier(QString login); //Supprime un Dossier
     void setPrepa(QString login, QString prepa);
     void setBranche(QString login, QString branche);

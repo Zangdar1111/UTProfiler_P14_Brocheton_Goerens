@@ -11,18 +11,21 @@ class Dossier{
     QString Cursus_Branche;
     QString Cursus_Filiere;
     QStringList Cursus_Mineur;
+    Semestre* SemestreCourant;
     QList<InscriptionPassee> ListeParcours;
     QList<Solution> ListeSolutions;
 public:
-    Dossier(QString login, QString nom_pre, unsigned int langue):Login(login), Nom_Prenom(nom_pre), Niveau_langue(langue){}
-    void editDossier(QString nom_pre, unsigned int langue){
+    Dossier(QString login, QString nom_pre, unsigned int langue, Semestre* sem):Login(login), Nom_Prenom(nom_pre), Niveau_langue(langue), SemestreCourant(sem){}
+    void editDossier(QString nom_pre, unsigned int langue, Semestre* sem){
         Nom_Prenom=nom_pre;
         Niveau_langue=langue;
+        SemestreCourant = sem;
     }
     void setPrepa(QString prepa) {Cursus_Prepa=prepa;}
     void setBranche(QString branche) {Cursus_Branche=branche;}
     void setFiliere(QString filiere) {Cursus_Filiere=filiere;}
     void addMineur(QString mineur){ Cursus_Mineur.append(mineur);}
+    void setSemestreCourant(Semestre* sem) {SemestreCourant=sem;}
     void addParcours(InscriptionPassee& pass) {ListeParcours.append(pass);}
     void addSolution(Solution& sol) {ListeSolutions.append(sol);}
 
@@ -32,6 +35,7 @@ public:
     QString getBranche() const {return Cursus_Branche;}
     QString getFiliere() const {return Cursus_Filiere;}
     QStringList getMineur() const {return Cursus_Mineur;}
+    Semestre* getSemestreCourant() const {return SemestreCourant;}
     QList<InscriptionPassee> getListeParcours() const {return ListeParcours;}
     QList<Solution> getListeSolutions() const {return ListeSolutions;}
     QStringList getListeUvs() const;
@@ -41,6 +45,7 @@ public:
     bool FiliereValide() const;
     bool MineurValide(unsigned int numMineur) const;
 
+    unsigned int getNbCreditsCat(Categorie cat, QString cursus) const;
     unsigned int getNbCreditsCS(QString cursus) const;
     unsigned int getNbCreditsTM(QString cursus) const;
     unsigned int getNbCreditsCSTM(QString cursus) const;
@@ -56,6 +61,7 @@ public:
     void proposerSolution();
     void proposerSolutionPrepa();
 
+    void completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus, QStringList* listeUVsPresentes);
 };
 
 

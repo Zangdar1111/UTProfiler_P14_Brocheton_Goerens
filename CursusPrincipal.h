@@ -22,6 +22,19 @@ public :
 
     //Accesseurs
 
+    unsigned int getCreditsCat(Categorie cat) const {
+        switch(cat){
+        case 0 : return Credits_CS;
+            break;
+        case 1 : return Credits_TM;
+            break;
+        case 2 : return Credits_TSH;
+            break;
+        case 3 : return Credits_SP;
+            break;
+        default : return 0;
+        }
+    }
     unsigned int getCreditsTotal() const {return Credits_Total;}
     unsigned int getCreditsCS() const {return Credits_CS;}
     unsigned int getCreditsTM() const {return Credits_TM;}

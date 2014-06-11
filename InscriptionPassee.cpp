@@ -8,6 +8,26 @@ void InscriptionPassee::setResultat(unsigned int i, Note res){
         cout<<"Erreur : L'UV demandée n'existe pas (index out of range)\n";
 }
 
+/* Retourne le nombre de Crédits de la Catégorie obtenus lors de ce semestre
+ * Argument : (optionnel) code du Cursus - la fonction retourne alors le nombre de crédits CS obtenus spécifiques à ce Cursus
+ */
+unsigned int InscriptionPassee::getNbCreditsCat(Categorie cat, QString cursus /*=QString::null*/) const {
+    unsigned int res=0;
+    UVManager* UVManage = UVManager::getInstance();
+
+    if(cursus!=""){
+        for (unsigned int i=0; i<getTailleTab(); i++)
+            if(isValidee(i)&&UVManage->hasCursus(getListUV()[i],cursus))
+                res+=UVManage->getNbCreditsCategorie(getListUV()[i], cat);
+    }
+    else {
+        for (unsigned int i=0; i<getTailleTab(); i++)
+            if(isValidee(i))
+                res+=UVManage->getNbCreditsCategorie(getListUV()[i], cat);
+    }
+    return res;
+}
+
 /* Retourne le nombre de Crédits CS obtenus lors de ce semestre
  * Argument : (optionnel) code du Cursus - la fonction retourne alors le nombre de crédits CS obtenus spécifiques à ce Cursus
  */

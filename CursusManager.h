@@ -27,6 +27,7 @@ public:
     void deleteCursus_fichier(QString c);
     void addCursus_fichier(QString c);
 
+    unsigned int getNbCreditsCatAValider(QString c, Categorie cat);
     unsigned int getNbCreditsCSAValider(QString c);
     unsigned int getNbCreditsTMAValider(QString c);
     unsigned int getNbCreditsCSTMAValider(QString c);

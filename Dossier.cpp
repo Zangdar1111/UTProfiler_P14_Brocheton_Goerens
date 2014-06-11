@@ -63,6 +63,15 @@ bool Dossier::MineurValide(unsigned int numMineur) const{
     return false;
 }
 
+unsigned int Dossier::getNbCreditsCat(Categorie cat, QString cursus) const {
+    unsigned int res=0;
+    for(int i=0; i<(getListeParcours().size()); i++){
+        if(getListeParcours()[i].getCursusPrincipal()==cursus)
+            res+=getListeParcours()[i].getNbCreditsCat(cat, cursus);
+    }
+    return res;
+}
+
 unsigned int Dossier::getNbCreditsCS(QString cursus) const {
     unsigned int res=0;
     //Parcours la liste des inscriptions passees
@@ -161,25 +170,56 @@ void Dossier::proposerSolution(){
 
 void Dossier::proposerSolutionPrepa(){
 
+//    CursusManager* CursusManage = CursusManager::getInstance();
+    QStringList listeUVsPresentes = getListeUvs();
+    Semestre* SemCourant = getSemestreCourant();
+
+    /*
+    unsigned int nbTotUVs=0; //Nombre Total d'UVs ajotuées au dossier
+    unsigned int nbTotCre=0; //Nombre Total de Crédits ajoutés
+*/
+    InscriptionFuture* proposition = new InscriptionFuture(SemCourant, getPrepa());
+    completeCat(CS, proposition, getPrepa(), &listeUVsPresentes);
+    completeCat(TM, proposition, getPrepa(), &listeUVsPresentes);
+    completeCat(TSH, proposition, getPrepa(), &listeUVsPresentes);
+    completeCat(SP, proposition, getPrepa(), &listeUVsPresentes);
+
+    if(proposition->getListUV().contains("XX01"))
+        cout<<"yes\n";
+    else cout<<"no\n";
+
+    Solution* solutionPrepa = new Solution();
+    solutionPrepa->addPrevision(*proposition);
+}
+
+void Dossier::completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus, QStringList* listeUVsPresentes){
     CursusManager* CursusManage = CursusManager::getInstance();
     UVManager* UVManage = UVManager::getInstance();
-    QStringList listeUVsPresentes = getListeUvs();
     bool impossible=false;
 
-    //Semestre* SemCourant = getSemestreCourant();
-    InscriptionFuture* proposition;
-    unsigned int nbCredCSTheo = getNbCreditsCS(getPrepa());
-    unsigned int nbCredCSAValider = CursusManage->getNbCreditsCSAValider(getPrepa());
-    while(nbCredCSTheo<nbCredCSAValider&&!impossible){
-       // proposition = new InscriptionFuture(NULL, getPrepa());
-        QString uv = UVManage->getUVfromCatCursus(CS, getPrepa(), listeUVsPresentes);
+    unsigned int nbUVsAjoutees=0;
+    unsigned int nbCredCatTheo = getNbCreditsCat(cat, cursus);
+    unsigned int nbCredCatAValider = CursusManage->getNbCreditsCatAValider(cursus, cat);
+
+    while(nbCredCatTheo<nbCredCatAValider&&!impossible&&nbUVsAjoutees<2){
+        cout<<"Recherche d'UVs\n";
+        QString uv = UVManage->getUVfromCatCursus(cat, cursus, *listeUVsPresentes);
         if(uv==QString::null){
-            impossible=false;
+            impossible=true;
+            cout<<"impossible\n";
         } else {
             cout<<"uv trouvee : "<<uv.toStdString()<<"\n";
-            nbCredCSTheo+=UVManage->getNbCreditsCategorie(uv,CS);
-            cout<<"Cred a valider : "<<nbCredCSAValider<<"\n";
-            cout<<"new cred theo : "<<nbCredCSTheo<<"\n";
+
+            //Ajouter l'UV à la proposition et à la liste des UVs présentes
+            proposition->addUV(uv);
+            listeUVsPresentes->append("XX01");
+
+            //Incrémenter le nombre d'UVs ajoutées et le nombre de crédits validés
+            nbUVsAjoutees++;
+            nbCredCatTheo+=UVManage->getNbCreditsCategorie(uv,cat);
+
+            cout<<"Cred a valider : "<<nbCredCatAValider<<"\n";
+            cout<<"new cred theo : "<<nbCredCatTheo<<"\n";
             //Ajouter le nb de crédits
             //GO ON
         }

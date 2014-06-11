@@ -49,6 +49,13 @@ Cursus* CursusManager::getCursus(QString c){
     else return NULL;
 }
 
+unsigned int CursusManager::getNbCreditsCatAValider(QString c, Categorie cat){
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL)
+        return findCursus->getCreditsCat(cat);
+    else return 0;
+}
+
 unsigned int CursusManager::getNbCreditsCSAValider(QString c){
     CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
     if(findCursus!=NULL)

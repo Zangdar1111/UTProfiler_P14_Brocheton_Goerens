@@ -19,7 +19,7 @@ QString NotetoQString(Note n){
 }
 
 Note QStringtoNote(QString note){
-    Note nott;
+    Note nott=EC;
     if (note=="A")
         nott=A;
     else if(note=="B")

@@ -8,14 +8,14 @@ Dossier* DossierManager::getDossier(QString login) const{
     else return NULL;
 }
 
-void DossierManager::addDossier(QString login, QString nom_pre, unsigned int langue){
+void DossierManager::addDossier(QString login, QString nom_pre, unsigned int langue, Semestre* sem){
     Dossier* findDossier=getDossier(login);
     if(findDossier==NULL){
-        Dossier* new_dos = new Dossier(login, nom_pre, langue);
+        Dossier* new_dos = new Dossier(login, nom_pre, langue, sem);
         TabDossier.insert(make_pair(login, new_dos));
     }
     else
-        findDossier->editDossier(nom_pre,langue);
+        findDossier->editDossier(nom_pre,langue, sem);
 }
 
 void DossierManager::deleteDossier(QString login){
@@ -185,6 +185,8 @@ QStringList DossierManager::listerDossier()
 
 void DossierManager::load()
 {
+    /*
+
     QFile liste_dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/liste.txt");
     if(liste_dossier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
@@ -249,8 +251,9 @@ void DossierManager::load()
     }
     else
         cout<<"Liste non trouvee";
-}
+*/
 
+}
 
 
 

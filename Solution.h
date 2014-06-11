@@ -13,6 +13,8 @@ public :
         ListePrevisions.append(pre);
     }
 
+    QList<InscriptionFuture> getListePrevisions() const {return ListePrevisions;}
+
     ~Solution(){
         ListePrevisions.clear();
     }
