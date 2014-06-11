@@ -69,8 +69,10 @@ int main(int argc, char *argv[])
 
     splash.finish(&w);
 
-    test_dossier();
-/*
+
+    //test_dossier();
+
+    /*
     DossierManage->addDossier("tbrochet","Brocheton Thibault",3);
     DossierManage->addDossier("mgoerens","Goerens Matthias",5);
 */

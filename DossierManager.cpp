@@ -196,12 +196,13 @@ void DossierManager::load()
         {
             liste_login.append(flux_liste.readLine());
         }
-        for(int i=0;i<liste_login.size();i++)
+        for(int ili=0;ili<liste_login.size();ili++)
         {
-            QFile dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+liste_login.at(i)+".txt");
+            cout<<liste_login.size();
+            cout<<liste_login.at(ili).toStdString();
+            QFile dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+liste_login.at(ili)+".txt");
             if(dossier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
             {
-                cout<<"Dossier "+liste_login.at(i).toStdString()+" bien trouvé";
                 QTextStream flux(&dossier);
                 QString login = flux.readLine();
                 QString NomPrenom = flux.readLine();
@@ -213,11 +214,10 @@ void DossierManager::load()
                 QStringList liste_mineur = Mineurs.split(",");
 
                 addDossier(login,NomPrenom,anglais);
-                cout<<"dossier normalement enregistré";
                 setPrepa(login,Prepa);
                 setBranche(login,Branche);
                 setFiliere(login,Filiere);
-                for (i=0;i<liste_mineur.size();i++)
+                for (int i=0;i<liste_mineur.size();i++)
                     addMineur(login,liste_mineur.at(i));
 
                 while(! flux.atEnd())
@@ -245,10 +245,9 @@ void DossierManager::load()
                     addParcours(login,IP);
                 }
             }
-            else
-                cout<<"Dossier "+liste_login.at(i).toStdString()+" non trouvé";
         }
     }
+
     else
         cout<<"Liste non trouvee";
 */
@@ -257,7 +256,36 @@ void DossierManager::load()
 
 
 
-void DossierManager::deleteDossier_fichier(QString c)
+void DossierManager::deleteDossier_fichier(QString login)
 {
-
+    QFile liste_dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/liste.txt");
+    if(liste_dossier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&liste_dossier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            tout.append(flux.readLine());
+        }
+        int ind=tout.indexOf(login);
+        tout.removeAt(ind);
+        liste_dossier.resize(0);
+        for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+        {
+            flux<<*it<<"\n";
+        }
+        int i=1;
+        QFile dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+".txt");
+        dossier.remove();
+        while(i<50)
+        {
+            /*if(QFile::exists("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solution"+i+".txt"))
+            {
+                cout<<"le fichier existe pas"<<endl;
+                break;
+            }*/
+            QFile::remove("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solution"+i+".txt");
+            i++;
+        }
+    }
 }

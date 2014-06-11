@@ -656,12 +656,6 @@ void MainWindow::EditDossier(QListWidgetItem* item)
             indexbranche++;
         }
     }
-
-
-
-
-
-
 }
 
 void MainWindow::ResetDossier()
@@ -686,6 +680,57 @@ void MainWindow::ResetDossier()
     ui->Edit_Dossier_Current_Filiere->setText("");
     ui->Edit_Dossier_Current_Mineur->setText("");
     ui->Edit_Dossier_Current_Reset->setText("Reset");
+
+    ui->Edit_Dossier_Semestre1_UV->clear();
+    ui->Edit_Dossier_Semestre2_UV->clear();
+    ui->Edit_Dossier_Semestre3_UV->clear();
+    ui->Edit_Dossier_Semestre4_UV->clear();
+    ui->Edit_Dossier_Semestre5_UV->clear();
+    ui->Edit_Dossier_Semestre6_UV->clear();
+
+    ui->Edit_Dossier_Semestre1_Notes->clear();
+    ui->Edit_Dossier_Semestre2_Notes->clear();
+    ui->Edit_Dossier_Semestre3_Notes->clear();
+    ui->Edit_Dossier_Semestre4_Notes->clear();
+    ui->Edit_Dossier_Semestre5_Notes->clear();
+    ui->Edit_Dossier_Semestre6_Notes->clear();
+
+    QStringList vide;
+    for (int i=0;i<7;i++)
+        vide.append("");
+    ui->Edit_Dossier_Semestre1_Notes->addItems(vide);
+    ui->Edit_Dossier_Semestre2_Notes->addItems(vide);
+    ui->Edit_Dossier_Semestre3_Notes->addItems(vide);
+    ui->Edit_Dossier_Semestre4_Notes->addItems(vide);
+    ui->Edit_Dossier_Semestre5_Notes->addItems(vide);
+    ui->Edit_Dossier_Semestre6_Notes->addItems(vide);
+
+    ui->Edit_Dossier_SemestreB1_UV->clear();
+    ui->Edit_Dossier_SemestreB2_UV->clear();
+    ui->Edit_Dossier_SemestreB3_UV->clear();
+    ui->Edit_Dossier_SemestreB4_UV->clear();
+    ui->Edit_Dossier_SemestreB5_UV->clear();
+    ui->Edit_Dossier_SemestreB6_UV->clear();
+    ui->Edit_Dossier_SemestreB7_UV->clear();
+    ui->Edit_Dossier_SemestreB8_UV->clear();
+
+    ui->Edit_Dossier_SemestreB1_Notes->clear();
+    ui->Edit_Dossier_SemestreB2_Notes->clear();
+    ui->Edit_Dossier_SemestreB3_Notes->clear();
+    ui->Edit_Dossier_SemestreB4_Notes->clear();
+    ui->Edit_Dossier_SemestreB5_Notes->clear();
+    ui->Edit_Dossier_SemestreB6_Notes->clear();
+    ui->Edit_Dossier_SemestreB7_Notes->clear();
+    ui->Edit_Dossier_SemestreB8_Notes->clear();
+
+    ui->Edit_Dossier_SemestreB1_Notes->addItems(vide);
+    ui->Edit_Dossier_SemestreB2_Notes->addItems(vide);
+    ui->Edit_Dossier_SemestreB3_Notes->addItems(vide);
+    ui->Edit_Dossier_SemestreB4_Notes->addItems(vide);
+    ui->Edit_Dossier_SemestreB5_Notes->addItems(vide);
+    ui->Edit_Dossier_SemestreB6_Notes->addItems(vide);
+    ui->Edit_Dossier_SemestreB7_Notes->addItems(vide);
+    ui->Edit_Dossier_SemestreB8_Notes->addItems(vide);
 
     ui->Edit_Dossier_InfosBase_Group->setEnabled(true);
     ui->Edit_Dossier_Anglais->setEnabled(true);
@@ -789,7 +834,26 @@ void MainWindow::Print_ListeCursus_Dossier()
 
 void MainWindow::SaveDossier()
 {
+    DossierManager* DossierManage = DossierManager::getInstance();
+    int anglais;
+    if(ui->Edit_Dossier_Anglais1->isChecked()) anglais=1;
+    if(ui->Edit_Dossier_Anglais2->isChecked()) anglais=2;
+    if(ui->Edit_Dossier_Anglais3->isChecked()) anglais=3;
+    if(ui->Edit_Dossier_Anglais4->isChecked()) anglais=4;
+    if(ui->Edit_Dossier_Anglais5->isChecked()) anglais=5;
+    if(ui->Edit_Dossier_Anglais6->isChecked()) anglais=6;
+    DossierManage->addDossier(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_NomPrenom->text(),anglais);
+    DossierManage->setPrepa(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Prepa->text());
+    DossierManage->setBranche(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Branche->text());
+    DossierManage->setFiliere(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Filiere->text());
+    QString Mineurs = ui->Edit_Dossier_Current_Mineur->text();
+    QStringList liste_mineur = Mineurs.split(",");
+    for (int i=0;i<liste_mineur.size();i++)
+        DossierManage->addMineur(ui->Edit_Dossier_Login->text(),liste_mineur.at(i));
 
+    QMessageBox::information(this,"Dossier "+ui->Edit_Dossier_Login->text()+" sauvegardée","Le Dossier "+ui->Edit_Dossier_Login->text()+" a bien été sauvegardée !",QMessageBox::Ok);
+    ResetDossier();
+    PrintDossier();
 }
 
 void MainWindow::DeleteDossier()
