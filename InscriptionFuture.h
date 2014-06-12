@@ -14,6 +14,22 @@ public :
         TabUVs.append(uv);
         tailleTab++;
     }
+
+    bool operator ==(InscriptionFuture insc) const{
+        if(TabUVs.size()!=insc.getListUV().size())
+            return false;
+
+        for(int i=0; i<TabUVs.size(); i++){
+            if(insc.getListUV().at(i)!=TabUVs.at(i))
+                return false;
+        }
+        return true;
+    }
+
+    bool operator !=(InscriptionFuture insc) const{
+        return !operator ==(insc);
+    }
+
 };
 
 
