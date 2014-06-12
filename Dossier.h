@@ -26,7 +26,6 @@ public:
     void setFiliere(QString filiere) {Cursus_Filiere=filiere;}
     void addMineur(QString mineur){ Cursus_Mineur.append(mineur);}
     void setSemestreCourant(Semestre* sem) {SemestreCourant=sem;}
-    //void addParcours(InscriptionPassee& pass) {ListeParcours.append(pass);}
     void addParcours(InscriptionPassee& pass) {ListeParcours.append(pass);}
     void addParcours(const InscriptionPassee& pass) {ListeParcours.append(pass);}
     void addSolution(Solution& sol) {ListeSolutions.append(sol);}

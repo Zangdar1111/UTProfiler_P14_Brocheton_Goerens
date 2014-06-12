@@ -82,6 +82,12 @@ public slots:
     void ChangeNoteB7(QListWidgetItem *);
     void ChangeNoteB8(QListWidgetItem *);
     //Onglet 4
+    void AutoDossierPrintUV();
+    void PrintAutoDossier();
+    void ResetAutoDossier();
+    void EditAutoDossier(QListWidgetItem *);
+
+
 
 private:
     Ui::MainWindow *ui;

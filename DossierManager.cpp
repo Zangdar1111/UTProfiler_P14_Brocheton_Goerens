@@ -225,7 +225,7 @@ void DossierManager::load()
                 QStringList sem2 = sem1.split(",");
                 Saison saiso=Printemps;
                 if(sem2.at(0)=="Automne")
-                    saiso=Automne;                    
+                    saiso=Automne;
                 Semestre* currentsemestre = new Semestre(saiso,sem2.at(1).toInt());
                 addDossier(login,NomPrenom,anglais,currentsemestre);
                 setPrepa(login,Prepa);
@@ -258,6 +258,38 @@ void DossierManager::load()
                     addParcours(login,IP);
                 }
             }
+            QFile solution("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+liste_login.at(ili)+"_solutions.txt");
+            if(solution.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
+            {
+                int indexsolution=2;
+                QTextStream flux_sol(&solution);
+                while(! flux_sol.atEnd())
+                {
+                    Solution sol = Solution();
+                    bool ajouter=false;
+                    if(indexsolution==2) flux_sol.readLine();
+                    while(flux_sol.readLine()!="#Solution#" && !flux_sol.atEnd())
+                    {
+                        ajouter=true;
+                        QString semest = flux_sol.readLine();cout<<"Semestre:"<<semest.toStdString()<<endl;
+                        QStringList semestre = semest.split(",");
+                        Saison sais=Printemps;
+                        if(semestre.at(0)=="Automne")
+                            sais=Automne;
+                        unsigned int annee = semestre.at(1).toInt();
+                        Semestre* sem = new Semestre(sais,annee);
+                        QString cursus = flux_sol.readLine();cout<<"Cursus:"<<cursus.toStdString()<<endl;
+                        QString uvs = flux_sol.readLine();cout<<"Uvs:"<<uvs.toStdString()<<endl;
+                        QStringList uvs_liste = uvs.split(",");
+                        InscriptionFuture IF = InscriptionFuture(sem,uvs_liste,cursus,uvs_liste.size());
+                        sol.addPrevision(IF);
+                    }
+                    if(ajouter)
+                        addSolution(liste_login.at(ili),sol);
+                    indexsolution++;
+                    ajouter=false;
+                }
+            }
         }
     }
 }
@@ -286,8 +318,8 @@ void DossierManager::deleteDossier_fichier(QString login)
         QFile dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+".txt");
         dossier.remove();
 
-        QFile dossier1("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
-        dossier1.remove("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
+        //QFile dossier1("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
+        //dossier1.remove("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
     }
 }
 
@@ -341,7 +373,10 @@ void DossierManager::addDossier_fichier(QString login)
         for(QList<InscriptionPassee>::iterator it=ins.begin() ; it!=ins.end() ; ++it)
         {
             flux<<"#"<<"\n";
-            flux<<it->getSemestre()->getSaison()<<","<<it->getSemestre()->getAnnee()<<"\n";
+            QString saisone = "Automne";
+            if (it->getSemestre()->getSaison()==Printemps)
+                saisone = "Printemps";
+            flux<<saisone<<","<<it->getSemestre()->getAnnee()<<"\n";
             flux<<it->getCursusPrincipal()<<"\n";
             QStringList uvs = it->getListUV();
             for (int i=0;i<uvs.size();i++)
