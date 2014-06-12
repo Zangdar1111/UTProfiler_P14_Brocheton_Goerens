@@ -237,11 +237,12 @@ void DossierManager::load()
                 while(! flux.atEnd())
                 {
                     flux.readLine();
-                    QString saison = flux.readLine();
+                    QString semest = flux.readLine();
+                    QStringList semestre = semest.split(",");
                     Saison sais=Printemps;
-                    if(saison=="Automne")
+                    if(semestre.at(0)=="Automne")
                         sais=Automne;
-                    unsigned int annee = flux.readLine().toInt();
+                    unsigned int annee = semestre.at(1).toInt();
                     Semestre* sem = new Semestre(sais,annee);
                     QString cursus = flux.readLine();
                     InscriptionPassee IP = InscriptionPassee(sem,cursus);
@@ -288,4 +289,77 @@ void DossierManager::deleteDossier_fichier(QString login)
         QFile dossier1("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
         dossier1.remove("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
     }
+}
+
+void DossierManager::addDossier_fichier(QString login)
+{
+    QFile liste_dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/liste.txt");
+    if(liste_dossier.open(QIODevice::ReadWrite | QIODevice::Text))
+    {
+        QTextStream flux(&liste_dossier);
+        QStringList tout;
+        while(! flux.atEnd())
+        {
+            tout.append(flux.readLine());
+        }
+        if(!tout.contains(login))
+            flux<<login<<"\n";
+    }
+
+    Dossier* doss = getDossier(login);
+
+    QFile dossier1("../QIODevice::ReadWrite | QIODevice::TextUTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
+    if(dossier1.open(QIODevice::ReadWrite | QIODevice::Text))
+        dossier1.resize(0);
+    else
+        cout<<"Dossier Solutions Introuvable !";
+
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+".txt");
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        fichier.resize(0);
+        QTextStream flux(&fichier);
+        flux<<login<<"\n";
+        flux<<doss->getNomPrenom()<<"\n";
+        flux<<doss->getNiveauLangue()<<"\n";
+        flux<<doss->getPrepa()<<"\n";
+        flux<<doss->getBranche()<<"\n";
+        flux<<doss->getFiliere()<<"\n";
+        QStringList mineurs = doss->getMineur();
+        for (int i=0;i<mineurs.size();i++)
+        {
+            flux<<mineurs.at(i);
+            if(i<mineurs.size()-1)
+                flux<<",";
+        }
+        flux<<"\n";
+        QString saiso = "Automne";
+        if (doss->getSemestreCourant()->getSaison()==Printemps)
+            saiso = "Printemps";
+        flux<<saiso<<","<<doss->getSemestreCourant()->getAnnee()<<"\n";
+        QList<InscriptionPassee> ins = doss->getListeParcours();
+        for(QList<InscriptionPassee>::iterator it=ins.begin() ; it!=ins.end() ; ++it)
+        {
+            flux<<"#"<<"\n";
+            flux<<it->getSemestre()->getSaison()<<","<<it->getSemestre()->getAnnee()<<"\n";
+            flux<<it->getCursusPrincipal()<<"\n";
+            QStringList uvs = it->getListUV();
+            for (int i=0;i<uvs.size();i++)
+            {
+                flux<<uvs.at(i);
+                if(i<uvs.size()-1)
+                    flux<<",";
+            }
+            flux<<"\n";
+            Note* notes = it->getResultat();
+            for (int i=0;i<uvs.size();i++)
+            {
+                flux<<NotetoQString(notes[i]);
+                if(i<uvs.size()-1)
+                    flux<<",";
+            }
+            flux<<"\n";
+        }
+    }
+
 }

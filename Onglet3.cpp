@@ -370,6 +370,21 @@ void MainWindow::EtapeSemestre()
     ui->Edit_Dossier_Current_Valider->setEnabled(false);
     ui->Edit_Dossier_Current_Reset->setText("Retour");
     ui->Edit_Dossier_Semestre_Group->setEnabled(true);
+    if(ui->Edit_Dossier_Current_Prepa->text()=="EXT" || ui->Edit_Dossier_Current_Prepa->text()!="")
+    {
+        ui->Edit_Dossier_Semestre1_UV->clear();
+        ui->Edit_Dossier_Semestre2_UV->clear();
+        ui->Edit_Dossier_Semestre3_UV->clear();
+        ui->Edit_Dossier_Semestre4_UV->clear();
+        ui->Edit_Dossier_Semestre5_UV->clear();
+        ui->Edit_Dossier_Semestre6_UV->clear();
+        ui->Edit_Dossier_Semestre1_Notes->clear();
+        ui->Edit_Dossier_Semestre2_Notes->clear();
+        ui->Edit_Dossier_Semestre3_Notes->clear();
+        ui->Edit_Dossier_Semestre4_Notes->clear();
+        ui->Edit_Dossier_Semestre5_Notes->clear();
+        ui->Edit_Dossier_Semestre6_Notes->clear();
+    }
     if (ui->Edit_Dossier_Current_Prepa->text()!="EXT" && ui->Edit_Dossier_Current_Prepa->text()!="")
     {
         ui->Edit_Dossier_SemestrePrepa_Group->setEnabled(true);
@@ -491,6 +506,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_Semestre1_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_Semestre1_Notes->count () < 7)
+                        ui->Edit_Dossier_Semestre1_Notes->addItem("");
                     ui->Edit_Dossier_Semestre1_Nom->setText(it->getCursusPrincipal()+"01");
                 break;
 
@@ -503,6 +520,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_Semestre2_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_Semestre2_Notes->count () < 7)
+                        ui->Edit_Dossier_Semestre2_Notes->addItem("");
                     ui->Edit_Dossier_Semestre2_Nom->setText(it->getCursusPrincipal()+"02");
                 break;
 
@@ -515,6 +534,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_Semestre3_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_Semestre3_Notes->count () < 7)
+                        ui->Edit_Dossier_Semestre3_Notes->addItem("");
                     ui->Edit_Dossier_Semestre3_Nom->setText(it->getCursusPrincipal()+"03");
                 break;
 
@@ -527,6 +548,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_Semestre4_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_Semestre4_Notes->count () < 7)
+                        ui->Edit_Dossier_Semestre4_Notes->addItem("");
                     ui->Edit_Dossier_Semestre4_Nom->setText(it->getCursusPrincipal()+"04");
                 break;
 
@@ -539,6 +562,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_Semestre5_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_Semestre5_Notes->count () < 7)
+                        ui->Edit_Dossier_Semestre5_Notes->addItem("");
                     ui->Edit_Dossier_Semestre5_Nom->setText(it->getCursusPrincipal()+"05");
                 break;
 
@@ -551,6 +576,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_Semestre6_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_Semestre6_Notes->count () < 7)
+                        ui->Edit_Dossier_Semestre6_Notes->addItem("");
                     ui->Edit_Dossier_Semestre6_Nom->setText(it->getCursusPrincipal()+"06");
                 break;
             }
@@ -569,6 +596,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB1_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB1_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB1_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB1_Nom->setText(it->getCursusPrincipal()+"01");
                 break;
 
@@ -581,6 +610,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB2_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB2_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB2_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB2_Nom->setText(it->getCursusPrincipal()+"02");
                 break;
 
@@ -593,6 +624,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB3_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB3_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB3_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB3_Nom->setText(it->getCursusPrincipal()+"03");
                 break;
 
@@ -605,6 +638,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB4_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB4_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB4_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB4_Nom->setText(it->getCursusPrincipal()+"04");
                 break;
 
@@ -617,6 +652,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB5_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB5_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB5_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB5_Nom->setText(it->getCursusPrincipal()+"05");
                 break;
 
@@ -629,6 +666,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB6_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB6_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB6_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB6_Nom->setText(it->getCursusPrincipal()+"06");
                 break;
 
@@ -641,6 +680,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB7_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB7_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB7_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB7_Nom->setText(it->getCursusPrincipal()+"07");
                 break;
 
@@ -653,6 +694,8 @@ void MainWindow::EditDossier(QListWidgetItem* item)
                         QString note = NotetoQString(result[i]);
                         ui->Edit_Dossier_SemestreB8_Notes->addItem(note);
                     }
+                    while(ui->Edit_Dossier_SemestreB8_Notes->count () < 7)
+                        ui->Edit_Dossier_SemestreB8_Notes->addItem("");
                     ui->Edit_Dossier_SemestreB8_Nom->setText(it->getCursusPrincipal()+"08");
                 break;
             }
@@ -852,8 +895,8 @@ void MainWindow::SaveDossier()
     Saison sais=Printemps;
     unsigned int annee = ui->Edit_Dossier_SemActuel_Annee->value();
     if(ui->Edit_Dossier_SemActuel_Automne->isChecked()) sais=Automne;
-    Semestre* sem = new Semestre(sais,annee);
-    DossierManage->addDossier(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_NomPrenom->text(),anglais,sem);
+    Semestre* sema = new Semestre(sais,annee);
+    DossierManage->addDossier(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_NomPrenom->text(),anglais,sema);
     DossierManage->setPrepa(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Prepa->text());
     DossierManage->setBranche(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Branche->text());
     DossierManage->setFiliere(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Filiere->text());
@@ -861,15 +904,15 @@ void MainWindow::SaveDossier()
     QStringList liste_mineur = Mineurs.split(",");
     for (int i=0;i<liste_mineur.size();i++)
         DossierManage->addMineur(ui->Edit_Dossier_Login->text(),liste_mineur.at(i));
-    DossierManage->setSemestreCourant(ui->Edit_Dossier_Login->text(),sem);
 
     Dossier* doss = DossierManage->getDossier(ui->Edit_Dossier_Login->text());
     doss->deleteAllParcours();
     doss->deleteAllSolutions();
-    QList<InscriptionPassee>* list_ip;
-
+    QList<InscriptionPassee> list_ip;
+    cout<<"TEST"<<endl;
     if(ui->Edit_Dossier_Current_Branche->text()!="")
     {
+        cout<<"TEST"<<endl;
         if (ui->Edit_Dossier_SemestreB8_UV->count () > 0)
         {
             Semestre* sem = new Semestre(sais,annee);
@@ -889,7 +932,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB8_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB8_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -918,7 +961,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB7_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB7_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -947,7 +990,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB6_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB6_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -976,7 +1019,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB5_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB5_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1005,7 +1048,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB4_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB4_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1034,7 +1077,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB3_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB3_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1063,7 +1106,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB2_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB2_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1092,7 +1135,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_SemestreB1_UV->takeItem(0);
                 delete ui->Edit_Dossier_SemestreB1_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1101,8 +1144,6 @@ void MainWindow::SaveDossier()
             else
                 sais=Printemps;
         }
-
-
     }
 
     if(ui->Edit_Dossier_Current_Prepa->text()!="EXT" && ui->Edit_Dossier_Current_Prepa->text()!="")
@@ -1126,7 +1167,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_Semestre6_UV->takeItem(0);
                 delete ui->Edit_Dossier_Semestre6_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1155,7 +1196,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_Semestre5_UV->takeItem(0);
                 delete ui->Edit_Dossier_Semestre5_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1184,7 +1225,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_Semestre4_UV->takeItem(0);
                 delete ui->Edit_Dossier_Semestre4_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1213,7 +1254,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_Semestre3_UV->takeItem(0);
                 delete ui->Edit_Dossier_Semestre3_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1242,36 +1283,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_Semestre2_UV->takeItem(0);
                 delete ui->Edit_Dossier_Semestre2_Notes->takeItem(0);
             }
-            list_ip->append(IP);
-            if(sais==Printemps)
-            {
-                annee--;
-                sais=Automne;
-            }
-            else
-                sais=Printemps;
-        }
-
-        if (ui->Edit_Dossier_Semestre2_UV->count () > 0)
-        {
-            Semestre* sem = new Semestre(sais,annee);
-            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
-            while (ui->Edit_Dossier_Semestre2_UV->count () > 0)
-            {
-                QStringList uvs,notes;
-                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre2_UV->item(0);
-                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre2_Notes->item(0);
-                uvs.append(item1->text());
-                notes.append(item2->text());
-                for(int i=0;i<uvs.size();i++)
-                {
-                    Note nott = QStringtoNote(notes.at(i));
-                    IP.addUVwithNote(uvs.at(i),nott);
-                }
-                delete ui->Edit_Dossier_Semestre2_UV->takeItem(0);
-                delete ui->Edit_Dossier_Semestre2_Notes->takeItem(0);
-            }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1300,7 +1312,7 @@ void MainWindow::SaveDossier()
                 delete ui->Edit_Dossier_Semestre1_UV->takeItem(0);
                 delete ui->Edit_Dossier_Semestre1_Notes->takeItem(0);
             }
-            list_ip->append(IP);
+            list_ip.append(IP);
             if(sais==Printemps)
             {
                 annee--;
@@ -1309,14 +1321,13 @@ void MainWindow::SaveDossier()
             else
                 sais=Printemps;
         }
-
     }
 
-    for(int i=list_ip->size()-1;i<0;i--)
+    for(int i=0;i<list_ip.size();i++)
     {
-        doss->addParcours(list_ip->takeAt(i));
+        doss->addParcours(list_ip.at(list_ip.size()-i-1));
     }
-
+    DossierManage->addDossier_fichier(ui->Edit_Dossier_Login->text());
     QMessageBox::information(this,"Dossier "+ui->Edit_Dossier_Login->text()+" sauvegardée","Le Dossier "+ui->Edit_Dossier_Login->text()+" a bien été sauvegardée !",QMessageBox::Ok);
     ResetDossier();
     PrintDossier();

@@ -13,7 +13,6 @@ friend class Singleton<CursusManager>;
 public:
     Cursus* getCursus(QString c); //Permet d'accéder à un Cursus de la Map
     void load(); //Charge les Cursus depuis un fichier
-    void save(); //Sauvegarde les Cursus dans un fichier
     void addCursusPrincipal(QString code, QString t, QString r, unsigned int tot, unsigned int cs, unsigned int tm, unsigned int cstm, unsigned int tsh, unsigned int sp, bool br); //Permet d'ajouter un Cursus Principal
     void addCursusSecondaire(QString code, QString t, QString r, bool fil); //Permet d'ajouter un Cursus Secondaire
     int addListToCursusSecondaire(QString code, unsigned int nb); //Permet d'ajouter une liste d'UV à un Cursus Secondaire

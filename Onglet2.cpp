@@ -78,6 +78,10 @@ void MainWindow::ResetCursus()
     ui->Edit_Cursus_Branche->setChecked(false);
     ui->Edit_Cursus_Filiere->setChecked(false);
     ui->Edit_Cursus_Mineur->setChecked(false);
+    ui->Edit_Cursus_Prepa->setEnabled(true);
+    ui->Edit_Cursus_Branche->setEnabled(true);
+    ui->Edit_Cursus_Filiere->setEnabled(true);
+    ui->Edit_Cursus_Mineur->setEnabled(true);
     ui->Edit_Cursus_CS->setValue(0);
     ui->Edit_Cursus_TM->setValue(0);
     ui->Edit_Cursus_TSH->setValue(0);

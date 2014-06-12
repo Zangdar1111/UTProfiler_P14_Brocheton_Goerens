@@ -42,7 +42,6 @@ public:
     void load(); //Charge les Dossiers depuis un fichier
     void deleteDossier_fichier(QString login); //Supprime une Dossier du fichier de saDossieregarde
     void addDossier_fichier(QString login); //Ajoute une Dossier au fichier de saDossieregarde
-    void save(); //SaDossieregarde les Dossier dans un fichier
 
 
 };

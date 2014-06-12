@@ -1,19 +1,19 @@
 #Principal#
 EXT
 Cursus Extérieur à l'UTC
-none
-180,48,48,80,48,60
+Etat Français
+102,48,24,72,24,6
 0
 #
 TC
 Tronc Commun
-SylViane PUlVin
+Luke Skywalker
 102,48,24,72,24,6
 0
 #
 GI
 Genie Informatique
-P. Trigano
+Dark Vador
 180,30,30,84,28,60
 1
 #
