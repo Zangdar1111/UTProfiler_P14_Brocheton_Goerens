@@ -471,6 +471,9 @@ void MainWindow::EditDossier(QListWidgetItem* item)
     if (dossier->getBranche()!=NULL) ui->Edit_Dossier_Current_Branche->setText(dossier->getBranche());
     if (dossier->getFiliere()!=NULL) ui->Edit_Dossier_Current_Filiere->setText(dossier->getFiliere());
     QList<InscriptionPassee> Lsem = DossierManage->getAllParcours(item->text());
+    ui->Edit_Dossier_SemActuel_Annee->setValue(dossier->getSemestreCourant()->getAnnee());
+    ui->Edit_Dossier_SemActuel_Automne->setChecked(true);
+    if(dossier->getSemestreCourant()->getSaison()==Printemps) ui->Edit_Dossier_SemActuel_Printemps->setChecked(true);
     int indexprepa=1,indexbranche=1;
     Note* result;
     for(QList<InscriptionPassee>::iterator it=Lsem.begin() ; it!=Lsem.end() ; ++it)
@@ -732,6 +735,10 @@ void MainWindow::ResetDossier()
     ui->Edit_Dossier_SemestreB7_Notes->addItems(vide);
     ui->Edit_Dossier_SemestreB8_Notes->addItems(vide);
 
+    ui->Edit_Dossier_SemActuel_Annee->setValue(0);
+    ui->Edit_Dossier_SemActuel_Automne->setChecked(false);
+    ui->Edit_Dossier_SemActuel_Printemps->setChecked(false);
+
     ui->Edit_Dossier_InfosBase_Group->setEnabled(true);
     ui->Edit_Dossier_Anglais->setEnabled(true);
     ui->Edit_Dossier_Cursus_Group->setEnabled(true);
@@ -842,7 +849,11 @@ void MainWindow::SaveDossier()
     if(ui->Edit_Dossier_Anglais4->isChecked()) anglais=4;
     if(ui->Edit_Dossier_Anglais5->isChecked()) anglais=5;
     if(ui->Edit_Dossier_Anglais6->isChecked()) anglais=6;
-    DossierManage->addDossier(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_NomPrenom->text(),anglais);
+    Saison sais=Printemps;
+    unsigned int annee = ui->Edit_Dossier_SemActuel_Annee->value();
+    if(ui->Edit_Dossier_SemActuel_Automne->isChecked()) sais=Automne;
+    Semestre* sem = new Semestre(sais,annee);
+    DossierManage->addDossier(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_NomPrenom->text(),anglais,sem);
     DossierManage->setPrepa(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Prepa->text());
     DossierManage->setBranche(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Branche->text());
     DossierManage->setFiliere(ui->Edit_Dossier_Login->text(),ui->Edit_Dossier_Current_Filiere->text());
@@ -850,6 +861,461 @@ void MainWindow::SaveDossier()
     QStringList liste_mineur = Mineurs.split(",");
     for (int i=0;i<liste_mineur.size();i++)
         DossierManage->addMineur(ui->Edit_Dossier_Login->text(),liste_mineur.at(i));
+    DossierManage->setSemestreCourant(ui->Edit_Dossier_Login->text(),sem);
+
+    Dossier* doss = DossierManage->getDossier(ui->Edit_Dossier_Login->text());
+    doss->deleteAllParcours();
+    doss->deleteAllSolutions();
+    QList<InscriptionPassee>* list_ip;
+
+    if(ui->Edit_Dossier_Current_Branche->text()!="")
+    {
+        if (ui->Edit_Dossier_SemestreB8_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB8_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB8_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB8_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB8_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB8_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_SemestreB7_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB7_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB7_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB7_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB7_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB7_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_SemestreB6_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB6_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB6_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB6_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB6_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB6_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_SemestreB5_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB5_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB5_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB5_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB5_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB5_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_SemestreB4_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB4_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB4_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB4_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB4_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB4_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_SemestreB3_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB3_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB3_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB3_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB3_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB3_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_SemestreB2_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB2_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB2_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB2_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB2_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB2_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_SemestreB1_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Branche->text());
+            while (ui->Edit_Dossier_SemestreB1_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_SemestreB1_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_SemestreB1_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_SemestreB1_UV->takeItem(0);
+                delete ui->Edit_Dossier_SemestreB1_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+
+    }
+
+    if(ui->Edit_Dossier_Current_Prepa->text()!="EXT" && ui->Edit_Dossier_Current_Prepa->text()!="")
+    {
+        if (ui->Edit_Dossier_Semestre6_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
+            while (ui->Edit_Dossier_Semestre6_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre6_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre6_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_Semestre6_UV->takeItem(0);
+                delete ui->Edit_Dossier_Semestre6_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_Semestre5_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
+            while (ui->Edit_Dossier_Semestre5_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre5_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre5_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_Semestre5_UV->takeItem(0);
+                delete ui->Edit_Dossier_Semestre5_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_Semestre4_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
+            while (ui->Edit_Dossier_Semestre4_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre4_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre4_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_Semestre4_UV->takeItem(0);
+                delete ui->Edit_Dossier_Semestre4_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_Semestre3_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
+            while (ui->Edit_Dossier_Semestre3_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre3_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre3_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_Semestre3_UV->takeItem(0);
+                delete ui->Edit_Dossier_Semestre3_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_Semestre2_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
+            while (ui->Edit_Dossier_Semestre2_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre2_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre2_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_Semestre2_UV->takeItem(0);
+                delete ui->Edit_Dossier_Semestre2_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_Semestre2_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
+            while (ui->Edit_Dossier_Semestre2_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre2_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre2_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_Semestre2_UV->takeItem(0);
+                delete ui->Edit_Dossier_Semestre2_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+        if (ui->Edit_Dossier_Semestre1_UV->count () > 0)
+        {
+            Semestre* sem = new Semestre(sais,annee);
+            InscriptionPassee IP = InscriptionPassee(sem,ui->Edit_Dossier_Current_Prepa->text());
+            while (ui->Edit_Dossier_Semestre1_UV->count () > 0)
+            {
+                QStringList uvs,notes;
+                QListWidgetItem* item1 = ui->Edit_Dossier_Semestre1_UV->item(0);
+                QListWidgetItem* item2 = ui->Edit_Dossier_Semestre1_Notes->item(0);
+                uvs.append(item1->text());
+                notes.append(item2->text());
+                for(int i=0;i<uvs.size();i++)
+                {
+                    Note nott = QStringtoNote(notes.at(i));
+                    IP.addUVwithNote(uvs.at(i),nott);
+                }
+                delete ui->Edit_Dossier_Semestre1_UV->takeItem(0);
+                delete ui->Edit_Dossier_Semestre1_Notes->takeItem(0);
+            }
+            list_ip->append(IP);
+            if(sais==Printemps)
+            {
+                annee--;
+                sais=Automne;
+            }
+            else
+                sais=Printemps;
+        }
+
+    }
+
+    for(int i=list_ip->size()-1;i<0;i--)
+    {
+        doss->addParcours(list_ip->takeAt(i));
+    }
 
     QMessageBox::information(this,"Dossier "+ui->Edit_Dossier_Login->text()+" sauvegardée","Le Dossier "+ui->Edit_Dossier_Login->text()+" a bien été sauvegardée !",QMessageBox::Ok);
     ResetDossier();

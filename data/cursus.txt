@@ -1,62 +1,20 @@
 #Principal#
-TC
-Tron Commun
-MachinTrucMuche
-320,8,9,21,5,60
-0
-#
-GI
-Genie Informatique
-MachinTruc
-160,18,19,29,25,60
-1
-#
 EXT
 Cursus Extérieur à l'UTC
 none
 180,48,48,80,48,60
 0
 #
+TC
+Tronc Commun
+SylViane PUlVin
+102,48,24,72,24,6
+0
+#
+GI
+Genie Informatique
+P. Trigano
+180,30,30,84,28,60
+1
+#
 #Secondaire#
-SRI
-Système Reseaux Informatique
-BiduleQuonSaitPasQui
-LO21,NF17
-2
-1
-#
-TCN
-Truc de Con Numérique
-MachinChose
-LO21,NF17;SY14,LO21;LO21,NF17;;
-2,1,1,2,2,1,1,2,1,1
-0
-#
-fil
-dswfxg
-dfg
-LO21
-1
-1
-#
-mineur1
-
-
-
-
-0
-#
-mineur2
-
-
-
-
-0
-#
-mineur3
-
-
-
-
-0
-#

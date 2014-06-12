@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Onglet_UV">
      <attribute name="title">
@@ -3383,7 +3383,7 @@
          <string>Sauvegarder le Dossier</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="Edit_Dossier_SemActuel_Label1">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -3393,10 +3393,10 @@
          </rect>
         </property>
         <property name="text">
-         <string>Premier Semestre:</string>
+         <string>Semestre Actuel:</string>
         </property>
        </widget>
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="Edit_Dossier_SemActuel_Annee">
         <property name="geometry">
          <rect>
           <x>210</x>
@@ -3406,7 +3406,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QRadioButton" name="radioButton">
+       <widget class="QRadioButton" name="Edit_Dossier_SemActuel_Automne">
         <property name="geometry">
          <rect>
           <x>120</x>
@@ -3419,7 +3419,7 @@
          <string>Automne</string>
         </property>
        </widget>
-       <widget class="QRadioButton" name="radioButton_2">
+       <widget class="QRadioButton" name="Edit_Dossier_SemActuel_Printemps">
         <property name="geometry">
          <rect>
           <x>120</x>
@@ -3432,7 +3432,7 @@
          <string>Printemps</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="Edit_Dossier_SemActuel_Label2">
         <property name="geometry">
          <rect>
           <x>200</x>

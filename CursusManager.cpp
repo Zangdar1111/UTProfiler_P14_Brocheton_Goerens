@@ -247,6 +247,8 @@ int CursusManager::check_integrity()
           {
               NbLigne=5;
               test=flux.readLine();
+              if(flux.atEnd())
+                  return 0;
           }
               for (unsigned int i=0;i<NbLigne;i++)
               {
@@ -283,6 +285,7 @@ void CursusManager::load()
 
                 secondaire=true;
                 if (code=="#Secondaire#") code = flux.readLine();
+                if(flux.atEnd()) break;
                 QString titre= flux.readLine();
                 QString resp = flux.readLine();
 

@@ -26,8 +26,12 @@ public:
     void setFiliere(QString filiere) {Cursus_Filiere=filiere;}
     void addMineur(QString mineur){ Cursus_Mineur.append(mineur);}
     void setSemestreCourant(Semestre* sem) {SemestreCourant=sem;}
-    void addParcours(InscriptionPassee& pass) {ListeParcours.append(pass);}
+    //void addParcours(InscriptionPassee& pass) {ListeParcours.append(pass);}
+    void addParcours(InscriptionPassee pass) {ListeParcours.append(pass);}
     void addSolution(Solution& sol) {ListeSolutions.append(sol);}
+
+    void deleteAllParcours() {ListeParcours.clear();}
+    void deleteAllSolutions() {ListeSolutions.clear();}
 
     QString getNomPrenom() const {return Nom_Prenom;}
     unsigned int getNiveauLangue() const {return Niveau_langue;}

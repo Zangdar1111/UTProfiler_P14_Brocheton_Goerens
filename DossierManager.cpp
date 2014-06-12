@@ -40,6 +40,16 @@ void DossierManager::setPrepa(QString login, QString prepa){
         cout<<"Erreur : Dossier ou Cursus Inexistant\n";
 }
 
+
+void DossierManager::setSemestreCourant(QString login, Semestre* sem){
+    Dossier* findDossier=getDossier(login);
+    if(findDossier==NULL){
+        cout<<"Erreur: Dossier non trouvé";
+    }
+    else
+        findDossier->setSemestreCourant(sem);
+}
+
 void DossierManager::setBranche(QString login, QString branche){
     CursusManager* CursusManage = CursusManager::getInstance();
     Dossier* findDossier=getDossier(login);
@@ -185,8 +195,6 @@ QStringList DossierManager::listerDossier()
 
 void DossierManager::load()
 {
-    /*
-
     QFile liste_dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/liste.txt");
     if(liste_dossier.open(QIODevice::ReadOnly | QIODevice::Text))  // si l'ouverture a réussi
     {
@@ -208,12 +216,18 @@ void DossierManager::load()
                 QString NomPrenom = flux.readLine();
                 int anglais = flux.readLine().toInt();
                 QString Prepa = flux.readLine();
+                cout<<Prepa.toStdString();
                 QString Branche = flux.readLine();
                 QString Filiere = flux.readLine();
                 QString Mineurs = flux.readLine();
                 QStringList liste_mineur = Mineurs.split(",");
-
-                addDossier(login,NomPrenom,anglais);
+                QString sem1 = flux.readLine();
+                QStringList sem2 = sem1.split(",");
+                Saison saiso=Printemps;
+                if(sem2.at(0)=="Automne")
+                    saiso=Automne;                    
+                Semestre* currentsemestre = new Semestre(saiso,sem2.at(1).toInt());
+                addDossier(login,NomPrenom,anglais,currentsemestre);
                 setPrepa(login,Prepa);
                 setBranche(login,Branche);
                 setFiliere(login,Filiere);
@@ -224,11 +238,9 @@ void DossierManager::load()
                 {
                     flux.readLine();
                     QString saison = flux.readLine();
-                    Saison sais;
+                    Saison sais=Printemps;
                     if(saison=="Automne")
                         sais=Automne;
-                    else
-                        sais=Printemps;
                     unsigned int annee = flux.readLine().toInt();
                     Semestre* sem = new Semestre(sais,annee);
                     QString cursus = flux.readLine();
@@ -247,11 +259,6 @@ void DossierManager::load()
             }
         }
     }
-
-    else
-        cout<<"Liste non trouvee";
-*/
-
 }
 
 
@@ -277,15 +284,8 @@ void DossierManager::deleteDossier_fichier(QString login)
         int i=1;
         QFile dossier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+".txt");
         dossier.remove();
-        while(i<50)
-        {
-            /*if(QFile::exists("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solution"+i+".txt"))
-            {
-                cout<<"le fichier existe pas"<<endl;
-                break;
-            }*/
-            QFile::remove("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solution"+i+".txt");
-            i++;
-        }
+
+        QFile dossier1("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
+        dossier1.remove("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
     }
 }

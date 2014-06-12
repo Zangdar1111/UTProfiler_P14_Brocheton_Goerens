@@ -19,6 +19,7 @@ public:
     void setBranche(QString login, QString branche);
     void setFiliere(QString login, QString filiere);
     void addMineur(QString login, QString mineur);
+    void setSemestreCourant(QString login, Semestre* sem);
     QString getNomPrenom(QString login) const;
     unsigned int getNiveauLangue(QString login) const;
     QString getPrepa(QString login) const;

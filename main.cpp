@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
     }
     splash.clearMessage();
     splash.showMessage("Chargement des UV", Qt::AlignCenter, Qt::black);
-    //UVManage->load();
+    UVManage->load();
     Sleep(500);
     splash.clearMessage();
     splash.showMessage("Chargement des Cursus", Qt::AlignCenter, Qt::black);
-    //CursusManage->load();
+    CursusManage->load();
     Sleep(500);
     splash.clearMessage();
     splash.showMessage("Chargement des Dossiers", Qt::AlignCenter, Qt::black);
@@ -72,10 +72,6 @@ int main(int argc, char *argv[])
 
     //test_dossier();
 
-    /*
-    DossierManage->addDossier("tbrochet","Brocheton Thibault",3);
-    DossierManage->addDossier("mgoerens","Goerens Matthias",5);
-*/
     return a.exec();
     atexit(fin);
 }

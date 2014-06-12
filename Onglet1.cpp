@@ -18,6 +18,10 @@ void MainWindow::ResetUV()
 void MainWindow::CreateUV()
 {
     ResetUV();
+    CursusManager* CursusManage = CursusManager::getInstance();
+    QStringList liste= CursusManage->listerCursus();
+    for (int i=0;i<liste.size();i++)
+        ui->Edit_UV_List1->addItem(liste.at(i));
     ui->Edit_UV_Code->setReadOnly(false);
     ui->Edit_UV_Group->setEnabled(true);
 }
