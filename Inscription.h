@@ -28,6 +28,13 @@ public:
     QString getCursusPrincipal() const {return CursusPpal;}
     unsigned int getTailleTab() const {return tailleTab;}
 
+    unsigned int getNbCreditsCatMax(Categorie cat) const{
+        unsigned int res=0;
+        UVManager* UVManage = UVManager::getInstance();
+        for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs.at(i), cat);
+        return res;
+    }
+
     //Récupère le nombre de crédits CS pouvant être validés au maximum
     unsigned int getNbCreditsCSMax() const{
         unsigned int res=0;

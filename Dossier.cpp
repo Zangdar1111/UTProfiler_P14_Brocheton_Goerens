@@ -170,14 +170,16 @@ void Dossier::proposerSolution(){
 
 void Dossier::proposerSolutionPrepa(){
 
-//    CursusManager* CursusManage = CursusManager::getInstance();
+//  CursusManager* CursusManage = CursusManager::getInstance();
     QStringList listeUVsPresentes = getListeUvs();
     Semestre* SemCourant = getSemestreCourant();
+    Solution* solutionPrepa = new Solution();
 
     /*
     unsigned int nbTotUVs=0; //Nombre Total d'UVs ajotuées au dossier
     unsigned int nbTotCre=0; //Nombre Total de Crédits ajoutés
 */
+
     InscriptionFuture* proposition = new InscriptionFuture(SemCourant, getPrepa());
     completeCat(CS, proposition, getPrepa(), &listeUVsPresentes);
     completeCat(TM, proposition, getPrepa(), &listeUVsPresentes);
@@ -188,8 +190,9 @@ void Dossier::proposerSolutionPrepa(){
         cout<<"yes\n";
     else cout<<"no\n";
 
-    Solution* solutionPrepa = new Solution();
     solutionPrepa->addPrevision(*proposition);
+    ListeSolutions.append(*solutionPrepa);
+    estSolutionValide(ListeSolutions.indexOf(*solutionPrepa));
 }
 
 void Dossier::completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus, QStringList* listeUVsPresentes){
@@ -224,4 +227,33 @@ void Dossier::completeCat(Categorie cat, InscriptionFuture* proposition, QString
             //GO ON
         }
     }
+}
+
+bool Dossier::estSolutionValide(int i) const{
+    if(i<0)
+        cout<<"Erreur : Solution inexistante !";
+    else
+        //if(PrepaSolutionValide(i)&&BrancheSolutionValide(i)&&NiveauLangueValide())
+        if(PrepaSolutionValide(i))
+            return true;
+
+    return false;
+}
+
+bool Dossier::PrepaSolutionValide(int i) const{
+    CursusManager* CursusManage = CursusManager::getInstance();
+
+    if(CursusManage->getNbCreditsCSAValider(getPrepa())>getNbCreditsCS(getPrepa())+getListeSolutions().at(i).getNbCreditsCat(CS, getPrepa()))
+        return false;
+    if(CursusManage->getNbCreditsTMAValider(getPrepa())>getNbCreditsTM(getPrepa())+getListeSolutions().at(i).getNbCreditsCat(TM, getPrepa()))
+        return false;
+    if(CursusManage->getNbCreditsCSTMAValider(getPrepa())>getNbCreditsCSTM(getPrepa())+getListeSolutions().at(i).getNbCreditsCat(CS, getPrepa()))
+        return false;
+    if(CursusManage->getNbCreditsTSHAValider(getPrepa())>getNbCreditsTSH(getPrepa())+getListeSolutions().at(i).getNbCreditsCat(TSH, getPrepa()))
+        return false;
+    if(CursusManage->getNbCreditsSPAValider(getPrepa())>getNbCreditsSP(getPrepa())+getListeSolutions().at(i).getNbCreditsCat(SP, getPrepa()))
+        return false;
+    if(CursusManage->getNbCreditsTotAValider(getPrepa())>getNbCreditsTot(getPrepa())+getListeSolutions().at(i).getNbCreditsCat(CS, getPrepa()))
+        return false;
+    return true;
 }

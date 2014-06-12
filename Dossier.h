@@ -66,6 +66,10 @@ public:
     void proposerSolutionPrepa();
 
     void completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus, QStringList* listeUVsPresentes);
+
+    bool estSolutionValide(int i) const;
+    bool PrepaSolutionValide(int i) const;
+
 };
 
 
