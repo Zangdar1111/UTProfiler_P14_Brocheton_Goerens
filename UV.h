@@ -37,7 +37,7 @@ public:
     int getNb_Cursus() const {return this->Nb_Cursus;}
     bool getDemiUV() const {return this->DemiUV;}
     bool hasCategorie(Categorie cat) const{
-        if(Credits_Categorie[cat]!=0) return true;
+        if(Credits_Categorie[cat]>0) return true;
         return false;
     }
 

@@ -31,6 +31,8 @@ public:
     unsigned int getNbCreditsCatMax(Categorie cat) const{
         unsigned int res=0;
         UVManager* UVManage = UVManager::getInstance();
+        cout<<"Taille de la liste d'UVs"<<tailleTab<<"\n";
+        cout<<"(OU) Taille de la liste d'UVs"<<getListUV().size()<<"\n";
         for (unsigned int i=0; i<tailleTab; i++) res+=UVManage->getNbCreditsCategorie(TabUVs.at(i), cat);
         return res;
     }

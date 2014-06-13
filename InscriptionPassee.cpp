@@ -36,9 +36,14 @@ unsigned int InscriptionPassee::getNbCreditsCS(QString cursus /*=QString::null*/
     UVManager* UVManage = UVManager::getInstance();
 
     if(cursus!=""){
-        for (unsigned int i=0; i<getTailleTab(); i++)
-            if(isValidee(i)&&UVManage->hasCursus(getListUV()[i],cursus))
+        cout<<"Cursus non vide\n";
+        for (unsigned int i=0; i<getTailleTab(); i++){
+            cout<<"Parcours la liste des UVs\n";
+            if(isValidee(i)&&UVManage->hasCursus(getListUV()[i],cursus)){
+                cout<<"UV validee et cursus correspondant\n";
                 res+=UVManage->getNbCreditsCategorie(getListUV()[i], CS);
+            }
+        }
     }
     else {
         for (unsigned int i=0; i<getTailleTab(); i++)
@@ -118,6 +123,7 @@ bool InscriptionPassee::isValidee(unsigned int i) const{
         if(Resultat[i]!=FX&&Resultat[i]!=F&&Resultat[i]!=RES&&Resultat[i]!=ABS&&Resultat[i]!=EC)
             return true;
     }
+    cout<<"UV non validee\n";
     return false;
 }
 

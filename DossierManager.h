@@ -33,7 +33,7 @@ public:
     QList<Solution> getAllSolutions(QString login) const;
 
     bool estDiplome(QString login) const;
-    void proposerSolution(QString login);
+    void proposerSolution(QString login, QStringList TriUVs);
 
     //Pour toi Thibault ?
 
@@ -42,6 +42,8 @@ public:
     void load(); //Charge les Dossiers depuis un fichier
     void deleteDossier_fichier(QString login); //Supprime une Dossier du fichier de saDossieregarde
     void addDossier_fichier(QString login); //Ajoute une Dossier au fichier de saDossieregarde
+
+    void afficherSolutions(QString login) const;
 
 
 };
