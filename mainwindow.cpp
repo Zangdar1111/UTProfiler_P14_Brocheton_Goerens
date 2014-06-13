@@ -76,11 +76,22 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent), ui(new Ui::MainWin
     //Onglet 4
     QObject::connect(ui->Edit_AutoDossier_UV_Seek, SIGNAL(clicked()), this, SLOT(AutoDossierPrintUV()));
     QObject::connect(ui->Seek_AutoDossier_Submit, SIGNAL(clicked()), this, SLOT(PrintAutoDossier()));
+    QObject::connect(ui->Create_AutoDossier, SIGNAL(clicked()), this, SLOT(Create_AutoDossier()));
     QObject::connect(ui->Print_AutoDossier_List, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(EditAutoDossier(QListWidgetItem *)));
+    QObject::connect(ui->Edit_AutoDossier_Annuler, SIGNAL(clicked()), this, SLOT(AnnSuppAutoDossier()));
+
+    QObject::connect(ui->Edit_AutoDossier_UV_Oui, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
+    QObject::connect(ui->Edit_AutoDossier_UV_Non, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
+    QObject::connect(ui->Edit_AutoDossier_Sauvegarde, SIGNAL(clicked()), this, SLOT(SaveAutoDossier()));
+
+
+
+
     //Configuration au lancement
     PrintUV();
     PrintCursus();
     PrintDossier();
+    PrintAutoDossier();
 }
 
 void MainWindow::quit()

@@ -257,3 +257,39 @@ bool Dossier::PrepaSolutionValide(int i) const{
         return false;
     return true;
 }
+
+ void Dossier::deleteSolution_fichier(int index)
+ {
+     cout<<"TEST";
+     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+Login+"_solutions.txt");
+     if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+     {
+         int marqueur1=0,marqueur2=0,j=0;
+         QTextStream flux(&fichier);
+         QStringList tout;
+         while(! flux.atEnd())
+         {
+             tout.append(flux.readLine());
+         }
+         for(int i=0;i<tout.size();i++)
+         {
+             if(tout.at(i)=="#Solution#")
+             {
+                 if(j==index)
+                    marqueur1=i;
+                 if(j==index+1)
+                     marqueur2=i;
+                 j++;
+             }
+         }
+         if(marqueur2==0)
+             marqueur2=tout.size();
+         for(int k=0;k<marqueur2-marqueur1;k++)
+            tout.removeAt(marqueur1);
+         fichier.resize(0);
+         for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
+         {
+             flux<<*it<<"\n";
+         }
+     }
+ }

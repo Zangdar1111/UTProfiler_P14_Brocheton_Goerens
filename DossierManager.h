@@ -35,8 +35,6 @@ public:
     bool estDiplome(QString login) const;
     void proposerSolution(QString login);
 
-    //Pour toi Thibault ?
-
     QStringList listerDossier(); // Permet de lister toutes les Dossier chargées dans l'application
 
     void load(); //Charge les Dossiers depuis un fichier

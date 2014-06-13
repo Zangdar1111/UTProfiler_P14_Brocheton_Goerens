@@ -7,7 +7,12 @@ GI
 
 Printemps,14
 #
-Printemps,14
+Automne,13
 GI
 RO03,MT10,SY02,SR01,SY15
-EC,EC,EC,EC,EC
+B,A,A,A,A
+#
+Printemps,14
+GI
+IA02,GE23,MI01,LA13,SY31,SY14
+EC,EC,EC,EC,EC,EC

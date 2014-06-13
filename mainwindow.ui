@@ -3512,6 +3512,9 @@
        <property name="defaultDropAction">
         <enum>Qt::CopyAction</enum>
        </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
       </widget>
       <widget class="QGroupBox" name="Edit_Dossier_UV_Seek_Group">
        <property name="geometry">
@@ -3744,8 +3747,8 @@
      <widget class="QPushButton" name="Create_AutoDossier">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>180</y>
+        <x>150</x>
+        <y>260</y>
         <width>111</width>
         <height>23</height>
        </rect>
@@ -5404,13 +5407,16 @@
          <bool>false</bool>
         </property>
         <property name="dragEnabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="dragDropMode">
          <enum>QAbstractItemView::DragOnly</enum>
         </property>
         <property name="defaultDropAction">
          <enum>Qt::CopyAction</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
        </widget>
        <widget class="QGroupBox" name="Edit_AutoDossier_UV_Seek_Group">
@@ -5577,16 +5583,19 @@
          </rect>
         </property>
         <property name="showDropIndicator" stdset="0">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="dragEnabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="dragDropMode">
-         <enum>QAbstractItemView::DragOnly</enum>
+         <enum>QAbstractItemView::DragDrop</enum>
         </property>
         <property name="defaultDropAction">
-         <enum>Qt::CopyAction</enum>
+         <enum>Qt::MoveAction</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
        </widget>
       </widget>
@@ -5612,16 +5621,19 @@
          </rect>
         </property>
         <property name="showDropIndicator" stdset="0">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="dragEnabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="dragDropMode">
-         <enum>QAbstractItemView::DragOnly</enum>
+         <enum>QAbstractItemView::DragDrop</enum>
         </property>
         <property name="defaultDropAction">
-         <enum>Qt::CopyAction</enum>
+         <enum>Qt::MoveAction</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
        </widget>
       </widget>
@@ -5694,14 +5706,42 @@
        </property>
       </widget>
      </widget>
-     <zorder>Print_AutoDossier_Label</zorder>
-     <zorder>Seek_AutoDossier_Group</zorder>
-     <zorder>Print_AutoDossier_List</zorder>
-     <zorder>Create_AutoDossier</zorder>
-     <zorder>Edit_AutoDossier_Semestre_Group</zorder>
-     <zorder>Edit_AutoDossier_SemestrePrepa_Group</zorder>
-     <zorder>Edit_AutoDossier_UV_Group</zorder>
-     <zorder>Edit_AutoDossier_Actions_Group</zorder>
+     <widget class="QLineEdit" name="Create_AutoDossier_Login">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>260</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Seek_AutoDossier_Label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>46</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Login:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Edit_AutoDossier_CurrentSolution">
+      <property name="geometry">
+       <rect>
+        <x>1185</x>
+        <y>50</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

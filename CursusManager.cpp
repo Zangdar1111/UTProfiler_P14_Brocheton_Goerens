@@ -328,7 +328,6 @@ void CursusManager::load()
             }
             flux.readLine();
         }
-
     }
 }
 

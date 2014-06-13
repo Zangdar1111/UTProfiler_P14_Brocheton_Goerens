@@ -29,6 +29,7 @@ public:
     void addParcours(InscriptionPassee& pass) {ListeParcours.append(pass);}
     void addParcours(const InscriptionPassee& pass) {ListeParcours.append(pass);}
     void addSolution(Solution& sol) {ListeSolutions.append(sol);}
+    void addSolution(const Solution& sol) {ListeSolutions.append(sol);}
 
     void deleteAllParcours() {ListeParcours.clear();}
     void deleteAllSolutions() {ListeSolutions.clear();}
@@ -66,6 +67,9 @@ public:
     void proposerSolutionPrepa();
 
     void completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus, QStringList* listeUVsPresentes);
+
+    void deleteSolution_fichier(int index);
+    void saveSolution_fichier();
 
     bool estSolutionValide(int i) const;
     bool PrepaSolutionValide(int i) const;

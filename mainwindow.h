@@ -86,7 +86,9 @@ public slots:
     void PrintAutoDossier();
     void ResetAutoDossier();
     void EditAutoDossier(QListWidgetItem *);
-
+    void Create_AutoDossier();
+    void AnnSuppAutoDossier();
+    void SaveAutoDossier();
 
 
 private:

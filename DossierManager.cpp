@@ -340,8 +340,8 @@ void DossierManager::addDossier_fichier(QString login)
 
     Dossier* doss = getDossier(login);
 
-    QFile dossier1("../QIODevice::ReadWrite | QIODevice::TextUTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
-    if(dossier1.open(QIODevice::ReadWrite | QIODevice::Text))
+    QFile dossier1("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+login+"_solutions.txt");
+    if(dossier1.open(QIODevice::ReadWrite | QIODevice::Append))
         dossier1.resize(0);
     else
         cout<<"Dossier Solutions Introuvable !";
@@ -396,5 +396,4 @@ void DossierManager::addDossier_fichier(QString login)
             flux<<"\n";
         }
     }
-
 }
