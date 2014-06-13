@@ -64,7 +64,7 @@ public:
     bool estDiplome() const;
 
     void proposerSolution(QStringList TriUVs);
-    void proposerSolutionPrepa(Solution* sol, int index, QStringList* listeUVsPresentes, QStringList TriUVs);
+    void proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresentes, Semestre* SemCourant, QStringList TriUVs);
     void proposerSolutionBranche(Solution* sol, int index, QStringList* listeUVsPresentes, QStringList TriUVs);
     void proposerSolutionFiliere(Solution* sol, int index);
 

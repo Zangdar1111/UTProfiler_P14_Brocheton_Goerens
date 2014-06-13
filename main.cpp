@@ -157,8 +157,8 @@ void test_dossier(){
 
     cout<<"Creation d'un dossier\n";
     //Création d'un dossier
-    Semestre* A11 = new Semestre(Automne, 2011);
-    Semestre* P12 = new Semestre(Printemps, 2012);
+    Semestre* A11 = new Semestre(Automne, 11);
+    Semestre* P12 = new Semestre(Printemps, 12);
 
     DossierManage->addDossier("someone", "Coucou Coucou", 4, A11);
     DossierManage->setPrepa("someone", "TC");

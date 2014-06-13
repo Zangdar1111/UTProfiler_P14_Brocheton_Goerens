@@ -116,10 +116,9 @@ QString UVManager::getUVfromCatCursus(Categorie cat, QString cursus, QStringList
     UV* findUV;
     for(int i=0; i<TriUVs.size(); i++){
         findUV=getUV(TriUVs.at(i));
-        cout<<"test de l'UV "<<findUV->getCode().toStdString()<<"\n";
+        cout<<"test de l'UV "<<findUV->getCode().toStdString()<<", donne "<<findUV->getCreditsCat(cat)<<" credits dans cette categorie; hasCategorie renvoie : "<<findUV->hasCategorie(cat)<<"; dejà présent dans la liste renvoie : "<<listeUVsPresentes->contains(TriUVs.at(i))<<"\n";
         if(hasCursus(TriUVs.at(i), cursus)&&!listeUVsPresentes->contains(TriUVs.at(i))&&findUV->hasCategorie(cat)){
             cout<<"UV "<<findUV->getCode().toStdString()<<" OK !\n";
-            listeUVsPresentes->append(TriUVs.at(i)); //Ajout de l'UV à la liste des UVs du Cursus
             return TriUVs.at(i); //Retourne le code de l'UV
         }
     }

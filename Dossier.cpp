@@ -165,13 +165,15 @@ bool Dossier::estDiplome() const{
 
 void Dossier::proposerSolution(QStringList TriUVs){
     QStringList listeUVsPresentes = getListeUvs(); //récupère la liste des UVs validées dans le dossier
+    Semestre* SemCourant = new Semestre(*getSemestreCourant());
+    SemCourant->afficher();
     Solution* sol = new Solution();
     ListeSolutions.append(*sol);
 
     cout<<"****Début de la recherche de Solution ****\n";
     if(!PrepaValide()){
         cout<<"---Complement de la Prepa\n---";
-        proposerSolutionPrepa(sol, ListeSolutions.indexOf(*sol), &listeUVsPresentes, TriUVs);
+        proposerSolutionPrepa(sol, &listeUVsPresentes, SemCourant, TriUVs);
         cout<<"affichage solution, apres complement prepa :\n";
         sol->afficher();
     }
@@ -188,18 +190,24 @@ void Dossier::proposerSolution(QStringList TriUVs){
 */
 }
 
-void Dossier::proposerSolutionPrepa(Solution* sol, int index, QStringList* listeUVsPresentes, QStringList TriUVs){
-    Semestre* SemCourant = getSemestreCourant(); //Récupère le semestre courant
+/* Propose une solution pour la prepa
+ * Créé des objets InscriptionsFutures et les ajoutes à l'objet Solution
+ * listeUvsPresentes contient les UV déjà présentes dans le dossier + les UVs déjà rajoutées par la solution
+ * TriUVs contient la liste de toutes les UVs, triées par ordre de préférence par l'utilisateur
+ */
+void Dossier::proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresentes, Semestre* SemCourant, QStringList TriUVs){
     bool complCS = true, complTM=true, complTSH=true, complSP=true;
     bool impossible=false;
+    Semestre* SemInscription;
 
     InscriptionFuture* proposition;
     unsigned int nbTotUVs; //Nombre Total d'UVs ajotuées dans la proposition - Ne doit pas excéder 7
     unsigned int nbTotCre; //Nombre Total de Crédits ajoutés dans la proposition - Ne doit pas excéder 35
-
     while(!PrepaSolutionValide(sol)&&!impossible){
+        SemCourant->incrementer();
+        SemInscription = new Semestre (*SemCourant);
         cout<<"##BOUCLE WHILE prepa non valide et non impossible de trouver une proposition\n";
-        proposition = new InscriptionFuture(SemCourant, getPrepa());
+        proposition = new InscriptionFuture(SemInscription, getPrepa());
         nbTotUVs=0;
         nbTotCre=0;
 
@@ -268,8 +276,9 @@ bool Dossier::completeCat(Categorie cat, InscriptionFuture* proposition, QString
                 impossible=true;
             } else {
             cout<<"UV Trouvee : "<<uv.toStdString()<<"\n";
-            //Ajouter l'UV à la proposition
+            //Ajouter l'UV à la proposition et à la liste des UVs du Cursus
             proposition->addUV(uv);
+            listeUVsPresentes->append(uv);
 
             cout<<"Ajout de "<<UVManage->getNbCreditsCategorie(uv,cat)<<"credits "<<cat<<"\n";
             //Incrémenter le nombre d'UVs ajoutées et le nombre de crédits validés

@@ -66,6 +66,8 @@ public :
 
     void afficher() const{
         for(int i=0; i<getListePrevisions().size(); i++){
+            getListePrevisions().at(i).getSemestre()->afficher();
+            cout<<" : ";
             for(int j=0; j<getListePrevisions().at(i).getListUV().size(); j++){
                 cout<<getListePrevisions().at(i).getListUV().at(j).toStdString()<<" - ";
             }
