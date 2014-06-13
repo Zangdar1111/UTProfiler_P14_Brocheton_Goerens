@@ -34,8 +34,7 @@ void MainWindow::ExecuterAutoCompletion()
     {
         uvsOui.append(uvsNon.at(i));
     }
-    Solution* Sol;
-    //Solution* Sol = DossierManage->proposerSolution(login,uvsOui);
+    Solution* Sol = DossierManage->proposerSolution(login,uvsOui);
     if(Sol==NULL)
         QMessageBox::information(this,"Erreur","Les paramètres fournis n'ont pas permis de calculer une solution.",QMessageBox::Ok);
     else

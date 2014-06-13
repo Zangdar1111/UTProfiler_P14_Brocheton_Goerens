@@ -76,7 +76,7 @@ public:
     unsigned int getNbTotInscrCursus(QString cursus) const;
 
     void deleteSolution_fichier(int index);
-    void saveSolution_fichier();
+    void addSolution_fichier();
 
     bool estSolutionValide(Solution *sol) const;
     bool PrepaSolutionValide(Solution *sol) const;
