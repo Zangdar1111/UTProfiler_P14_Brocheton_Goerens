@@ -89,6 +89,7 @@ public slots:
     void Create_AutoDossier();
     void AnnSuppAutoDossier();
     void SaveAutoDossier();
+    void ExecuterAutoCompletion();
 
 
 private:

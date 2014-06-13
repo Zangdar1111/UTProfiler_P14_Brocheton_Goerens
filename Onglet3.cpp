@@ -370,7 +370,7 @@ void MainWindow::EtapeSemestre()
     ui->Edit_Dossier_Current_Valider->setEnabled(false);
     ui->Edit_Dossier_Current_Reset->setText("Retour");
     ui->Edit_Dossier_Semestre_Group->setEnabled(true);
-    if(ui->Edit_Dossier_Current_Prepa->text()=="EXT" || ui->Edit_Dossier_Current_Prepa->text()!="")
+    if(ui->Edit_Dossier_Current_Prepa->text()=="EXT" && ui->Edit_Dossier_Current_Prepa->text()!="")
     {
         ui->Edit_Dossier_Semestre1_UV->clear();
         ui->Edit_Dossier_Semestre2_UV->clear();
@@ -408,6 +408,34 @@ void MainWindow::EtapeSemestre()
         ui->Edit_Dossier_SemestreB6_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"06");
         ui->Edit_Dossier_SemestreB7_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"07");
         ui->Edit_Dossier_SemestreB8_Nom->setText(ui->Edit_Dossier_Current_Branche->text()+"08");
+    }
+    if (ui->Edit_Dossier_Current_Branche->text()=="")
+    {
+        ui->Edit_Dossier_UV_Group->setEnabled(true);
+        ui->Edit_Dossier_SemestreB1_Nom->setText("GX01");
+        ui->Edit_Dossier_SemestreB2_Nom->setText("GX02");
+        ui->Edit_Dossier_SemestreB3_Nom->setText("GX03");
+        ui->Edit_Dossier_SemestreB4_Nom->setText("GX04");
+        ui->Edit_Dossier_SemestreB5_Nom->setText("GX05");
+        ui->Edit_Dossier_SemestreB6_Nom->setText("GX06");
+        ui->Edit_Dossier_SemestreB7_Nom->setText("GX07");
+        ui->Edit_Dossier_SemestreB8_Nom->setText("GX08");
+        ui->Edit_Dossier_SemestreB1_UV->clear();
+        ui->Edit_Dossier_SemestreB2_UV->clear();
+        ui->Edit_Dossier_SemestreB3_UV->clear();
+        ui->Edit_Dossier_SemestreB4_UV->clear();
+        ui->Edit_Dossier_SemestreB5_UV->clear();
+        ui->Edit_Dossier_SemestreB6_UV->clear();
+        ui->Edit_Dossier_SemestreB7_UV->clear();
+        ui->Edit_Dossier_SemestreB8_UV->clear();
+        ui->Edit_Dossier_SemestreB1_Notes->clear();
+        ui->Edit_Dossier_SemestreB2_Notes->clear();
+        ui->Edit_Dossier_SemestreB3_Notes->clear();
+        ui->Edit_Dossier_SemestreB4_Notes->clear();
+        ui->Edit_Dossier_SemestreB5_Notes->clear();
+        ui->Edit_Dossier_SemestreB6_Notes->clear();
+        ui->Edit_Dossier_SemestreB7_Notes->clear();
+        ui->Edit_Dossier_SemestreB8_Notes->clear();
     }
 }
 

@@ -1,11 +1,215 @@
 #include "includes.h"
 
+void MainWindow::ExecuterAutoCompletion()
+{
+    QString login =  ui->Edit_AutoDossier_CurrentSolution->text();
+    UVManager* UVManage = UVManager::getInstance();
+    DossierManager* DossierManage = DossierManager::getInstance();
+    QStringList uvsOui,uvsNon;
+    while(ui->Edit_AutoDossier_UV_Oui->count()>0)
+        uvsOui.append(ui->Edit_AutoDossier_UV_Oui->item(0)->text());
+    while(ui->Edit_AutoDossier_UV_Non->count()>0)
+        uvsNon.append(ui->Edit_AutoDossier_UV_Non->item(0)->text());
+    QStringList allUV = UVManage->listerUV();
+    for(int i=0;i<uvsNon.size();i++)
+    {
+        if(uvsOui.contains(uvsNon.at(i)))
+            uvsOui.removeOne(uvsNon.at(i));
+    }
+    for(int i=0;i<uvsOui.size();i++)
+    {
+        if(allUV.contains(uvsOui.at(i)))
+            allUV.removeOne(uvsOui.at(i));
+    }
+    for(int i=0;i<uvsNon.size();i++)
+    {
+        if(allUV.contains(uvsNon.at(i)))
+            allUV.removeOne(uvsNon.at(i));
+    }
+    for(int i=0;i<allUV.size();i++)
+    {
+        uvsOui.append(allUV.at(i));
+    }
+    for(int i=0;i<uvsNon.size();i++)
+    {
+        uvsOui.append(uvsNon.at(i));
+    }
+    Solution* Sol;
+    //Solution* Sol = DossierManage->proposerSolution(login,uvsOui);
+    if(Sol==NULL)
+        QMessageBox::information(this,"Erreur","Les paramètres fournis n'ont pas permis de calculer une solution.",QMessageBox::Ok);
+    else
+    {
+        QList<InscriptionFuture> Lfut = Sol->getListePrevisions();
+        CursusManager* CursusManage = CursusManager::getInstance();
+        for(QList<InscriptionFuture>::iterator it=Lfut.begin() ; it!=Lfut.end() ; ++it)
+        {
+            if(CursusManage->getCursus(it->getCursusPrincipal())->isWhat1()==1)
+            {
+                if(MainWindow::ui->Edit_AutoDossier_Semestre1_UV->count() == 0)
+                    ui->Edit_AutoDossier_Semestre1_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_Semestre2_UV->count() == 0)
+                    ui->Edit_AutoDossier_Semestre2_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_Semestre3_UV->count() == 0)
+                    ui->Edit_AutoDossier_Semestre3_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_Semestre4_UV->count() == 0)
+                    ui->Edit_AutoDossier_Semestre4_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_Semestre5_UV->count() == 0)
+                    ui->Edit_AutoDossier_Semestre5_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_Semestre6_UV->count() == 0)
+                    ui->Edit_AutoDossier_Semestre6_UV->addItems(it->getListUV());
+            }
+            else
+            {
+                if(ui->Edit_AutoDossier_SemestreB1_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB1_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_SemestreB2_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB2_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_SemestreB3_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB3_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_SemestreB4_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB4_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_SemestreB5_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB5_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_SemestreB6_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB6_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_SemestreB7_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB7_UV->addItems(it->getListUV());
+                else if(ui->Edit_AutoDossier_SemestreB8_UV->count() == 0)
+                    ui->Edit_AutoDossier_SemestreB8_UV->addItems(it->getListUV());
+            }
+        }
+    }
+}
+
+
+
 
 void MainWindow::SaveAutoDossier()
 {
+    QString login =  ui->Edit_AutoDossier_CurrentSolution->text();
+    DossierManager* DossierManage = DossierManager::getInstance();
+    Dossier* dossier = DossierManage->getDossier(login);
+    Solution Sol = Solution();
+    Semestre* ajout = dossier->getSemestreCourant();
+    Semestre* newSem = new Semestre(*ajout);
+    if(ui->Edit_AutoDossier_Semestre1_Notes->count()==0 and ui->Edit_AutoDossier_Semestre1_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_Semestre1_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_Semestre1_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getPrepa(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_Semestre2_Notes->count()==0 and ui->Edit_AutoDossier_Semestre2_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_Semestre2_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_Semestre2_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getPrepa(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_Semestre3_Notes->count()==0 and ui->Edit_AutoDossier_Semestre3_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_Semestre3_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_Semestre3_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getPrepa(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_Semestre4_Notes->count()==0 and ui->Edit_AutoDossier_Semestre4_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_Semestre4_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_Semestre4_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getPrepa(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_Semestre5_Notes->count()==0 and ui->Edit_AutoDossier_Semestre5_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_Semestre5_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_Semestre5_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getPrepa(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_Semestre6_Notes->count()==0 and ui->Edit_AutoDossier_Semestre6_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_Semestre6_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_Semestre6_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getPrepa(),uvs.size()));
+    }
 
-
-
+    if(ui->Edit_AutoDossier_SemestreB1_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB1_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB1_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB1_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_SemestreB2_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB2_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB2_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB2_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_SemestreB3_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB3_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB3_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB3_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_SemestreB4_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB4_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB4_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB4_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_SemestreB5_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB5_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB5_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB5_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_SemestreB6_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB6_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB6_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB6_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_SemestreB7_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB7_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB7_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB7_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    if(ui->Edit_AutoDossier_SemestreB8_Notes->count()==0 and ui->Edit_AutoDossier_SemestreB8_UV->count()>0)
+    {
+        newSem->incrementer();
+        QStringList uvs;
+        while (ui->Edit_Dossier_SemestreB8_UV->count () > 0)
+            uvs.append(ui->Edit_Dossier_SemestreB8_UV->item(0)->text());
+        Sol.addPrevision(InscriptionFuture(newSem,uvs,dossier->getBranche(),uvs.size()));
+    }
+    dossier->addSolution(Sol);
+    dossier->addSolution_fichier();
+    QMessageBox::information(this,"Solution sauvegardée","La Solution a bien été sauvegardée !",QMessageBox::Ok);
+    PrintAutoDossier();
 }
 
 
