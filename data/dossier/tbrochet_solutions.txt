@@ -1,0 +1,9 @@
+#Solution#
+#
+Printemps,13
+GI
+SR01,IA01,NF16,SY31,LA12,GE10
+#
+Automne,13
+GI
+SR01,IA01,NF16

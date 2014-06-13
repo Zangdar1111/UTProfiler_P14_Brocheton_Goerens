@@ -73,8 +73,7 @@ public:
                      QStringList TriUVs);
 
     void deleteSolution_fichier(int index);
-    void saveSolution_fichier();
-
+    void addSolution_fichier();
     bool estSolutionValide(int i) const;
     bool PrepaSolutionValide(Solution *sol) const;
     bool BrancheSolutionValide(int i) const;

@@ -432,7 +432,6 @@ void Dossier::proposerSolutionFiliere(Solution* sol, int index){
 
 void Dossier::deleteSolution_fichier(int index)
 {
-    cout<<"TEST";
     QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+Login+"_solutions.txt");
     if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
     {
@@ -462,6 +461,40 @@ void Dossier::deleteSolution_fichier(int index)
         for(QList<QString>::iterator it=tout.begin() ; it!=tout.end() ; ++it)
         {
             flux<<*it<<"\n";
+        }
+    }
+}
+
+void Dossier::addSolution_fichier()
+{
+
+    QFile fichier("../UTProfiler_P14_Brocheton_Goerens/data/dossier/"+Login+"_solutions.txt");
+    if(fichier.open(QIODevice::ReadWrite | QIODevice::Text))  // si l'ouverture a réussi
+    {
+        QTextStream flux(&fichier);
+        fichier.resize(0);
+        QList<Solution> Sols = getListeSolutions();
+        for(QList<Solution>::iterator it=Sols.begin() ; it!=Sols.end() ; ++it)
+        {
+            flux<<"#Solution#\n";
+            QList<InscriptionFuture> IF = it->getListePrevisions();
+            for(QList<InscriptionFuture>::iterator it2=IF.begin() ; it2!=IF.end() ; ++it2)
+            {
+                flux<<"#\n";
+                QString saisone = "Automne";
+                if (it2->getSemestre()->getSaison()==Printemps)
+                    saisone = "Printemps";
+                flux<<saisone<<","<<it2->getSemestre()->getAnnee()<<"\n";
+                flux<<it2->getCursusPrincipal()<<"\n";
+                QStringList uvs = it2->getListUV();
+                for (int i=0;i<uvs.size();i++)
+                {
+                    flux<<uvs.at(i);
+                    if(i<uvs.size()-1)
+                        flux<<",";
+                }
+                flux<<"\n";
+            }
         }
     }
 }

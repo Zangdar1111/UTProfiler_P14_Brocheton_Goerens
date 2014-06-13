@@ -7,8 +7,26 @@ void MainWindow::SaveAutoDossier()
     DossierManager* DossierManage = DossierManager::getInstance();
     Dossier* dossier = DossierManage->getDossier(login);
     Solution Sol = Solution();
-
-
+    Semestre* ajout = dossier->getSemestreCourant();
+    if(ui->Edit_AutoDossier_Semestre1_Notes->count()==0 and ui->Edit_AutoDossier_Semestre1_UV->count()>0)
+    {
+        //Semestre* newSem = ;
+        while (ui->Edit_Dossier_Semestre2_UV->count () > 0)
+        {
+            QStringList uvs;
+            QListWidgetItem* item1 = ui->Edit_Dossier_Semestre2_UV->item(0);
+            uvs.append(item1->text());
+            for(int i=0;i<uvs.size();i++)
+            {
+                IP.addUV(uvs.at(i));
+            }
+        }
+        InscriptionFuture IF = InscriptionFuture(newSem,,dossier->getPrepa(),uvs.size());
+    }
+    
+    
+    
+    //dossier->addSolution_fichier();
     QMessageBox::information(this,"Solution sauvegardée","La Solution a bien été sauvegardée !",QMessageBox::Ok);
     PrintAutoDossier();
 }
