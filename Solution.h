@@ -27,7 +27,7 @@ public :
             if(getListePrevisions().at(i).getCursusPrincipal()==cursus){
                 cout<<"cursus egaux\n";
                 nbCredits+=getListePrevisions().at(i).getNbCreditsCatMax(cat);
-                cout<<"Valeur de nbCredits\n";
+                cout<<"Valeur de nbCredits = <<"<<nbCredits<<"\n";
             }
         }
         cout<<"Valeur de retour nbCredits : "<<nbCredits<<"\n";
@@ -67,7 +67,7 @@ public :
     void afficher() const{
         for(int i=0; i<getListePrevisions().size(); i++){
             getListePrevisions().at(i).getSemestre()->afficher();
-            cout<<" : ";
+            cout<<", "<<getListePrevisions().at(i).getCursusPrincipal().toStdString()<<" : ";
             for(int j=0; j<getListePrevisions().at(i).getListUV().size(); j++){
                 cout<<getListePrevisions().at(i).getListUV().at(j).toStdString()<<" - ";
             }

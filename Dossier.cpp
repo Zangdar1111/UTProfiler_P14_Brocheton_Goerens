@@ -163,31 +163,42 @@ bool Dossier::estDiplome() const{
 
 /* ******Solutions******** */
 
-void Dossier::proposerSolution(QStringList TriUVs){
+Solution* Dossier::proposerSolution(QStringList TriUVs){
     QStringList listeUVsPresentes = getListeUvs(); //récupère la liste des UVs validées dans le dossier
     Semestre* SemCourant = new Semestre(*getSemestreCourant());
-    SemCourant->afficher();
     Solution* sol = new Solution();
-    ListeSolutions.append(*sol);
+    //ListeSolutions.append(*sol);
+
+    //Le nombre de Semestre passés :
+    unsigned int nbTotSemestrePrepa = getNbTotInscrCursus(getPrepa());
+    unsigned int nbTotSemestreBranche = getNbTotInscrCursus(getBranche());
+
 
     cout<<"****Début de la recherche de Solution ****\n";
     if(!PrepaValide()){
-        cout<<"---Complement de la Prepa\n---";
-        proposerSolutionPrepa(sol, &listeUVsPresentes, SemCourant, TriUVs);
+        cout<<"---Complement de la Prepa---\n";
+        proposerSolutionPrepa(sol, &listeUVsPresentes, SemCourant, TriUVs, nbTotSemestrePrepa);
         cout<<"affichage solution, apres complement prepa :\n";
         sol->afficher();
     }
-   /* if(!BrancheValide()){
-
-        if(!FiliereValide()){
+    if(!BrancheValide()){
+        cout<<"---Complement de la Branche---\n";
+        proposerSolutionBranche(sol, &listeUVsPresentes, SemCourant, TriUVs, nbTotSemestreBranche);
+        /*if(!FiliereValide()){
             proposerSolutionFiliere(sol, ListeSolutions.indexOf(*sol));
-        }
-        proposerSolutionBranche(sol, ListeSolutions.indexOf(*sol), &listeUVsPresentes, TriUVs);
+        }*/
+        cout<<"affichage solution, apres complement branche :\n";
+        sol->afficher();
     }
-    if(estSolutionValide(ListeSolutions.indexOf(*sol)))
+
+    if(estSolutionValide(sol)){
         cout<<"solution valide !\n";
-    else cout<<"solution non valide !\n";
-*/
+        return sol;
+    }
+    else{
+        cout<<"solution non valide !\n";
+        return NULL;
+    }
 }
 
 /* Propose une solution pour la prepa
@@ -195,7 +206,8 @@ void Dossier::proposerSolution(QStringList TriUVs){
  * listeUvsPresentes contient les UV déjà présentes dans le dossier + les UVs déjà rajoutées par la solution
  * TriUVs contient la liste de toutes les UVs, triées par ordre de préférence par l'utilisateur
  */
-void Dossier::proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresentes, Semestre* SemCourant, QStringList TriUVs){
+void Dossier::proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresentes, Semestre* SemCourant,
+                                    QStringList TriUVs, unsigned int nbTotSemestrePrepa){
     bool complCS = true, complTM=true, complTSH=true, complSP=true;
     bool impossible=false;
     Semestre* SemInscription;
@@ -211,6 +223,10 @@ void Dossier::proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresente
         nbTotUVs=0;
         nbTotCre=0;
 
+        if(nbTotSemestrePrepa==0){
+            cout<<"*****Complement des SP*****\n";
+            complSP=completeCat(SP, proposition, getPrepa(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+        }
         cout<<"*****Complement des CS*****\n";
         complCS=completeCat(CS, proposition, getPrepa(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
         cout<<"*****Complement des TM*****\n";
@@ -225,13 +241,61 @@ void Dossier::proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresente
             impossible=true;
         }
         sol->addPrevision(*proposition);
+        nbTotSemestrePrepa++;
         cout<<"Nombre de previsions dans la solution : "<<sol->getListePrevisions().size()<<"\n";
         cout<<"affichage solution1\n";
         sol->afficher();
     }
 }
 
-void Dossier::proposerSolutionBranche(Solution* sol, int index, QStringList* listeUVsPresentes, QStringList TriUVs){
+void Dossier::proposerSolutionBranche(Solution* sol, QStringList* listeUVsPresentes, Semestre* SemCourant,
+                                      QStringList TriUVs, unsigned int nbTotSemestreBranche){
+    bool complCS = true, complTM=true, complTSH=true, complSP=true;
+    bool impossible=false;
+    Semestre* SemInscription;
+
+    InscriptionFuture* proposition;
+    unsigned int nbTotUVs; //Nombre Total d'UVs ajotuées dans la proposition - Ne doit pas excéder 7
+    unsigned int nbTotCre; //Nombre Total de Crédits ajoutés dans la proposition - Ne doit pas excéder 35
+    while(!BrancheSolutionValide(sol)&&!impossible){
+        SemCourant->incrementer();
+        SemInscription = new Semestre (*SemCourant);
+        cout<<"##BOUCLE WHILE branche non valide et non impossible de trouver une proposition\n";
+        proposition = new InscriptionFuture(SemInscription, getBranche());
+        nbTotUVs=0;
+        nbTotCre=0;
+
+        if(nbTotSemestreBranche>2&&(getNbCreditsCat(SP, getBranche())+sol->getNbCreditsCat(SP,getBranche())<30))
+            complSP=completeCat(SP, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+        else {
+            if(nbTotSemestreBranche>5&&(getNbCreditsCat(SP, getBranche())+sol->getNbCreditsCat(SP,getBranche())<60))
+                complSP=completeCat(SP, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+            else{
+                cout<<"*****Complement des CS*****\n";
+                complCS=completeCat(CS, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+                cout<<"*****Complement des TM*****\n";
+                complTM=completeCat(TM, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+                cout<<"*****Complement des TSH*****\n";
+                complTSH=completeCat(TSH, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+                cout<<"*****Complement des SP*****\n";
+                complSP=completeCat(SP, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+
+                if(complCS&&complTM&&complTSH&&complSP){
+                    cout<<"ERR : IMPOSSIBLE DE TROUVER UNE SOLUTION\n";
+                    impossible=true;
+                }
+            }
+        }
+
+        sol->addPrevision(*proposition);
+        nbTotSemestreBranche++;
+        cout<<"Nombre de previsions dans la solution : "<<sol->getListePrevisions().size()<<"\n";
+        cout<<"affichage solution1\n";
+        sol->afficher();
+    }
+
+    /*
+
     Semestre* SemCourant = getSemestreCourant();
 
     unsigned int nbTotUVs; //Nombre Total d'UVs ajotuées dans cette proposition - Ne doit pas excéder 7
@@ -251,6 +315,8 @@ void Dossier::proposerSolutionBranche(Solution* sol, int index, QStringList* lis
 
         sol->addPrevision(*proposition);
     }
+
+    */
 }
 
 bool Dossier::completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus,
@@ -290,26 +356,16 @@ bool Dossier::completeCat(Categorie cat, InscriptionFuture* proposition, QString
     (*nbTotUVs)+=nbUVsAjoutees;
     (*nbTotCre)+=nbCreAjoutees;
 
-    cout<<"**Fin d'ajout des credits "<<cat<<" : "<<nbCreAjoutees<<" ajoutes, "<<(*nbTotCre)<<" credits au total, "<< nbCredCatAValider<<" credits a valider\n";
+    cout<<"**Fin d'ajout des credits "<<cat<<" : "<<nbCreAjoutees<<" ajoutes ce tour ci, "<<(*nbTotCre)<<" credits ajoutes au total, "<< nbCredCatAValider<<" credits a valider au total\n";
     return impossible;
 }
 
-bool Dossier::estSolutionValide(int i) const{
-    if(i<0)
-        cout<<"Erreur : Solution inexistante !";
-    else{
-        //if(PrepaSolutionValide(i)&&BrancheSolutionValide(i)&&NiveauLangueValide())
-    /*    if(!PrepaSolutionValide(i)){
-            cout<<"Prepa Solution NON VALIDE\n";
-            return false;
-        }
-        if(!BrancheSolutionValide(i)){
-            cout<<"Branche Solution NON VALIDE\n";
-            return false;
-        }
-        */
-    }
-    return true;
+bool Dossier::estSolutionValide(Solution* sol) const{
+
+    //if(PrepaSolutionValide(sol)&&BrancheSolutionValide(sol)&&NiveauLangueValide())
+    if(PrepaSolutionValide(sol)&&BrancheSolutionValide(sol))
+        return true;
+    else return false;
 }
 
 bool Dossier::PrepaSolutionValide(Solution* sol) const{
@@ -359,7 +415,52 @@ bool Dossier::PrepaSolutionValide(Solution* sol) const{
     return true;
 }
 
-bool Dossier::BrancheSolutionValide(int i) const{
+bool Dossier::BrancheSolutionValide(Solution* sol) const{
+    CursusManager* CursusManage = CursusManager::getInstance();
+
+    cout<<"Test Si la BrancheSolution est valide\n";
+    cout<<"affichage solution3\n";
+    sol->afficher();
+
+    if(CursusManage->getNbCreditsCSAValider(getBranche())>getNbCreditsCS(getBranche())+sol->getNbCreditsCat(CS, getBranche())){
+        cout<<"Branche non valide ! "<<CursusManage->getNbCreditsCSAValider(getBranche())<<" credits CS à valider, "
+              <<getNbCreditsCS(getBranche())<<" credits CS deja presents dans le dossier, "
+                <<sol->getNbCreditsCat(CS, getBranche())<<" credits CS ajoutes par la solution\n";
+        return false;
+    }
+    if(CursusManage->getNbCreditsTMAValider(getBranche())>getNbCreditsTM(getBranche())+sol->getNbCreditsCat(TM, getBranche())){
+        cout<<"Branche non valide ! "<<CursusManage->getNbCreditsTMAValider(getBranche())<<" credits TM à valider, "
+              <<getNbCreditsTM(getBranche())<<" credits TM deja presents dans le dossier, "
+                <<sol->getNbCreditsCat(TM, getBranche())<<" credits TM ajoutes par la solution\n";
+        return false;
+    }
+    if(CursusManage->getNbCreditsCSTMAValider(getBranche())>getNbCreditsCSTM(getBranche())+sol->getNbCreditsCSTM(getBranche())){
+        cout<<"Branche non valide ! "<<CursusManage->getNbCreditsCSTMAValider(getBranche())<<" credits CS-TM à valider, "
+              <<getNbCreditsCSTM(getBranche())<<" credits CS-TM deja presents dans le dossier, "
+                <<sol->getNbCreditsCSTM(getBranche())<<" credits CS-TM ajoutes par la solution\n";
+        return false;
+    }
+    if(CursusManage->getNbCreditsTSHAValider(getBranche())>getNbCreditsTSH(getBranche())+sol->getNbCreditsCat(TSH, getBranche())){
+        cout<<"Branche non valide ! "<<CursusManage->getNbCreditsTSHAValider(getBranche())<<" credits TSH à valider, "
+              <<getNbCreditsTSH(getBranche())<<" credits TSH deja presents dans le dossier, "
+                <<sol->getNbCreditsCat(TSH, getBranche())<<" credits TSH ajoutes par la solution\n";
+        return false;
+    }
+    if(CursusManage->getNbCreditsSPAValider(getBranche())>getNbCreditsSP(getBranche())+sol->getNbCreditsCat(SP, getBranche())){
+        cout<<"Branche non valide ! "<<CursusManage->getNbCreditsSPAValider(getBranche())<<" credits SP à valider, "
+              <<getNbCreditsSP(getBranche())<<" credits SP deja presents dans le dossier, "
+                <<sol->getNbCreditsCat(SP, getBranche())<<" credits SP ajoutes par la solution\n";
+        return false;
+    }
+    if(CursusManage->getNbCreditsTotAValider(getBranche())>getNbCreditsTot(getBranche())+sol->getNbCreditsTot(getBranche())){
+        cout<<"Branche non valide ! "<<CursusManage->getNbCreditsTotAValider(getBranche())<<" credits Tot à valider, "
+              <<getNbCreditsTot(getBranche())<<" credits Tot deja presents dans le dossier, "
+                <<sol->getNbCreditsTot(getBranche())<<" credits Tot ajoutes par la solution\n";
+        return false;
+    }
+    cout<<"Branche Valide !\n";
+    return true;
+    /*
     CursusManager* CursusManage = CursusManager::getInstance();
 
     if(CursusManage->getNbCreditsCSAValider(getBranche())>getNbCreditsCS(getBranche())+getListeSolutions().at(i).getNbCreditsCat(CS, getBranche()))
@@ -375,6 +476,7 @@ bool Dossier::BrancheSolutionValide(int i) const{
     if(CursusManage->getNbCreditsTotAValider(getBranche())>getNbCreditsTot(getBranche())+getListeSolutions().at(i).getNbCreditsTot(getBranche()))
         return false;
     return true;
+    */
 }
 
 bool Dossier::FiliereSolutionValide(const int i) const{
@@ -427,6 +529,16 @@ void Dossier::proposerSolutionFiliere(Solution* sol, int index){
         */
         sol->addPrevision(*proposition);
     }
+}
+
+
+unsigned int Dossier::getNbTotInscrCursus(QString cursus) const{
+    unsigned nb=0;
+    for(int i=0; i<getListeParcours().size(); i++){
+        if(getListeParcours().at(i).getCursusPrincipal()==cursus)
+            nb++;
+    }
+    return nb;
 }
 
 

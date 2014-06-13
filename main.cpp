@@ -157,8 +157,9 @@ void test_dossier(){
 
     cout<<"Creation d'un dossier\n";
     //Création d'un dossier
+    /*
     Semestre* A11 = new Semestre(Automne, 11);
-    Semestre* P12 = new Semestre(Printemps, 12);
+    // Semestre* P12 = new Semestre(Printemps, 12);
 
     DossierManage->addDossier("someone", "Coucou Coucou", 4, A11);
     DossierManage->setPrepa("someone", "TC");
@@ -178,6 +179,8 @@ void test_dossier(){
     TabResTC[2]=A;
     TabResTC[3]=A;
     InscriptionPassee* TC01 = new InscriptionPassee(A11, *TabUVTC, "TC", 4, TabResTC);
+
+    DossierManage->addParcours("someone", *TC01);
 
 
     QStringList* TabUVGI = new QStringList("LO21");
@@ -202,21 +205,20 @@ void test_dossier(){
     InscriptionPassee* GI01 = new InscriptionPassee(P12, *TabUVGI, "GI", 8, TabResGI);
 
 
-    DossierManage->addParcours("someone", *TC01);
     DossierManage->addParcours("someone", *GI01);
 
     UVManage->addUV("XX01","Blabla", true, false, false);
     UVManage->addUVCursus("XX01", "TC");
     UVManage->editUVCategorie("XX01",CS,6);
-
+*/
     QStringList* TriUVs = new QStringList();
     *TriUVs = UVManage->listerUV();
 
     cout<<"Test du diplome du dossier\n";
-    if(DossierManage->estDiplome("someone"))
+    if(DossierManage->estDiplome("kenobiob"))
         cout<<"Le dossier est validé!\n";
     else{ cout<<"Le dossier est refusé!\n";
-        DossierManage->proposerSolution("someone", *TriUVs);
+        DossierManage->proposerSolution("kenobiob", *TriUVs);
     }
 
     /*

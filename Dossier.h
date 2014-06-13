@@ -63,21 +63,24 @@ public:
     bool NiveauLangueValide() const;
     bool estDiplome() const;
 
-    void proposerSolution(QStringList TriUVs);
-    void proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresentes, Semestre* SemCourant, QStringList TriUVs);
-    void proposerSolutionBranche(Solution* sol, int index, QStringList* listeUVsPresentes, QStringList TriUVs);
+    Solution *proposerSolution(QStringList TriUVs);
+    void proposerSolutionPrepa(Solution* sol, QStringList* listeUVsPresentes, Semestre* SemCourant,
+                               QStringList TriUVs, unsigned int nbTotSemestrePrepa);
+    void proposerSolutionBranche(Solution* sol, QStringList* listeUVsPresentes, Semestre *SemCourant,
+                                 QStringList TriUVs, unsigned int nbTotSemestreBranche);
     void proposerSolutionFiliere(Solution* sol, int index);
 
     bool completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus,
                      QStringList* listeUVsPresentes, unsigned int* nbTotUVs, unsigned int* nbTotCre,
                      QStringList TriUVs);
+    unsigned int getNbTotInscrCursus(QString cursus) const;
 
     void deleteSolution_fichier(int index);
     void saveSolution_fichier();
 
-    bool estSolutionValide(int i) const;
+    bool estSolutionValide(Solution *sol) const;
     bool PrepaSolutionValide(Solution *sol) const;
-    bool BrancheSolutionValide(int i) const;
+    bool BrancheSolutionValide(Solution *sol) const;
     bool FiliereSolutionValide(const int i) const;
 
     bool estListeUVsSolutionCompletee(QStringList liste, unsigned int nb, const int i) const;
