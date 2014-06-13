@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     splash.finish(&w);
 
 
-    test_dossier();
+    //test_dossier();
 
     return a.exec();
     atexit(fin);

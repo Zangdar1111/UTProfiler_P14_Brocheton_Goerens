@@ -120,7 +120,7 @@ unsigned int InscriptionPassee::getNbCreditsTot(QString cursus /*=""*/) const {
 //Retourne true si l'UV est validée, false sinon
 bool InscriptionPassee::isValidee(unsigned int i) const{
     if(existUV(i)){
-        if(Resultat[i]!=FX&&Resultat[i]!=F&&Resultat[i]!=RES&&Resultat[i]!=ABS&&Resultat[i]!=EC)
+        if(Resultat[i]!=FX&&Resultat[i]!=F&&Resultat[i]!=RES&&Resultat[i]!=ABS)
             return true;
     }
     cout<<"UV non validee\n";

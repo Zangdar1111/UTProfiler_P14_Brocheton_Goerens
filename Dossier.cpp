@@ -175,11 +175,13 @@ Solution* Dossier::proposerSolution(QStringList TriUVs){
 
 
     cout<<"****Début de la recherche de Solution ****\n";
-    if(!PrepaValide()){
-        cout<<"---Complement de la Prepa---\n";
-        proposerSolutionPrepa(sol, &listeUVsPresentes, SemCourant, TriUVs, nbTotSemestrePrepa);
-        cout<<"affichage solution, apres complement prepa :\n";
-        sol->afficher();
+    if(getPrepa()!="EXT"){
+        if(!PrepaValide()){
+            cout<<"---Complement de la Prepa---\n";
+            proposerSolutionPrepa(sol, &listeUVsPresentes, SemCourant, TriUVs, nbTotSemestrePrepa);
+            cout<<"affichage solution, apres complement prepa :\n";
+            sol->afficher();
+        }
     }
     if(!BrancheValide()){
         cout<<"---Complement de la Branche---\n";
@@ -265,10 +267,10 @@ void Dossier::proposerSolutionBranche(Solution* sol, QStringList* listeUVsPresen
         nbTotUVs=0;
         nbTotCre=0;
 
-        if(nbTotSemestreBranche>2&&(getNbCreditsCat(SP, getBranche())+sol->getNbCreditsCat(SP,getBranche())<30))
+        if(nbTotSemestreBranche>1&&(getNbCreditsCat(SP, getBranche())+sol->getNbCreditsCat(SP,getBranche())<30))
             complSP=completeCat(SP, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
         else {
-            if(nbTotSemestreBranche>5&&(getNbCreditsCat(SP, getBranche())+sol->getNbCreditsCat(SP,getBranche())<60))
+            if(nbTotSemestreBranche>4&&(getNbCreditsCat(SP, getBranche())+sol->getNbCreditsCat(SP,getBranche())<60))
                 complSP=completeCat(SP, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
             else{/*
                 if(nbTotSemestreBranche<3){
@@ -368,7 +370,11 @@ bool Dossier::completeCat(Categorie cat, InscriptionFuture* proposition, QString
 bool Dossier::estSolutionValide(Solution* sol) const{
 
     //if(PrepaSolutionValide(sol)&&BrancheSolutionValide(sol)&&NiveauLangueValide())
-    if(PrepaSolutionValide(sol)&&BrancheSolutionValide(sol))
+    if(getPrepa()!="EXT"){
+        if(PrepaSolutionValide(sol)&&BrancheSolutionValide(sol))
+            return true;
+    }
+    if(BrancheSolutionValide(sol))
         return true;
     else return false;
 }
