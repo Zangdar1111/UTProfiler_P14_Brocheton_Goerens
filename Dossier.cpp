@@ -270,7 +270,12 @@ void Dossier::proposerSolutionBranche(Solution* sol, QStringList* listeUVsPresen
         else {
             if(nbTotSemestreBranche>5&&(getNbCreditsCat(SP, getBranche())+sol->getNbCreditsCat(SP,getBranche())<60))
                 complSP=completeCat(SP, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
-            else{
+            else{/*
+                if(nbTotSemestreBranche<3){
+                    complCS=completeCat(CS, proposition, getFiliere(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+                    complTM=completeCat(TM, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
+                }*/
+
                 cout<<"*****Complement des CS*****\n";
                 complCS=completeCat(CS, proposition, getBranche(), listeUVsPresentes, &nbTotUVs, &nbTotCre, TriUVs);
                 cout<<"*****Complement des TM*****\n";

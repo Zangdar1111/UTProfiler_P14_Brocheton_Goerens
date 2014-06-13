@@ -33,7 +33,7 @@ public:
     QList<Solution> getAllSolutions(QString login) const;
 
     bool estDiplome(QString login) const;
-    void proposerSolution(QString login, QStringList TriUVs);
+    Solution* proposerSolution(QString login, QStringList TriUVs);
 
     QStringList listerDossier(); // Permet de lister toutes les Dossier chargées dans l'application
 

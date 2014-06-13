@@ -176,10 +176,12 @@ bool DossierManager::estDiplome(QString login) const{
         return false;
 }
 
-void DossierManager::proposerSolution(QString login, QStringList TriUVs){
+Solution *DossierManager::proposerSolution(QString login, QStringList TriUVs){
+    Solution* sol;
     Dossier* findDossier=getDossier(login);
     if(findDossier!=NULL)
-        findDossier->proposerSolution(TriUVs);
+        sol=findDossier->proposerSolution(TriUVs);
+    return sol;
 }
 
 void DossierManager::afficherSolutions(QString login) const{
