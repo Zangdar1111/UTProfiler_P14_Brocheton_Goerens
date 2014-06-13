@@ -159,6 +159,13 @@ void MainWindow::EditCursus(QListWidgetItem *item)
         ui->Edit_Cursus_Filiere->setEnabled(false);
         ui->Edit_Cursus_Mineur->setEnabled(false);
     }
+    else
+    {
+        ui->Delete_Cursus->setEnabled(true);
+        ui->Edit_Cursus_Branche->setEnabled(true);
+        ui->Edit_Cursus_Filiere->setEnabled(true);
+        ui->Edit_Cursus_Mineur->setEnabled(true);
+    }
     ui->Edit_Cursus_Group->setEnabled(true);
 }
 

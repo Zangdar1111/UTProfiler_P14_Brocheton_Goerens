@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent), ui(new Ui::MainWin
     QObject::connect(ui->Edit_AutoDossier_UV_Non, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(poubelle(QListWidgetItem *)));
     QObject::connect(ui->Edit_AutoDossier_Sauvegarde, SIGNAL(clicked()), this, SLOT(SaveAutoDossier()));
 
+    QObject::connect(ui->Edit_AutoDossier_Executer, SIGNAL(clicked()), this, SLOT(ExecuterAutoCompletion()));
 
 
 
