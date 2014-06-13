@@ -40,7 +40,8 @@ public:
 
     //A supprimer par la suite
     void afficherCursus(QString c);
-
+    //bool isPrepa(QString c) const;
+    //bool isBranche(QString c) const;
     //QString getUVfromCursus(QString code, QStringList listeUVs) const;
 };
 

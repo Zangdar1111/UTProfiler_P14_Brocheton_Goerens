@@ -27,7 +27,7 @@ public :
             if(getListePrevisions().at(i).getCursusPrincipal()==cursus){
                 cout<<"cursus egaux\n";
                 nbCredits+=getListePrevisions().at(i).getNbCreditsCatMax(cat);
-                cout<<"Valeur de nbCredits\n";
+                cout<<"Valeur de nbCredits : "<<nbCredits<<"\n";
             }
         }
         cout<<"Valeur de retour nbCredits : "<<nbCredits<<"\n";

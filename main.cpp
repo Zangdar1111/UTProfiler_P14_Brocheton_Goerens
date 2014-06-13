@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     splash.finish(&w);
 
 
-    //test_dossier();
+    test_dossier();
 
     return a.exec();
     atexit(fin);
@@ -87,6 +87,7 @@ void test_dossier(){
 
     //Création d'UVs
     cout<<"Creation des UVs\n";
+    /*
     UVManage->addUV("LO20","BlablaLO20", true, false, false);
     UVManage->addUV("LO21","Programmation Objet", true, false, false);
     UVManage->addUV("LO22","blablaLO22", true, false, false);
@@ -152,6 +153,7 @@ void test_dossier(){
     CursusManage->addUVtoListFromCursusSecondaire("SRI","NF21",indice_liste1);
     CursusManage->addUVtoListFromCursusSecondaire("SRI","NF22",indice_liste1);
     CursusManage->addUVtoListFromCursusSecondaire("SRI","NF23",indice_liste1);
+    */
 
     cout<<"Creation d'un dossier\n";
     //Création d'un dossier
@@ -166,10 +168,10 @@ void test_dossier(){
     cout<<"Creation des inscriptions\n";
     //Création des inscriptions passées de 'someone'
 
-    QStringList* TabUVTC = new QStringList("LO20");
-    TabUVTC->append("LO22");
-    TabUVTC->append("NF16");
-    TabUVTC->append("NF17");
+    QStringList* TabUVTC = new QStringList("BL09");
+    TabUVTC->append("NF93");
+    TabUVTC->append("PS04");
+    TabUVTC->append("SC22");
     Note* TabResTC = new Note[4];
     TabResTC[0]=A;
     TabResTC[1]=A;
@@ -207,14 +209,15 @@ void test_dossier(){
     UVManage->addUVCursus("XX01", "TC");
     UVManage->editUVCategorie("XX01",CS,6);
 
+    QStringList* TriUVs = new QStringList();
+    *TriUVs = UVManage->listerUV();
+
     cout<<"Test du diplome du dossier\n";
     if(DossierManage->estDiplome("someone"))
         cout<<"Le dossier est validé!\n";
     else{ cout<<"Le dossier est refusé!\n";
-        DossierManage->proposerSolution("someone");
+        DossierManage->proposerSolution("someone", *TriUVs);
     }
-
-
 
     /*
     QString test = UVManage->getUVfromCatCursus(TM, "TC", *TabUVTC);

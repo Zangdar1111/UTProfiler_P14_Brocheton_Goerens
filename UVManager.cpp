@@ -53,7 +53,7 @@ unsigned int UVManager::getNbCreditsCategorie(QString c, Categorie cat){
     UV* findUV=getUV(c);
     if(findUV!=NULL)
         return findUV->getCreditsCat(cat);
-    else return 0;
+    return 0;
 }
 
 unsigned int UVManager::getNbTotCredits(QString c){
@@ -71,6 +71,7 @@ bool UVManager::hasCursus(QString c, QString cursus){
     if(findUV!=NULL)
         if(findUV->getTab_Cursus().contains(cursus))
             return true;
+    cout<<"ne fait pas partie du bon Cursus\n";
     return false;
 }
 
@@ -110,11 +111,20 @@ void UVManager::addUVCursus(QString c, QString cur){
     }
 }
 
-QString UVManager::getUVfromCatCursus(Categorie cat, QString cursus, QStringList listeUVsPresentes){
-    for(map<QString, UV>::const_iterator it=TabUV.begin() ; it!=TabUV.end() ; ++it)
-        if(hasCursus(it->first, cursus)&&!listeUVsPresentes.contains(it->first)&&(it->second).hasCategorie(cat))
-            return it->first;
-    return QString::null;
+QString UVManager::getUVfromCatCursus(Categorie cat, QString cursus, QStringList* listeUVsPresentes, QStringList TriUVs){
+    cout<<"...Recherche d'Uvs... Critere : cat="<<cat<<"; cursus="<<cursus.toStdString()<<"\n";
+    UV* findUV;
+    for(int i=0; i<TriUVs.size(); i++){
+        findUV=getUV(TriUVs.at(i));
+        cout<<"test de l'UV "<<findUV->getCode().toStdString()<<"\n";
+        if(hasCursus(TriUVs.at(i), cursus)&&!listeUVsPresentes->contains(TriUVs.at(i))&&findUV->hasCategorie(cat)){
+            cout<<"UV "<<findUV->getCode().toStdString()<<" OK !\n";
+            listeUVsPresentes->append(TriUVs.at(i)); //Ajout de l'UV à la liste des UVs du Cursus
+            return TriUVs.at(i); //Retourne le code de l'UV
+        }
+    }
+    cout<<"Aucune UV trouvée...\n";
+    return QString::null; //Si aucune UV ne correspond, on renvoie NULL
 }
 
 /* Permet de retirer tous les Cursus d'une UV par le UVManager

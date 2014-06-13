@@ -217,6 +217,24 @@ void CursusManager::editNbUVsforListOfCursusSecondaire(QString code, unsigned in
     }
 }
 /*
+bool CursusManager::isPrepa(QString c) const{
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->isWhat1();
+    }
+    else return false;
+}
+
+bool CursusManager::isBranche(QString c) const{
+    CursusPrincipal* findCursus= dynamic_cast<CursusPrincipal*>(getCursus(c));
+    if(findCursus!=NULL){
+        return findCursus->isWhat2();
+    }
+    else return false;
+}
+*/
+
+/*
 QString CursusManager::getUVfromCursus(QString code, QStringList listeUVs) const{
     CursusSecondaire* findCursus= dynamic_cast<CursusSecondaire*>(getCursus(code));
     unsigned int i=0;

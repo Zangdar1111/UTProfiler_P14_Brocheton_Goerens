@@ -63,17 +63,26 @@ public:
     bool NiveauLangueValide() const;
     bool estDiplome() const;
 
-    void proposerSolution();
-    void proposerSolutionPrepa();
+    void proposerSolution(QStringList TriUVs);
+    void proposerSolutionPrepa(Solution* sol, int index, QStringList* listeUVsPresentes, QStringList TriUVs);
+    void proposerSolutionBranche(Solution* sol, int index, QStringList* listeUVsPresentes, QStringList TriUVs);
+    void proposerSolutionFiliere(Solution* sol, int index);
 
-    void completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus, QStringList* listeUVsPresentes);
+    bool completeCat(Categorie cat, InscriptionFuture* proposition, QString cursus,
+                     QStringList* listeUVsPresentes, unsigned int* nbTotUVs, unsigned int* nbTotCre,
+                     QStringList TriUVs);
 
     void deleteSolution_fichier(int index);
     void saveSolution_fichier();
 
     bool estSolutionValide(int i) const;
-    bool PrepaSolutionValide(int i) const;
+    bool PrepaSolutionValide(Solution *sol) const;
+    bool BrancheSolutionValide(int i) const;
+    bool FiliereSolutionValide(const int i) const;
 
+    bool estListeUVsSolutionCompletee(QStringList liste, unsigned int nb, const int i) const;
+
+    void afficherSolutions() const;
 };
 
 
